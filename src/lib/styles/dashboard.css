@@ -1,0 +1,19 @@
+.watched-callsigns-div,
+.discord-notifications-div {
+	display: flex;
+	flex-direction: column;
+}
+
+.watched-callsign,
+.discord-notification {
+	display: flex;
+	flex-direction: row;
+	width: 100%;
+}
+
+.watched-callsign p,
+.watched-callsig button,
+discord-notification p,
+.discord-notification button {
+	margin: 0 5px 0 5px;
+}
