@@ -9,4 +9,4 @@ node_modules
 vite.config.js.timestamp-*
 vite.config.ts.timestamp-*
 
-/src/server/conf/*
+src/lib/server/conf/*.ts
