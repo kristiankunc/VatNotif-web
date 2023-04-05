@@ -23,7 +23,7 @@
 	</div>
 
 	<div class="navrar__api_status">
-		<p contenteditable bind:innerHTML={status} />
+		<p>{status}</p>
 	</div>
 	<div class="navbar__links">
 		<a href="/auth/login">Login</a>
