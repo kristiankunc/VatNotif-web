@@ -1,11 +1,41 @@
 <script>
 	import Navbar from "$lib/components/Navbar.svelte";
+	import "../lib/styles/index.css";
 </script>
 
 <Navbar />
 <svelte:head>
 	<title>VatNotif - Home</title>
 </svelte:head>
+<div class="main-div">
+	<div class="introduction-heading">
+		<h2>How to use?</h2>
+	</div>
+
+	<div class="introduction-div">
+		<div class="card">
+			<img src="/cards/explore.svg" alt="Avatar" style="width:100%" />
+			<div class="card-contents-div">
+				<h4><b>Find</b></h4>
+				<p>Find airports and positions you are interested in!</p>
+			</div>
+		</div>
+		<div class="card">
+			<img src="/cards/compass.svg" alt="Avatar" style="width:100%" />
+			<div class="card-contents-div">
+				<h4><b>Track</b></h4>
+				<p>Get their callsign and add them to your tracking list!</p>
+			</div>
+		</div>
+		<div class="card">
+			<img src="/cards/notification.svg" alt="Avatar" style="width:100%" />
+			<div class="card-contents-div">
+				<h4><b>Notify</b></h4>
+				<p>Receive a notification once they come online!</p>
+			</div>
+		</div>
+	</div>
+</div>
 
 <h1>Hello and welcome to VatNotif!</h1>
 <p>

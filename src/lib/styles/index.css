@@ -1,0 +1,40 @@
+.main-div {
+	display: flex;
+	flex-flow: column wrap;
+}
+
+.introduction-heading {
+	text-align: center;
+	width: 100%;
+	margin: 20px;
+}
+
+.introduction-div {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-evenly;
+	margin: 20px;
+}
+
+.card {
+	box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+	transition: 0.3s;
+	border-radius: 5px;
+	text-align: center;
+}
+
+.card img {
+	border-radius: 5px 5px 0 0;
+	max-width: 100%;
+	float: left;
+	height: 360px;
+	object-fit: cover;
+}
+.card:hover {
+	box-shadow: 0 8px 16px 0 rgba(0, 0, 0, 0.2);
+}
+
+.card-contents-div {
+	padding: 2px 16px;
+}
