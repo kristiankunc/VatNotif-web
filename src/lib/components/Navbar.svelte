@@ -18,17 +18,23 @@
 </script>
 
 <div class="navbar">
-	<div class="navbar__title">
-		<a href="/">VatNotif</a>
+	<div class="box navbar__title">
+		<span>
+			<a href="/">VatNotif</a>
+		</span>
 	</div>
 
-	<div class="navrar__api_status">
-		<p>{status}</p>
+	<div class="box navbar__api_status">
+		<span>
+			{status}
+		</span>
 	</div>
-	<div class="navbar__links">
-		<a href="/auth/login">Login</a>
-		<a href="/auth/logout">Logout</a>
-		<a href="/dashboard">Dashboard</a>
+	<div class="box navbar__links">
+		<span>
+			<a href="/auth/login">Login</a>
+			<a href="/auth/logout">Logout</a>
+			<a href="/dashboard">Dashboard</a>
+		</span>
 	</div>
 </div>
 
@@ -38,15 +44,28 @@
 		flex-direction: row;
 		justify-content: space-between;
 		align-items: center;
+		text-align: center;
 		background-color: #1e1e1e;
 	}
 
-	.navbar a,
-	.navbar p {
-		margin: 1rem;
+	.navbar * {
 		color: #fff;
+		margin-inline: 0;
 	}
 
+	.box {
+		flex: 1;
+		display: flex;
+		justify-content: center;
+	}
+
+	.box:first-child > span {
+		margin-right: auto;
+	}
+
+	.box:last-child > span {
+		margin-left: auto;
+	}
 	.navbar__title a {
 		font-weight: bold;
 		text-decoration: none;
@@ -59,8 +78,8 @@
 		justify-content: space-between;
 		align-items: center;
 	}
-
 	.navbar__links a {
+		margin-inline: 1rem;
 		font-size: 1.25rem;
 		text-decoration: none;
 		font-weight: bold;
