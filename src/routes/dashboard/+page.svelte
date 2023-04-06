@@ -145,45 +145,49 @@
 	<title>VatNotif - Dashboard</title>
 </svelte:head>
 
-<h1>Dashboard</h1>
+<div class="main-container">
+	<h1>Dashboard</h1>
 
-<h2>User info</h2>
-<p>CID: {data.user.cid}</p>
-<p>Name: {data.user.personal.name_full}</p>
-
-<h2>Watched callsigns</h2>
-<div class="watched-callsigns-div">
-	{#if $watchedCallsignsStore.length === 0}
-		<p>You have no watched callsigns</p>
-	{:else}
-		{#each $watchedCallsignsStore as callsign}
-			<div class="watched-callsign">
-				<p>{callsign}</p>
-				<button on:click={() => deleteCallsignHandler(callsign)}>Delete</button>
-			</div>
-		{/each}
-	{/if}
-	<div class="watched-callsign">
-		<input placeholder="Enter callsign" bind:value={enteredCallsign} />
-		<button on:click={addCallsignHandler}>Add</button>
+	<div class="section">
+		<h2>User info</h2>
+		<p>CID: {data.user.cid}</p>
+		<p>Name: {data.user.personal.name_full}</p>
 	</div>
-</div>
 
-<h2>Discord Notifications</h2>
-<div class="discord-notifications-div">
-	{#if $discordNotificationsStore.length === 0}
-		<p>You have no notifications</p>
-	{:else}
-		{#each $discordNotificationsStore as notification}
-			<div class="discord-notification">
-				<p>{notification}</p>
-				<button on:click={() => testDiscordNotificationHandler(notification)}>Test</button>
-				<button on:click={() => deleteDiscordNotificationHandler(notification)}>Delete</button>
-			</div>
-		{/each}
-	{/if}
-	<div class="discord-notification">
-		<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} />
-		<button on:click={addDiscordNotificationHandler}>Add</button>
+	<h2>Watched callsigns</h2>
+	<div class="watched-callsigns-div section">
+		{#if $watchedCallsignsStore.length === 0}
+			<p>You have no watched callsigns</p>
+		{:else}
+			{#each $watchedCallsignsStore as callsign}
+				<div class="watched-callsign">
+					<p>{callsign}</p>
+					<button on:click={() => deleteCallsignHandler(callsign)}>Delete</button>
+				</div>
+			{/each}
+		{/if}
+		<div class="watched-callsign">
+			<input placeholder="Enter callsign" bind:value={enteredCallsign} />
+			<button on:click={addCallsignHandler}>Add</button>
+		</div>
+	</div>
+
+	<h2>Discord Notifications</h2>
+	<div class="discord-notifications-div section">
+		{#if $discordNotificationsStore.length === 0}
+			<p>You have no notifications</p>
+		{:else}
+			{#each $discordNotificationsStore as notification}
+				<div class="discord-notification">
+					<p>{notification}</p>
+					<button on:click={() => testDiscordNotificationHandler(notification)}>Test</button>
+					<button on:click={() => deleteDiscordNotificationHandler(notification)}>Delete</button>
+				</div>
+			{/each}
+		{/if}
+		<div class="discord-notification">
+			<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} />
+			<button on:click={addDiscordNotificationHandler}>Add</button>
+		</div>
 	</div>
 </div>
