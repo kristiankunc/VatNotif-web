@@ -2,6 +2,7 @@
 	import { onMount } from "svelte";
 
 	let status = "API Status - Loading...";
+	let isLoggedIn = false;
 
 	onMount(async () => {
 		try {
@@ -15,6 +16,13 @@
 			status = "API Status - ❌ (Offline)";
 		}
 	});
+
+	// check if user has session cookie
+	const sessionCookie = document.cookie.split(";").find((c) => c.trim().startsWith("session="));
+
+	if (sessionCookie) {
+		isLoggedIn = true;
+	}
 </script>
 
 <div class="navbar">
@@ -31,9 +39,12 @@
 	</div>
 	<div class="box navbar__links">
 		<span>
-			<a href="/auth/login">Login</a>
-			<a href="/auth/logout">Logout</a>
-			<a href="/dashboard">Dashboard</a>
+			{#if !isLoggedIn}
+				<a href="/auth/login">Login</a>
+			{:else}
+				<a href="/auth/logout">Logout</a>
+				<a href="/dashboard">Dashboard</a>
+			{/if}
 		</span>
 	</div>
 </div>
