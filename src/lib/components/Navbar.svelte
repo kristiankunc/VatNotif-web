@@ -1,8 +1,9 @@
 <script>
 	import { onMount } from "svelte";
+	import { writable } from "svelte/store";
 
 	let status = "API Status - Loading...";
-	let isLoggedIn = false;
+	let isLoggedIn = writable(false);
 
 	onMount(async () => {
 		try {
@@ -20,7 +21,7 @@
 	// check if user has session cookie
 	// wait for onMount to run
 	onMount(() => {
-		isLoggedIn = document.cookie.includes("session");
+		isLoggedIn.set(document.cookie.includes("session="));
 	});
 </script>
 
@@ -38,7 +39,7 @@
 	</div>
 	<div class="box navbar__links">
 		<span>
-			{#if !isLoggedIn}
+			{#if !$isLoggedIn}
 				<a href="/auth/login">Login</a>
 			{:else}
 				<a href="/auth/logout">Logout</a>
