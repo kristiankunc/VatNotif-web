@@ -1,4 +1,4 @@
-<script>
+<script lang="ts">
 	import { onMount } from "svelte";
 	import { writable } from "svelte/store";
 
@@ -16,10 +16,16 @@
 		} catch (e) {
 			status = "API Status - ❌ (Offline)";
 		}
-	});
 
-	onMount(() => {
-		isLoggedIn.set(document.cookie.includes("session="));
+		const res = await fetch("/auth/check", {
+			method: "POST",
+		});
+
+		if (res.ok) {
+			isLoggedIn.set(true);
+		} else {
+			isLoggedIn.set(false);
+		}
 	});
 </script>
 
