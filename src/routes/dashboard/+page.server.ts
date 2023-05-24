@@ -3,14 +3,14 @@ import { SessionsDatabase } from "$lib/server/database/sessions";
 import { WatchedCallsignsDatabase } from "$lib/server/database/watched-callsigns";
 import { VatsimUser } from "$lib/server/vatsim/user";
 import type { PageServerLoad } from "./$types";
-import { error } from "@sveltejs/kit";
+import { error, redirect } from "@sveltejs/kit";
 
 export const load = (async ({ cookies }) => {
 	const sessionId = cookies.get("session");
-	if (!sessionId) throw error(400, "No session cookie provided");
+	if (!sessionId) throw redirect(302, "/auth/login");
 
 	const session = await SessionsDatabase.getSession(sessionId);
-	if (!session) throw error(400, "Invalid session cookie provided");
+	if (!session) throw redirect(302, "/auth/login");
 
 	const { accessToken } = session;
 
