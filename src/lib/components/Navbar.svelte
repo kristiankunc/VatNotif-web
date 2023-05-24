@@ -18,8 +18,6 @@
 		}
 	});
 
-	// check if user has session cookie
-	// wait for onMount to run
 	onMount(() => {
 		isLoggedIn.set(document.cookie.includes("session="));
 	});
@@ -39,11 +37,11 @@
 	</div>
 	<div class="box navbar__links">
 		<span>
-			{#if !$isLoggedIn}
-				<a href="/auth/login">Login</a>
-			{:else}
+			{#if $isLoggedIn}
 				<a href="/auth/logout">Logout</a>
 				<a href="/dashboard">Dashboard</a>
+			{:else}
+				<a href="/auth/login">Login</a>
 			{/if}
 		</span>
 	</div>
