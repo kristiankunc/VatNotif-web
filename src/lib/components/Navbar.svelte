@@ -18,11 +18,10 @@
 	});
 
 	// check if user has session cookie
-	const sessionCookie = document.cookie.split(";").find((c) => c.trim().startsWith("session="));
-
-	if (sessionCookie) {
-		isLoggedIn = true;
-	}
+	// wait for onMount to run
+	onMount(() => {
+		isLoggedIn = document.cookie.includes("session");
+	});
 </script>
 
 <div class="navbar">
