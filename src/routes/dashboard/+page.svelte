@@ -14,10 +14,12 @@
 		watchedCallsigns: string[];
 		user: VatsimUserData;
 		discordNotifications: string[];
+		isIgnored: boolean;
 	};
 
 	const watchedCallsignsStore = writable(data.watchedCallsigns);
 	const discordNotificationsStore = writable(data.discordNotifications);
+	const isIgnoredStore = writable(data.isIgnored);
 
 	onMount(() => {
 		watchedCallsignsStore.set(data.watchedCallsigns);
@@ -137,6 +139,25 @@
 
 		alert("Notification sent");
 	}
+
+	export async function ignoreHandler(): Promise<string | void> {
+		isIgnoredStore.update((isIgnored) => !isIgnored);
+
+		document.body.style.cursor = "wait";
+
+		const res = await fetch("/api/ignore", {
+			method: "POST",
+			body: JSON.stringify({
+				state: $isIgnoredStore,
+			}),
+		});
+
+		document.body.style.cursor = "default";
+
+		if (!res.ok) {
+			return alert(`Something went wrong\nError: ${(await res.json()).message}`);
+		}
+	}
 </script>
 
 <Navbar />
@@ -148,46 +169,59 @@
 <div class="main-container">
 	<h1>Dashboard</h1>
 
-	<div class="section">
+	<div class="section center">
 		<h2>User info</h2>
 		<p>CID: {data.user.cid}</p>
 		<p>Name: {data.user.personal.name_full}</p>
 	</div>
 
-	<h2>Watched callsigns</h2>
-	<div class="watched-callsigns-div section">
-		{#if $watchedCallsignsStore.length === 0}
-			<p>You have no watched callsigns</p>
-		{:else}
-			{#each $watchedCallsignsStore as callsign}
-				<div class="watched-callsign">
-					<p>{callsign}</p>
-					<button on:click={() => deleteCallsignHandler(callsign)}>Delete</button>
-				</div>
-			{/each}
-		{/if}
-		<div class="watched-callsign">
-			<input placeholder="Enter callsign" bind:value={enteredCallsign} />
-			<button on:click={addCallsignHandler}>Add</button>
+	<div class="section center">
+		<h2>Privacy settings</h2>
+		<p>Your CID currently <b>{$isIgnoredStore ? "can't" : "can"}</b> be tracked</p>
+		<label class="switch">
+			<input type="checkbox" bind:checked={$isIgnoredStore} on:click={ignoreHandler} />
+			<span class="slider" />
+		</label>
+	</div>
+
+	<div class="section">
+		<h2>Watched callsigns</h2>
+		<div class="watched-callsigns-div section">
+			{#if $watchedCallsignsStore.length === 0}
+				<p>You have no watched callsigns</p>
+			{:else}
+				{#each $watchedCallsignsStore as callsign}
+					<div class="watched-callsign">
+						<p>{callsign}</p>
+						<button on:click={() => deleteCallsignHandler(callsign)}>Delete</button>
+					</div>
+				{/each}
+			{/if}
+			<div class="watched-callsign">
+				<input placeholder="Enter callsign" bind:value={enteredCallsign} />
+				<button on:click={addCallsignHandler}>Add</button>
+			</div>
 		</div>
 	</div>
 
-	<h2>Discord Notifications</h2>
-	<div class="discord-notifications-div section">
-		{#if $discordNotificationsStore.length === 0}
-			<p>You have no notifications</p>
-		{:else}
-			{#each $discordNotificationsStore as notification}
-				<div class="discord-notification">
-					<p>{notification}</p>
-					<button on:click={() => testDiscordNotificationHandler(notification)}>Test</button>
-					<button on:click={() => deleteDiscordNotificationHandler(notification)}>Delete</button>
-				</div>
-			{/each}
-		{/if}
-		<div class="discord-notification">
-			<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} />
-			<button on:click={addDiscordNotificationHandler}>Add</button>
+	<div class="section">
+		<h2>Discord Notifications</h2>
+		<div class="discord-notifications-div section">
+			{#if $discordNotificationsStore.length === 0}
+				<p>You have no notifications</p>
+			{:else}
+				{#each $discordNotificationsStore as notification}
+					<div class="discord-notification">
+						<p>{notification}</p>
+						<button on:click={() => testDiscordNotificationHandler(notification)}>Test</button>
+						<button on:click={() => deleteDiscordNotificationHandler(notification)}>Delete</button>
+					</div>
+				{/each}
+			{/if}
+			<div class="discord-notification">
+				<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} />
+				<button on:click={addDiscordNotificationHandler}>Add</button>
+			</div>
 		</div>
 	</div>
 </div>

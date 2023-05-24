@@ -1,4 +1,5 @@
 import { DiscordNotificationsDatabase } from "$lib/server/database/discord-notifications";
+import { IgnoredCidsDatabase } from "$lib/server/database/ignored-cids";
 import { SessionsDatabase } from "$lib/server/database/sessions";
 import { WatchedCallsignsDatabase } from "$lib/server/database/watched-callsigns";
 import { VatsimUser } from "$lib/server/vatsim/user";
@@ -17,6 +18,7 @@ export const load = (async ({ cookies }) => {
 	const user = await VatsimUser.fetchUserDetails(accessToken);
 	const watchedCallsigns = await WatchedCallsignsDatabase.getWatchedCallsignsForCid(user.cid);
 	const discordNotifications = await DiscordNotificationsDatabase.getNotificationsForCid(user.cid);
+	const isIgnored = await IgnoredCidsDatabase.isIgnored(user.cid);
 
-	return { watchedCallsigns: watchedCallsigns, user: user, discordNotifications: discordNotifications };
+	return { watchedCallsigns: watchedCallsigns, user: user, discordNotifications: discordNotifications, isIgnored: isIgnored };
 }) satisfies PageServerLoad;
