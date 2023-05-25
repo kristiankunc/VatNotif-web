@@ -4,6 +4,6 @@ export class InputValidation {
 	}
 
 	public static isDiscordWebhookUrl(webhookUrl: string): boolean {
-		return /^https:\/\/discord\.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_-]+$/.test(webhookUrl);
+		return /^https:\/\/discord\.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_-]++$/.test(webhookUrl);
 	}
 }
