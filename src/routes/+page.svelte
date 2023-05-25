@@ -58,10 +58,9 @@
 	<div class="section">
 		<h3>Discord webhook</h3>
 		<p>
-			You can receive notifications via a Discord webhook, to learn more about webhooks on Discord, read <a
-				href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks"
-				>this article. Once you're ready, paste the webhook URl into your dashboard and you're ready to go</a
-			>
+			You can receive notifications via a Discord webhook, to learn more about webhooks on Discord, read
+			<a href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks"> this article- </a>
+			Once you're ready, paste the webhook URl into your dashboard and you're ready to go!
 		</p>
 	</div>
 
