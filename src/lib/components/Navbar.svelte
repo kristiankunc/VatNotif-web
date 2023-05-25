@@ -32,7 +32,10 @@
 <div class="navbar">
 	<div class="box navbar__title">
 		<span>
-			<a href="/">VatNotif</a>
+			<a href="/">
+				<img src="/brand/logo.webp" alt="logo" />
+				<nobr>VatNotif</nobr>
+			</a>
 		</span>
 	</div>
 
@@ -54,6 +57,9 @@
 </div>
 
 <style>
+	img {
+		max-width: 40px;
+	}
 	.navbar {
 		display: flex;
 		flex-direction: row;
