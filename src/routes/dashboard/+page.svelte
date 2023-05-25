@@ -78,7 +78,7 @@
 			return alert("Please enter a notification");
 		}
 
-		if (InputValidation.isDiscordWebhookUrl(enteredDiscordNotification)) {
+		if (!InputValidation.isDiscordWebhookUrl(enteredDiscordNotification)) {
 			return alert("Please enter a valid notification");
 		}
 
