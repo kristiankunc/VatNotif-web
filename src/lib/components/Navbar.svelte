@@ -99,4 +99,15 @@
 		text-decoration: none;
 		font-weight: bold;
 	}
+
+	/* Mobile */
+	@media (max-width: 768px) {
+		.navbar {
+			flex-direction: column;
+		}
+
+		.box {
+			margin: 10px;
+		}
+	}
 </style>

@@ -15,10 +15,12 @@ export const GET = (async ({ cookies }) => {
 
 	await SessionsDatabase.deleteSessionById(sessionId);
 
+	// delete the cookie
 	return new Response(null, {
 		status: 302,
 		headers: {
-			location: "/",
+			Location: "/",
+			"Set-Cookie": `session=; Path=/; Expires=Thu, 01 Jan 1970 00:00:00 GMT; HttpOnly; Secure; SameSite=Strict`,
 		},
 	});
 }) satisfies RequestHandler;
