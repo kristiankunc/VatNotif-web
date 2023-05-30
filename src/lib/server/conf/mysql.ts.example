@@ -1,0 +1,9 @@
+import type { MysqlConfigOptions } from "$lib/types/config";
+
+export const mysqlConfig: MysqlConfigOptions = {
+	host: "localhost",
+	port: 3306,
+	username: "vatnotif",
+	password: "1234",
+	database: "vatnotif",
+};

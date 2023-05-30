@@ -1,0 +1,10 @@
+import type { VatsimConfigOptions } from "$lib/types/config";
+
+
+export const vatsimConfig: VatsimConfigOptions = {
+	authUrl: "https://auth.vatsim.net",
+	clientId: "1",
+	clientSecret: "12345",
+	redirectUri: "http:localhost/auth/callback",
+	scopes: "full_name+vatsim_details",
+};
