@@ -4,7 +4,7 @@ VatNotif is a notification service for VatSim pilots. With this tool you can rec
 ## Usage
 To use it, go on the deployment website (<https://vatnotif.kristn.co.uk/>) and log in with your vatSim account. Then go to the dashboard and add the callsigns you want to track (eg. EGNX_GND) and also set up your notification options such as Discord webhook, more info on the notifications is on the home page.
 
-## Building
+## Development setup
 
 ### MYSQL
 
@@ -20,6 +20,9 @@ After that, edit the [mysql.ts.example](src/lib/server/conf/mysql.ts.example) co
 Edit the [vatsim.ts.example](src/lib/server/conf/vatsim.ts.example) file to match your VatSim OAuth details (<https://github.com/vatsimnetwork/developer-info/wiki/Connect>) and rename it to `vatsim.ts`.
 
 To build && run this projetc, first clone it
+
+### Running
+
 ```bash
 $ git clone git@github.com:kristiankunc/VatNotif-web.git
 ```
