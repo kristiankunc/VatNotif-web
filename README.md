@@ -1,38 +1,46 @@
-# create-svelte
+# VatNotif
+VatNotif is a notification service for VatSim pilots. With this tool you can receive an alert when a selected controller position comes online.
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/master/packages/create-svelte).
+## Usage
+To use it, go on the deployment website (<https://vatnotif.kristn.co.uk/>) and log in with your vatSim account. Then go to the dashboard and add the callsigns you want to track (eg. EGNX_GND) and also set up your notification options such as Discord webhook, more info on the notifications is on the home page.
 
-## Creating a project
-
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
-```
-
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
-```
+## Building 
 
 ## Building
-
-To create a production version of your app:
-
+To build && run this projetc, first clone it
 ```bash
-npm run build
+$ git clone git@github.com:kristiankunc/VatNotif-web.git
 ```
 
-You can preview the production build with `npm run preview`.
+install dependencies via npm
+``` bash
+$ npm i
+```
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+build & run
+```bash
+$ npm run build && npm start
+```
+
+alternatively, use the hot reload dev server
+```bash
+$ npm run dev
+```
+
+## Contributing
+Thank you for considering contributing to VatNotif! Here are some guidelines to follow:
+
+1. Fork the repository and create a new branch for your feature or bug fix.
+2. Write tests for your changes and ensure that all tests pass.
+3. Submit a pull request with a clear description of your changes and why they are necessary.
+4. Be responsive to any feedback or questions from the maintainers.
+
+Please note that this project is released with a Contributor Code of Conduct. By participating in this project, you agree to abide by its terms.
+
+## Code of Conduct
+
+Our project has adopted a Code of Conduct that we expect project participants to adhere to. Please read the [full text](CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
+
+
+## License
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
