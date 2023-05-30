@@ -4,8 +4,6 @@ VatNotif is a notification service for VatSim pilots. With this tool you can rec
 ## Usage
 To use it, go on the deployment website (<https://vatnotif.kristn.co.uk/>) and log in with your vatSim account. Then go to the dashboard and add the callsigns you want to track (eg. EGNX_GND) and also set up your notification options such as Discord webhook, more info on the notifications is on the home page.
 
-## Building 
-
 ## Building
 To build && run this projetc, first clone it
 ```bash
@@ -39,7 +37,7 @@ Please note that this project is released with a Contributor Code of Conduct. By
 
 ## Code of Conduct
 
-Our project has adopted a Code of Conduct that we expect project participants to adhere to. Please read the [full text](CODE_OF_CONDUCT.md) so that you can understand what actions will and will not be tolerated.
+Please note that this project follows the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/). By participating, you are expected to uphold this code. Please report any unacceptable behavior to the project maintainers.
 
 
 ## License
