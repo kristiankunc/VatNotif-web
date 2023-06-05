@@ -15,7 +15,7 @@ export const POST = (async ({ url, cookies }) => {
 		throw error(400, "Missing callsign");
 	}
 
-	if (!InputValidation.isCallsign(callsign)) {
+	if (callsign.length > 15) {
 		throw error(400, "Invalid callsign");
 	}
 
@@ -56,10 +56,6 @@ export const DELETE = (async ({ url, cookies }) => {
 	const callsign = url.searchParams.get("callsign");
 	if (!callsign) {
 		throw error(400, "Missing callsign");
-	}
-
-	if (!InputValidation.isCallsign(callsign)) {
-		throw error(400, "Invalid callsign");
 	}
 
 	const session = await SessionsDatabase.getSession(sessionId);

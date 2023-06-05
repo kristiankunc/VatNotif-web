@@ -1,5 +1,6 @@
 export class InputValidation {
 	public static isCallsign(callsign: string): boolean {
+		// not working for some cases - wontifx
 		return /^[A-Z]{2,4}_?[A-Z]{1,4}_?(GND|TWR|APP|DEP|CTR|FSS|DEL|INFO|RAI|ACC)$/.test(callsign);
 	}
 
