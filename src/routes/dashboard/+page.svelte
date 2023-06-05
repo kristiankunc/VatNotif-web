@@ -31,8 +31,8 @@
 			return alert("Please enter a callsign");
 		}
 
-		if (enteredCallsign.length > 15) {
-			return alert("Callsign is too long");
+		if (!InputValidation.isCallsign(enteredCallsign)) {
+			return alert("Please enter a valid callsign");
 		}
 
 		document.body.style.cursor = "wait";

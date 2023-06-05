@@ -1,7 +1,6 @@
 export class InputValidation {
 	public static isCallsign(callsign: string): boolean {
-		// not working for some cases - wontifx
-		return /^[A-Z]{2,4}_?[A-Z]{1,4}_?(GND|TWR|APP|DEP|CTR|FSS|DEL|INFO|RAI|ACC)$/.test(callsign);
+		return /^[A-Z]{2,4}((\_|-)[A-Z0-9_]{0,2})?_?\_(CTR|APP|DEP|TWR|GND|DEL|TMU|FSS|RMP|FIS|FMP|AFIS)$/.test(callsign) && callsign.length <= 15;
 	}
 
 	public static isDiscordWebhookUrl(webhookUrl: string): boolean {

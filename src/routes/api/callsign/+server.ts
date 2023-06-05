@@ -15,7 +15,7 @@ export const POST = (async ({ url, cookies }) => {
 		throw error(400, "Missing callsign");
 	}
 
-	if (callsign.length > 15) {
+	if (!InputValidation.isCallsign(callsign)) {
 		throw error(400, "Invalid callsign");
 	}
 
