@@ -7,7 +7,7 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetch("https://vatnotif-api.kristn.co.uk");
+			const res = await fetch("https://api.vatnotif.kristn.co.uk");
 			if (res.ok) {
 				status = "API Status - ✅";
 			} else {
