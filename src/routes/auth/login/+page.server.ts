@@ -12,5 +12,5 @@ export const load = (async ({ cookies }) => {
 	const session = await SessionsDatabase.getSession(sessionId);
 	if (!session) throw redirect(302, authUrl);
 
-	throw redirect(302, "/");
+	throw redirect(302, "/dashboard");
 }) satisfies PageServerLoad;
