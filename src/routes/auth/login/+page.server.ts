@@ -14,5 +14,5 @@ export const load = (async ({ cookies }) => {
 		throw redirect(302, authUrl.toString());
 	}
 
-	throw redirect(302, "/dashboard");
+	throw redirect(302, "/");
 }) satisfies PageServerLoad;
