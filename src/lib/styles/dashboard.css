@@ -118,6 +118,7 @@ input:checked + .slider:before {
 .watched-callsign button,
 .discord-notification button {
 	padding: 5px 10px;
+	margin: 5px;
 	border: none;
 	border-radius: 5px;
 	background-color: var(--primary-color);
