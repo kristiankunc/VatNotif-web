@@ -7,24 +7,21 @@
 
 	onMount(async () => {
 		try {
-			const res = await fetch("https://api.vatnotif.kristn.co.uk");
-			if (res.ok) {
+			const [apiRes, loginRes] = await Promise.all([fetch("https://api.vatnotif.kristn.co.uk"), fetch("/auth/check", { method: "POST" })]);
+
+			if (apiRes.ok) {
 				status = "API Status - ✅";
 			} else {
-				status = `API Status - ❌ (${res.status})`;
+				status = `API Status - ❌ (${apiRes.status})`;
+			}
+
+			if (loginRes.ok) {
+				isLoggedIn.set(true);
+			} else {
+				isLoggedIn.set(false);
 			}
 		} catch (e) {
 			status = "API Status - ❌ (Offline)";
-		}
-
-		const res = await fetch("/auth/check", {
-			method: "POST",
-		});
-
-		if (res.ok) {
-			isLoggedIn.set(true);
-		} else {
-			isLoggedIn.set(false);
 		}
 	});
 </script>
