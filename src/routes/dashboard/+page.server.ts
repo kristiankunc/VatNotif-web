@@ -14,7 +14,6 @@ export const load = (async ({ cookies }) => {
 	if (!session) throw redirect(302, "/auth/login");
 
 	const { accessToken } = session;
-
 	const user = await VatsimUser.fetchUserDetails(accessToken);
 	const watchedCallsigns = await WatchedCallsignsDatabase.getWatchedCallsignsForCid(user.cid);
 	const discordNotifications = await DiscordNotificationsDatabase.getNotificationsForCid(user.cid);

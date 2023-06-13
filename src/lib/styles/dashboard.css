@@ -1,38 +1,53 @@
+/* CSS */
+@import url("https://fonts.googleapis.com/css?family=Roboto:400,700&display=swap");
+
+* {
+	margin: 0px;
+}
+
+:root {
+	--primary-color: #007bff;
+	--secondary-color: #6c757d;
+	--background-color: #f8f9fa;
+	--text-color: #212529;
+}
+
 .main-container {
-	display: flex;
-	flex-direction: column;
+	max-width: 800px;
+	margin: 0 auto;
+	padding: 20px;
+	background-color: var(--background-color);
+	font-family: "Roboto", sans-serif;
+	color: var(--text-color);
+}
+
+h1 {
+	font-size: 36px;
+	font-weight: 700;
+	margin-bottom: 20px;
+}
+
+.section {
+	margin-bottom: 20px;
+	padding: 20px;
+	background-color: #fff;
+	border-radius: 5px;
+	box-shadow: 0px 2px 5px rgba(0, 0, 0, 0.1);
 }
 
 .center {
 	text-align: center;
 }
 
-.main-container h1 {
-	text-align: center;
+h2 {
+	font-size: 24px;
+	font-weight: 700;
+	margin-bottom: 10px;
 }
 
-.section {
-	margin: 10px 0 20px 0px;
-}
-
-.watched-callsigns-div,
-.discord-notifications-div {
-	display: flex;
-	flex-direction: column;
-}
-
-.watched-callsign,
-.discord-notification {
-	display: flex;
-	flex-direction: row;
-	width: 100%;
-}
-
-.watched-callsign p,
-.watched-callsig button,
-discord-notification p,
-.discord-notification button {
-	margin: 0 5px 0 5px;
+p {
+	font-size: 16px;
+	margin-bottom: 10px;
 }
 
 .switch {
@@ -55,9 +70,10 @@ discord-notification p,
 	left: 0;
 	right: 0;
 	bottom: 0;
-	background-color: #ccc;
+	background-color: var(--secondary-color);
 	-webkit-transition: 0.4s;
 	transition: 0.4s;
+	border-radius: 34px;
 }
 
 .slider:before {
@@ -67,21 +83,61 @@ discord-notification p,
 	width: 26px;
 	left: 4px;
 	bottom: 4px;
-	background-color: white;
+	background-color: #fff;
 	-webkit-transition: 0.4s;
 	transition: 0.4s;
+	border-radius: 50%;
 }
 
 input:checked + .slider {
-	background-color: #2196f3;
+	background-color: var(--primary-color);
 }
 
 input:focus + .slider {
-	box-shadow: 0 0 1px #2196f3;
+	box-shadow: 0 0 1px var(--primary-color);
 }
 
 input:checked + .slider:before {
 	-webkit-transform: translateX(26px);
 	-ms-transform: translateX(26px);
 	transform: translateX(26px);
+}
+
+.watched-callsigns-div,
+.discord-notifications-div {
+	display: flex;
+	flex-direction: column;
+}
+
+.watched-callsign,
+.discord-notification {
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+	margin-bottom: 10px;
+}
+
+.watched-callsign input,
+.discord-notification input {
+	flex: 1;
+	margin-right: 10px;
+	padding: 5px;
+	border: none;
+	border-radius: 5px;
+	background-color: #f2f2f2;
+}
+
+.watched-callsign button,
+.discord-notification button {
+	padding: 5px 10px;
+	border: none;
+	border-radius: 5px;
+	background-color: var(--primary-color);
+	color: #fff;
+	cursor: pointer;
+}
+
+.watched-callsign button:hover,
+.discord-notification button:hover {
+	background-color: #0069d9;
 }
