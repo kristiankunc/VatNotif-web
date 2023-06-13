@@ -166,7 +166,6 @@
 	<title>VatNotif - Dashboard</title>
 </svelte:head>
 
-<!-- HTML -->
 <div class="main-container">
 	<h1>Dashboard</h1>
 
@@ -220,7 +219,7 @@
 				{/each}
 			{/if}
 			<div class="discord-notification">
-				<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} />
+				<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} style="word-break: break-all" />
 				<button on:click={addDiscordNotificationHandler}>Add</button>
 			</div>
 		</div>
