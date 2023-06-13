@@ -4,15 +4,13 @@ import { error, redirect } from "@sveltejs/kit";
 import { vatsimConfig } from "$lib/server/conf/vatsim";
 
 export const load = (async ({ cookies }) => {
-	const authUrl = new URL(`${vatsimConfig.authUrl}/oauth/authorize`);
-	authUrl.searchParams.append("client_id", vatsimConfig.clientId);
-	authUrl.searchParams.append("redirect_uri", vatsimConfig.redirectUri);
-	authUrl.searchParams.append("response_type", "code");
-	authUrl.searchParams.append("scope", vatsimConfig.scopes);
+	const authUrl = `${vatsimConfig.authUrl}/oauth/authorize?client_id=${vatsimConfig.clientId}&redirect_uri=${vatsimConfig.redirectUri}&response_type=code&scope=${vatsimConfig.scopes}`;
 
-	if (!cookies.get("session") || !(await SessionsDatabase.getSession(cookies.get("session")!))) {
-		throw redirect(302, authUrl.toString());
-	}
+	const sessionId = cookies.get("session");
+	if (!sessionId) throw redirect(302, authUrl);
 
-	throw redirect(302, "/");
+	const session = await SessionsDatabase.getSession(sessionId);
+	if (!session) throw redirect(302, authUrl);
+
+	throw redirect(302, "/dashboard");
 }) satisfies PageServerLoad;
