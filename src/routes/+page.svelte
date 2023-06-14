@@ -4,6 +4,10 @@
 	import Layout from "./+layout.svelte";
 </script>
 
+<svelte:head>
+	<title>VatNotif</title>
+</svelte:head>
+
 <Navbar />
 
 <main class="container">
