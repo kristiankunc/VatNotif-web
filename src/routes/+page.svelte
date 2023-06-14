@@ -60,8 +60,8 @@
 		<div class="faq__question">
 			<h3 class="faq__question-title">Is the service paid?</h3>
 			<p class="faq__question-answer">
-				No, VatNotif is completely free to use. If you'd like to support the project, you can donate to the developer <a
-					href="https://paypal.me/kristn1">here</a
+				No, VatNotif is completely free to use. If you'd like to support the project, you can donate to the developer using <a
+					href="https://paypal.me/kristn1">PayPal</a
 				>.
 			</p>
 		</div>
