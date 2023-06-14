@@ -1,29 +1,6 @@
 <script lang="ts">
-	import { onMount } from "svelte";
-	import { writable } from "svelte/store";
-
-	let status = "API Status - Loading...";
-	let isLoggedIn = writable(false);
-
-	onMount(async () => {
-		try {
-			const [apiRes, loginRes] = await Promise.all([fetch("https://api.vatnotif.kristn.co.uk"), fetch("/auth/check", { method: "POST" })]);
-
-			if (apiRes.ok) {
-				status = "API Status - ✅";
-			} else {
-				status = `API Status - ❌ (${apiRes.status})`;
-			}
-
-			if (loginRes.ok) {
-				isLoggedIn.set(true);
-			} else {
-				isLoggedIn.set(false);
-			}
-		} catch (e) {
-			status = "API Status - ❌ (Offline)";
-		}
-	});
+	export let isLoggedIn: boolean;
+	export let apiStatus: boolean;
 </script>
 
 <div class="navbar">
@@ -38,12 +15,12 @@
 
 	<div class="box navbar__api_status">
 		<span>
-			{status}
+			API Status - {apiStatus ? "✅" : "❌"}
 		</span>
 	</div>
 	<div class="box navbar__links">
 		<span>
-			{#if $isLoggedIn}
+			{#if isLoggedIn}
 				<a href="/auth/logout">Logout</a>
 				<a href="/dashboard">Dashboard</a>
 			{:else}

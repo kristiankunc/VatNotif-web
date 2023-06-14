@@ -164,8 +164,6 @@
 	<title>VatNotif - Dashboard</title>
 </svelte:head>
 
-<Navbar />
-
 <div class="main-container">
 	<h1>Dashboard</h1>
 

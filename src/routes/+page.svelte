@@ -1,14 +1,10 @@
 <script>
-	import Navbar from "$lib/components/Navbar.svelte";
 	import "../lib/styles/index.css";
-	import Layout from "./+layout.svelte";
 </script>
 
 <svelte:head>
 	<title>VatNotif</title>
 </svelte:head>
-
-<Navbar />
 
 <main class="container">
 	<section class="hero">
