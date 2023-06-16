@@ -153,6 +153,18 @@
 	margin-bottom: 0.5rem;
 }
 
+.news__title {
+	font-size: 2rem;
+	font-weight: 700;
+	margin-bottom: 2rem;
+}
+
+.news__article h3 {
+	font-size: 1.5rem;
+	font-weight: 700;
+	margin-top: 1rem;
+}
+
 .data-handling {
 	margin: 4rem 0;
 }

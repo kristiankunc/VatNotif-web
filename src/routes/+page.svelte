@@ -75,6 +75,26 @@
 		</div>
 	</section>
 
+	<section class="news">
+		<h2 class="news__title">What's new?</h2>
+		<div class="news__article">
+			<h3>Notifications Updates</h3>
+			<time datetime="2021-06-16">16. 6. 2021</time>
+			<p>
+				The Discord notification embed look has been tweaked a little and a notification for when a controller logs off has been added. You
+				can now do not have to check if a controller is still online or not.
+			</p>
+			<div class="news__article">
+				<h3>New UI</h3>
+				<time datetime="2023-06-13">13. 6. 2023</time>
+				<p>
+					The VatNotif UI has been completely updated including the dashboard. This update hopes to make the site more appealing and
+					user-friendly to newcomers.
+				</p>
+			</div>
+		</div>
+	</section>
+
 	<section class="data-handling">
 		<h2 class="data-handling__title">Data Handling Policy</h2>
 		<p class="data-handling__description">
