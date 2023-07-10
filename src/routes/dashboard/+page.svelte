@@ -1,11 +1,11 @@
 <script lang="ts">
-	import Navbar from "$lib/components/Navbar.svelte";
 	import "$lib/styles/dashboard.css";
 	import { InputValidation } from "$lib/scripts/input-validation";
 	import { writable } from "svelte/store";
 	import { onMount } from "svelte";
 
 	import type { VatsimUserData } from "$lib/types/vatsim";
+	import Feedback from "$lib/components/Feedback.svelte";
 
 	let enteredCallsign = "";
 	let enteredDiscordNotification = "";
@@ -163,6 +163,8 @@
 <svelte:head>
 	<title>VatNotif - Dashboard</title>
 </svelte:head>
+
+<Feedback />
 
 <div class="main-container">
 	<h1>Dashboard</h1>
