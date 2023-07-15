@@ -92,21 +92,27 @@ input:checked + .slider:before {
 }
 
 .watched-callsigns-div,
-.discord-notifications-div {
+.notifications-div {
 	display: flex;
 	flex-direction: column;
 }
 
 .watched-callsign,
-.discord-notification {
+.notification {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
 	margin-bottom: 10px;
 }
 
+.notification p {
+	overflow: hidden;
+	white-space: nowrap;
+	text-overflow: ellipsis;
+}
+
 .watched-callsign input,
-.discord-notification input {
+.notification input {
 	flex: 1;
 	margin-right: 10px;
 	padding: 5px;
@@ -116,7 +122,7 @@ input:checked + .slider:before {
 }
 
 .watched-callsign button,
-.discord-notification button {
+.notification button {
 	padding: 5px 10px;
 	margin: 5px;
 	border: none;
@@ -127,6 +133,6 @@ input:checked + .slider:before {
 }
 
 .watched-callsign button:hover,
-.discord-notification button:hover {
+.notification button:hover {
 	background-color: #0069d9;
 }

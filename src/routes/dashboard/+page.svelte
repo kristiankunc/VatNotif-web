@@ -206,19 +206,19 @@
 
 	<div class="section">
 		<h2>Discord Notifications</h2>
-		<div class="discord-notifications-div section">
+		<div class="notifications-div section">
 			{#if $discordNotificationsStore.length === 0}
 				<p>You have no notifications</p>
 			{:else}
 				{#each $discordNotificationsStore as notification}
-					<div class="discord-notification">
+					<div class="notification">
 						<p>{notification}</p>
 						<button on:click={() => testDiscordNotificationHandler(notification)}>Test</button>
 						<button on:click={() => deleteDiscordNotificationHandler(notification)}>Delete</button>
 					</div>
 				{/each}
 			{/if}
-			<div class="discord-notification">
+			<div class="notification">
 				<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} style="word-break: break-all" />
 				<button on:click={addDiscordNotificationHandler}>Add</button>
 			</div>
