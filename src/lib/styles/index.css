@@ -80,8 +80,9 @@
 }
 
 .feature__icon {
-	width: 5rem;
-	height: 5rem;
+	width: 7.5em;
+	height: 7.5rem;
+	transform: scale(2);
 	margin-bottom: 1rem;
 }
 
