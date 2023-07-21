@@ -1,11 +1,12 @@
 <script lang="ts">
 	import "$lib/styles/dashboard.css";
 	import { InputValidation } from "$lib/scripts/input-validation";
-	import { writable } from "svelte/store";
+	import { get, writable } from "svelte/store";
 	import { onMount } from "svelte";
 
 	import type { VatsimUserData } from "$lib/types/vatsim";
 	import Feedback from "$lib/components/Feedback.svelte";
+	import { urlBase64ToUint8Array } from "$lib/scripts/base64-convert";
 
 	let enteredCallsign = "";
 	let enteredDiscordNotification = "";
@@ -20,10 +21,20 @@
 	const watchedCallsignsStore = writable(data.watchedCallsigns);
 	const discordNotificationsStore = writable(data.discordNotifications);
 	const isIgnoredStore = writable(data.isIgnored);
+	const pushNotificationsStore = writable(false);
 
 	onMount(() => {
-		watchedCallsignsStore.set(data.watchedCallsigns);
-		discordNotificationsStore.set(data.discordNotifications);
+		if (Notification.permission === "granted" && "serviceWorker" in navigator) {
+			navigator.serviceWorker.getRegistration("src/lib/scripts/push-service-worker.ts").then((registration) => {
+				if (registration) {
+					registration.pushManager.getSubscription().then((subscription) => {
+						if (subscription) {
+							pushNotificationsStore.set(true);
+						}
+					});
+				}
+			});
+		}
 	});
 
 	async function addCallsignHandler(): Promise<string | void> {
@@ -158,6 +169,70 @@
 			return alert(`Something went wrong\nError: ${(await res.json()).message}`);
 		}
 	}
+
+	export async function pushHandler(): Promise<string | void> {
+		const permsResult = await Notification.requestPermission();
+
+		if (permsResult !== "granted") {
+			return alert("Please allow push notifications");
+		}
+
+		if (!("serviceWorker" in navigator)) {
+			return alert("Service workers are not supported");
+		}
+		if (!get(pushNotificationsStore)) {
+			const registration = await navigator.serviceWorker.getRegistration("src/lib/scripts/push-service-worker.ts");
+			const subscription = await registration?.pushManager.getSubscription();
+
+			if (registration) {
+				await registration.unregister();
+			}
+
+			const res = await fetch("/api/push-notification", {
+				method: "DELETE",
+				headers: {
+					"Content-type": "application/json",
+				},
+				body: JSON.stringify({
+					subscription: subscription,
+				}),
+			});
+
+			if (!res.ok) {
+				return alert(`Something went wrong\nError: ${(await res.json()).message}`);
+			}
+			return;
+		}
+
+		document.body.style.cursor = "wait";
+
+		const registration = await navigator.serviceWorker.register("src/lib/scripts/push-service-worker.ts", { scope: "/src/lib/scripts/" });
+		let subscription = await registration.pushManager.getSubscription();
+
+		if (!subscription) {
+			//const vapidPublicKey = urlBase64ToUint8Array(await (await fetch("http://localhost:8000/push/public-key")).text());
+			const vapidPublicKey = urlBase64ToUint8Array("BPC5EC_GjWtuEW3igUWFinjOb6-YZR7S26auhZPyOjlGTxsHkvjoIIXmDIODKSrzjldDIAwhGE2I2LFvUbf0YOM");
+			subscription = await registration.pushManager.subscribe({
+				userVisibleOnly: true,
+				applicationServerKey: vapidPublicKey,
+			});
+		}
+		const res = await fetch("/api/push-notification", {
+			method: "POST",
+			headers: {
+				"Content-type": "application/json",
+			},
+			body: JSON.stringify({
+				subscription: subscription,
+			}),
+		});
+
+		if (!res.ok) {
+			return alert(`Something went wrong\nError: ${(await res.json()).message}`);
+		}
+
+		document.body.style.cursor = "default";
+	}
 </script>
 
 <svelte:head>
@@ -222,6 +297,18 @@
 				<input placeholder="Enter webhook url" bind:value={enteredDiscordNotification} style="word-break: break-all" />
 				<button on:click={addDiscordNotificationHandler}>Add</button>
 			</div>
+		</div>
+	</div>
+
+	<div class="section">
+		<h2>Push Notifications</h2>
+
+		<div class="notifications-div section">
+			<p>Enable push notifications</p>
+			<label class="switch">
+				<input type="checkbox" bind:checked={$pushNotificationsStore} on:click={pushHandler} />
+				<span class="slider" />
+			</label>
 		</div>
 	</div>
 </div>
