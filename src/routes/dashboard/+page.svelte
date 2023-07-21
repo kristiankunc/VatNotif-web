@@ -210,8 +210,7 @@
 		let subscription = await registration.pushManager.getSubscription();
 
 		if (!subscription) {
-			//const vapidPublicKey = urlBase64ToUint8Array(await (await fetch("http://localhost:8000/push/public-key")).text());
-			const vapidPublicKey = urlBase64ToUint8Array("BPC5EC_GjWtuEW3igUWFinjOb6-YZR7S26auhZPyOjlGTxsHkvjoIIXmDIODKSrzjldDIAwhGE2I2LFvUbf0YOM");
+			const vapidPublicKey = urlBase64ToUint8Array(await (await fetch("https://api.vatnotif.kristn.co.uk/push/public-key")).text());
 			subscription = await registration.pushManager.subscribe({
 				userVisibleOnly: true,
 				applicationServerKey: vapidPublicKey,
