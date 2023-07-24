@@ -206,7 +206,7 @@
 
 		document.body.style.cursor = "wait";
 
-		const registration = await navigator.serviceWorker.register("src/lib/scripts/push-service-worker.ts", { scope: "/src/lib/scripts/" });
+		const registration = await navigator.serviceWorker.register("src/lib/scripts/push-service-worker.ts");
 		let subscription = await registration.pushManager.getSubscription();
 
 		if (!subscription) {
