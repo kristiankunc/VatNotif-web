@@ -1,1 +1,1 @@
-export const apiUrl = "api.vatnotif.kristn.co.uk";
+export const apiUrl = "https://api.vatnotif.kristn.co.uk";
