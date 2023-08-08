@@ -207,7 +207,7 @@
 
 		document.body.style.cursor = "wait";
 
-		const registration = await navigator.serviceWorker.register("src/service-worker.ts", {
+		const registration = await navigator.serviceWorker.register("./src/service-worker.ts", {
 			type: dev ? "module" : "classic",
 		});
 		let subscription = await registration.pushManager.getSubscription();
