@@ -3,6 +3,7 @@
 	import { InputValidation } from "$lib/scripts/input-validation";
 	import { get, writable } from "svelte/store";
 	import { onMount } from "svelte";
+	import { dev } from "$app/environment";
 
 	import type { VatsimUserData } from "$lib/types/vatsim";
 	import Feedback from "$lib/components/Feedback.svelte";
@@ -206,7 +207,9 @@
 
 		document.body.style.cursor = "wait";
 
-		const registration = await navigator.serviceWorker.register("src/service-worker.ts");
+		const registration = await navigator.serviceWorker.register("src/service-worker.ts", {
+			type: dev ? "module" : "classic",
+		});
 		let subscription = await registration.pushManager.getSubscription();
 
 		if (!subscription) {
