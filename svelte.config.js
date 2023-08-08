@@ -16,6 +16,15 @@ const config = {
 		// See https://kit.svelte.dev/docs/adapters for more information about adapters.
 		adapter: adapter(),
 	},
+	vite: {
+		build: {
+			rollupOptions: {
+				input: {
+					sw: "src/lib/scripts/service-worker.ts",
+				},
+			},
+		},
+	},
 };
 
 export default config;

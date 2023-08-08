@@ -26,7 +26,7 @@
 
 	onMount(() => {
 		if (Notification.permission === "granted" && "serviceWorker" in navigator) {
-			navigator.serviceWorker.getRegistration("src/service-worker.ts").then((registration) => {
+			navigator.serviceWorker.getRegistration("./src/lib/scripts/service-worker.ts").then((registration) => {
 				if (registration) {
 					registration.pushManager.getSubscription().then((subscription) => {
 						if (subscription) {
@@ -182,7 +182,7 @@
 			return alert("Service workers are not supported");
 		}
 		if (!get(pushNotificationsStore)) {
-			const registration = await navigator.serviceWorker.getRegistration("src/service-worker.ts");
+			const registration = await navigator.serviceWorker.getRegistration("./src/lib/scripts/service-worker.ts");
 			const subscription = await registration?.pushManager.getSubscription();
 
 			if (registration) {
@@ -207,7 +207,7 @@
 
 		document.body.style.cursor = "wait";
 
-		const registration = await navigator.serviceWorker.register("./src/service-worker.ts", {
+		const registration = await navigator.serviceWorker.register("./src/lib/scripts/service-worker.ts", {
 			type: dev ? "module" : "classic",
 		});
 		let subscription = await registration.pushManager.getSubscription();
