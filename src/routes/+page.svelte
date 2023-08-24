@@ -34,7 +34,7 @@
 	</section>
 
 	<section class="getting-started">
-		<h2 class="getting-started__title">Getting Started</h2>
+		<h2 class="section-title">Getting Started</h2>
 		<p class="getting-started__description">
 			To get started, please login with your VATSIM account. After that you can proceed to the <a href="/dashboard">Dashboard</a> and add some callsigns
 			you'd like to receive notifications for. You can also add Discord webhooks to receive notifications on your discord servers.
@@ -43,7 +43,7 @@
 	</section>
 
 	<section class="faq">
-		<h2 class="faq__title">FAQ</h2>
+		<h2 class="section-title">FAQ</h2>
 		<div class="faq__question">
 			<h3 class="faq__question-title">What is VatNotif?</h3>
 			<p class="faq__question-answer">
@@ -76,7 +76,7 @@
 	</section>
 
 	<section class="news">
-		<h2 class="news__title">What's new?</h2>
+		<h2 class="section-title">What's new?</h2>
 		<div class="news__article">
 			<h3>Push Notifications</h3>
 			<time datetime="2021-07-24">24. 7. 2021</time>
@@ -103,8 +103,18 @@
 		</div>
 	</section>
 
+	<section>
+		<h2 class="section-title">Contact</h2>
+		<p>
+			If you have any questions or concerns, please do not hesitate to contact us at <a href="mailto:kristian@kristn.co.uk"
+				>kristian@kristn.co.uk</a
+			>
+			<br />
+			Or get other contact options at <a href="https://kristn.co.uk">kristn.co.uk</a>
+		</p>
+	</section>
 	<section class="data-handling">
-		<h2 class="data-handling__title">Data Handling Policy</h2>
+		<h2 class="section-title">Data Handling Policy</h2>
 		<p class="data-handling__description">
 			At VatNotif, we take data privacy seriously and are committed to protecting your personal information. As such, we have implemented the
 			following data handling policy:

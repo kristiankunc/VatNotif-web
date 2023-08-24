@@ -106,10 +106,11 @@
 	text-align: center;
 }
 
-.getting-started__title {
+.section-title {
 	font-size: 2rem;
 	font-weight: 700;
-	margin-bottom: 1rem;
+	margin-top: 2rem;
+	margin-bottom: 1.5rem;
 }
 
 .getting-started__description {
@@ -118,24 +119,8 @@
 	margin-bottom: 2rem;
 }
 
-.faq {
-	margin: 4rem 0;
-}
-
-.faq__title {
-	font-size: 2rem;
-	font-weight: 700;
-	margin-bottom: 2rem;
-}
-
 .faq__question {
 	margin-bottom: 2rem;
-}
-
-.faq__question-title {
-	font-size: 1.5rem;
-	font-weight: 700;
-	margin-bottom: 1rem;
 }
 
 .faq__question-answer {
@@ -144,36 +129,10 @@
 	margin-bottom: 1rem;
 }
 
-.faq__question-list {
-	list-style: none;
-	margin: 0;
-	padding: 0;
-}
-
-.faq__question-list li {
-	margin-bottom: 0.5rem;
-}
-
-.news__title {
-	font-size: 2rem;
-	font-weight: 700;
-	margin-bottom: 2rem;
-}
-
 .news__article h3 {
 	font-size: 1.5rem;
 	font-weight: 700;
 	margin-top: 1rem;
-}
-
-.data-handling {
-	margin: 4rem 0;
-}
-
-.data-handling__title {
-	font-size: 2rem;
-	font-weight: 700;
-	margin-bottom: 2rem;
 }
 
 .data-handling__description {
@@ -190,9 +149,4 @@
 
 .data-handling__item {
 	margin-bottom: 1rem;
-}
-
-.data-handling__disclaimer {
-	font-style: italic;
-	margin-top: 2rem;
 }
