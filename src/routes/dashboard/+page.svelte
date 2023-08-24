@@ -263,6 +263,11 @@
 
 	<div class="section">
 		<h2>Watched callsigns</h2>
+		<p>
+			Enter your watched callsigns here, e.g. EGNX_GND.
+			<br />
+			Wildcard (*) is supported if you want to track for example all positions at an airport e.g. EGNX_*
+		</p>
 		<div class="watched-callsigns-div section">
 			{#if $watchedCallsignsStore.length === 0}
 				<p>You have no watched callsigns</p>
@@ -283,6 +288,11 @@
 
 	<div class="section">
 		<h2>Discord Notifications</h2>
+		<p>
+			Enter your discord webhooks here, they should have a url like this:
+			<br />
+			https://discord.com/api/webhooks/123456789/abcdefghijklmnopqrstuvwxyz123456789
+		</p>
 		<div class="notifications-div section">
 			{#if $discordNotificationsStore.length === 0}
 				<p>You have no notifications</p>
