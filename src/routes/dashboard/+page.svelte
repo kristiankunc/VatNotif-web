@@ -316,7 +316,8 @@
 		<h2>Push Notifications</h2>
 
 		<div class="notifications-div section">
-			<p>Enable push notifications</p>
+			<p>Enable push notifications - currently in BETA</p>
+
 			<label class="switch">
 				<input type="checkbox" bind:checked={$pushNotificationsStore} on:click={pushHandler} />
 				<span class="slider" />
