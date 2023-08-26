@@ -8,6 +8,9 @@
 
 {#if browser}
 	<script defer data-domain="vatnotif.kristn.co.uk" src="https://plausible.kristn.co.uk/js/script.js"></script>
+	<script>
+		console.log("plausible loaded");
+	</script>
 {/if}
 
 <Navbar isLoggedIn={data.isLoggedIn} apiStatus={data.apiStatus} />

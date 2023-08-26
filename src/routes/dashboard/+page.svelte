@@ -274,6 +274,7 @@
 			{:else}
 				{#each $watchedCallsignsStore as callsign}
 					<div class="watched-callsign">
+						;
 						<p>{callsign}</p>
 						<button on:click={() => deleteCallsignHandler(callsign)}>Delete</button>
 					</div>
