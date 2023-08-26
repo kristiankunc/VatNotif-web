@@ -266,7 +266,7 @@
 		<p>
 			Enter your watched callsigns here, e.g. EGNX_GND.
 			<br />
-			Wildcard (*) is supported if you want to track for example all positions at an airport e.g. EGNX_*
+			Wildcard (%) is supported if you want to track for example all positions at an airport e.g. EGNX_%
 		</p>
 		<div class="watched-callsigns-div section">
 			{#if $watchedCallsignsStore.length === 0}
