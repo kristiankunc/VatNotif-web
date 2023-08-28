@@ -19,7 +19,6 @@ export class VatsimAuth {
 		});
 
 		if (!res.ok) {
-			console.log(await res.json());
 			return Promise.reject(res.status);
 		}
 
@@ -46,7 +45,6 @@ export class VatsimAuth {
 		});
 
 		if (!res.ok) {
-			console.log(await res.json());
 			Promise.reject(res.status);
 		}
 

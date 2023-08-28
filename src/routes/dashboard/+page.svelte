@@ -26,7 +26,7 @@
 
 	onMount(() => {
 		if (Notification.permission === "granted" && "serviceWorker" in navigator) {
-			navigator.serviceWorker.getRegistration("./src/lib/scripts/service-worker.ts").then((registration) => {
+			navigator.serviceWorker.getRegistration("/service-worker.js").then((registration) => {
 				if (registration) {
 					registration.pushManager.getSubscription().then((subscription) => {
 						if (subscription) {
@@ -182,7 +182,8 @@
 			return alert("Service workers are not supported");
 		}
 		if (!get(pushNotificationsStore)) {
-			const registration = await navigator.serviceWorker.getRegistration("./src/lib/scripts/service-worker.ts");
+			// Disable push notifications
+			const registration = await navigator.serviceWorker.getRegistration("/service-worker.js");
 			const subscription = await registration?.pushManager.getSubscription();
 
 			if (registration) {
@@ -203,37 +204,36 @@
 				return alert(`Something went wrong\nError: ${(await res.json()).message}`);
 			}
 			return;
-		}
+		} else {
+			// Enable push notifications
+			document.body.style.cursor = "wait";
 
-		document.body.style.cursor = "wait";
+			const registration = await navigator.serviceWorker.register("/service-worker.js");
+			let subscription = await registration.pushManager.getSubscription();
 
-		const registration = await navigator.serviceWorker.register("./src/lib/scripts/service-worker.ts", {
-			type: dev ? "module" : "classic",
-		});
-		let subscription = await registration.pushManager.getSubscription();
-
-		if (!subscription) {
-			const vapidPublicKey = urlBase64ToUint8Array(await (await fetch("https://api.vatnotif.kristn.co.uk/push/public-key")).text());
-			subscription = await registration.pushManager.subscribe({
-				userVisibleOnly: true,
-				applicationServerKey: vapidPublicKey,
+			if (!subscription) {
+				const vapidPublicKey = urlBase64ToUint8Array(await (await fetch("https://api.vatnotif.kristn.co.uk/push/public-key")).text());
+				subscription = await registration.pushManager.subscribe({
+					userVisibleOnly: true,
+					applicationServerKey: vapidPublicKey,
+				});
+			}
+			const res = await fetch("/api/push-notification", {
+				method: "POST",
+				headers: {
+					"Content-type": "application/json",
+				},
+				body: JSON.stringify({
+					subscription: subscription,
+				}),
 			});
-		}
-		const res = await fetch("/api/push-notification", {
-			method: "POST",
-			headers: {
-				"Content-type": "application/json",
-			},
-			body: JSON.stringify({
-				subscription: subscription,
-			}),
-		});
 
-		if (!res.ok) {
-			return alert(`Something went wrong\nError: ${(await res.json()).message}`);
-		}
+			if (!res.ok) {
+				return alert(`Something went wrong\nError: ${(await res.json()).message}`);
+			}
 
-		document.body.style.cursor = "default";
+			document.body.style.cursor = "default";
+		}
 	}
 </script>
 
@@ -312,7 +312,7 @@
 		<h2>Push Notifications</h2>
 
 		<div class="notifications-div section">
-			<p>Enable push notifications - currently in BETA</p>
+			<p>Enable push notifications</p>
 
 			<label class="switch">
 				<input type="checkbox" bind:checked={$pushNotificationsStore} on:click={pushHandler} />
