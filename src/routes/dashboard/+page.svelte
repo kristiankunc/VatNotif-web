@@ -263,11 +263,7 @@
 
 	<div class="section">
 		<h2>Watched callsigns</h2>
-		<p>
-			Enter your watched callsigns here, e.g. EGNX_GND.
-			<br />
-			Wildcard (%) is supported if you want to track for example all positions at an airport e.g. EGNX_%
-		</p>
+		<p>Enter your watched callsigns here, e.g. EGNX_GND.</p>
 		<div class="watched-callsigns-div section">
 			{#if $watchedCallsignsStore.length === 0}
 				<p>You have no watched callsigns</p>
