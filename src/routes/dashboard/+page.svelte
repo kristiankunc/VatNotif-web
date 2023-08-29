@@ -254,7 +254,10 @@
 
 	<div class="section center">
 		<h2>Privacy settings</h2>
-		<p>Your CID currently <b>{$isIgnoredStore ? "can't" : "can"}</b> be tracked</p>
+		<p>
+			Your CID currently <b>{$isIgnoredStore ? "can't" : "can"}</b> be tracked by other VatNotif users, they
+			<b>{$isIgnoredStore ? "won't" : "will"}</b> receive a notification when you come online on a tracked position
+		</p>
 		<label class="switch">
 			<input type="checkbox" bind:checked={$isIgnoredStore} on:click={ignoreHandler} />
 			<span class="slider" />
