@@ -266,7 +266,12 @@
 
 	<div class="section">
 		<h2>Watched callsigns</h2>
-		<p>Enter your watched callsigns here, e.g. EGNX_GND.</p>
+		<p>
+			Enter your watched callsigns here, e.g. EGNX_GND.
+			<br />
+			Wildcard (%) is supported, e.g. EGNX_%. This will watch all EGNX positions. The callsign cannot contain only a wildcard and cannot start with
+			a wildcard.
+		</p>
 		<div class="watched-callsigns-div section">
 			{#if $watchedCallsignsStore.length === 0}
 				<p>You have no watched callsigns</p>
