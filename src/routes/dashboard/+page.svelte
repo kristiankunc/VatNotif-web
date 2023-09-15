@@ -3,7 +3,6 @@
 	import { InputValidation } from "$lib/scripts/input-validation";
 	import { get, writable } from "svelte/store";
 	import { onMount } from "svelte";
-	import { dev } from "$app/environment";
 
 	import type { VatsimUserData } from "$lib/types/vatsim";
 	import Feedback from "$lib/components/Feedback.svelte";

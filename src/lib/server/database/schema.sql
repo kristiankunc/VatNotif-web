@@ -15,6 +15,16 @@ CREATE TABLE ignored_cids (
   cid INT
 );
 
+-- Create table push_notifications
+CREATE TABLE push_notifications (
+  cid INT NOT NULL,
+  endpoint VARCHAR(255) NOT NULL,
+  expiration_time BIGINT,
+  p256dh VARCHAR(255) NOT NULL,
+  auth VARCHAR(255) NOT NULL,
+  PRIMARY KEY (cid)
+);
+
 -- Create table sessions
 CREATE TABLE sessions (
   session_id VARCHAR(64),
