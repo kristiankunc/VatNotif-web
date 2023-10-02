@@ -15,7 +15,7 @@
 		"@sveltejs/kit": "^1.25.1",
 		"@types/node": "^20.6.5",
 		"@types/source-map": "^0.5.7",
-		"@types/webpack": "^5.28.2",
+		"@types/webpack": "^5.28.3",
 		"svelte": "^4.2.1",
 		"svelte-check": "^3.5.2",
 		"tslib": "^2.6.2",
