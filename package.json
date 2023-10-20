@@ -24,6 +24,6 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"mysql2": "^3.6.1"
+		"mysql2": "^3.6.2"
 	}
 }
