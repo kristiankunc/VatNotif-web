@@ -2,7 +2,7 @@
 VatNotif is a notification service for VATSIM pilots. With this tool you can receive an alert when a selected controller position comes online.
 
 ## Usage
-To use it, go on the deployment website (<https://vatnotif.kristn.co.uk/>) and log in with your vatSim account. Then go to the dashboard and add the callsigns you want to track (eg. EGNX_GND) and also set up your notification options such as Discord webhook, more info on the notifications is on the home page.
+To use it, go on the deployment website (<https://vatnotif.kristn.co.uk/>) and log in with your VATSIM account. Then go to the dashboard and add the callsigns you want to track (eg. EGNX_GND) and also set up your notification options such as Discord webhook, more info on the notifications is on the home page.
 
 ## Development setup
 
