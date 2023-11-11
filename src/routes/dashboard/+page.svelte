@@ -4,15 +4,16 @@
 	import { get, writable } from "svelte/store";
 	import { onMount } from "svelte";
 
-	import type { VatsimUserData } from "$lib/types/vatsim";
+	import type { VatsimUserData, WatchedCallsign } from "$lib/types/vatsim";
 	import Feedback from "$lib/components/Feedback.svelte";
 	import { urlBase64ToUint8Array } from "$lib/scripts/base64-convert";
 
 	let enteredCallsign = "";
 	let enteredDiscordNotification = "";
+	let enteredTopdown = false;
 
 	export let data: {
-		watchedCallsigns: string[];
+		watchedCallsigns: WatchedCallsign[];
 		user: VatsimUserData;
 		discordNotifications: string[];
 		isIgnored: boolean;
@@ -47,7 +48,7 @@
 		}
 
 		document.body.style.cursor = "wait";
-		const res = await fetch(`/api/callsign?callsign=${enteredCallsign}`, {
+		const res = await fetch(`/api/callsign?callsign=${enteredCallsign}&topdown=${enteredTopdown}`, {
 			method: "POST",
 		});
 		document.body.style.cursor = "default";
@@ -57,7 +58,7 @@
 		}
 
 		watchedCallsignsStore.update((watchedCallsigns) => {
-			watchedCallsigns.push(enteredCallsign);
+			watchedCallsigns.push({ string: enteredCallsign, topdown: enteredTopdown });
 			return watchedCallsigns;
 		});
 
@@ -80,7 +81,7 @@
 		}
 
 		watchedCallsignsStore.update((watchedCallsigns) => {
-			return watchedCallsigns.filter((c) => c !== callsign);
+			return watchedCallsigns.filter((c) => c.string !== callsign);
 		});
 	}
 
@@ -234,6 +235,18 @@
 			document.body.style.cursor = "default";
 		}
 	}
+
+	export async function topdownToggle(callsign: WatchedCallsign) {
+		document.body.style.cursor = "wait";
+		const res = await fetch(`/api/callsign?callsign=${callsign.string}&topdown=${!callsign.topdown}`, {
+			method: "PUT",
+		});
+		document.body.style.cursor = "default";
+
+		if (!res.ok) {
+			return alert(`Something went wrong\nError: ${(await res.json()).message}`);
+		}
+	}
 </script>
 
 <svelte:head>
@@ -277,13 +290,25 @@
 			{:else}
 				{#each $watchedCallsignsStore as callsign}
 					<div class="watched-callsign">
-						<p>{callsign}</p>
-						<button on:click={() => deleteCallsignHandler(callsign)}>Delete</button>
+						<p>{callsign.string}</p>
+						<div style="width: 50%" />
+						<p>top-down</p>
+						<label class="switch">
+							<input type="checkbox" bind:checked={callsign.topdown} on:click={() => topdownToggle(callsign)} />
+							<span class="slider" />
+						</label>
+						<button on:click={() => deleteCallsignHandler(callsign.string)}>Delete</button>
 					</div>
 				{/each}
 			{/if}
 			<div class="watched-callsign">
 				<input placeholder="Enter callsign" bind:value={enteredCallsign} />
+				<div style="width: 20%" />
+				<p>top-down</p>
+				<label class="switch">
+					<input type="checkbox" bind:checked={enteredTopdown} />
+					<span class="slider" />
+				</label>
 				<button on:click={addCallsignHandler}>Add</button>
 			</div>
 		</div>

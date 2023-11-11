@@ -9,3 +9,8 @@ export interface VatsimUserData {
 		token_valid: boolean;
 	};
 }
+
+export interface WatchedCallsign {
+	string: string;
+	topdown: boolean;
+}

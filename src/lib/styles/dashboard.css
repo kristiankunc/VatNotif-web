@@ -36,9 +36,11 @@ h2 {
 p {
 	font-size: 16px;
 	margin-bottom: 10px;
+	margin-left: 20px;
 }
 
 .switch {
+	margin: 20px;
 	position: relative;
 	display: inline-block;
 	width: 60px;

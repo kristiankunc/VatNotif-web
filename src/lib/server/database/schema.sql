@@ -35,6 +35,7 @@ CREATE TABLE sessions (
 
 -- Create table watched_callsigns
 CREATE TABLE watched_callsigns (
-  cid INT,
-  callsign VARCHAR(15)
-);
+  cid INT NOT NULL,
+  callsign VARCHAR(15) NOT NULL,
+  topdown BOOLEAN NOT NULL DEFAULT FALSE,
+)
