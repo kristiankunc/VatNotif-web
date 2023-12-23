@@ -291,7 +291,7 @@
 				{#each $watchedCallsignsStore as callsign}
 					<div class="watched-callsign">
 						<p>{callsign.string}</p>
-						<div style="width: 50%" />
+						<div style="width: 45%" />
 						<p>top-down</p>
 						<label class="switch">
 							<input type="checkbox" bind:checked={callsign.topdown} on:click={() => topdownToggle(callsign)} />

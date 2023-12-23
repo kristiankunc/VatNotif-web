@@ -1,6 +1,5 @@
 import type { VatsimUserData } from "$lib/types/vatsim";
 import { vatsimConfig } from "../conf/vatsim";
-import { SessionsDatabase } from "../database/sessions";
 
 export class VatsimUser {
 	// make private
@@ -16,7 +15,18 @@ export class VatsimUser {
 			return Promise.reject(res.status);
 		}
 
-		return (await res.json()).data;
+		const data = (await res.json()).data;
+		return {
+			cid: Number.parseInt(data.cid),
+			personal: {
+				name_first: data.personal.name_first,
+				name_last: data.personal.name_last,
+				name_full: data.personal.name_full,
+			},
+			oauth: {
+				token_valid: data.oauth.token_valid === "true",
+			},
+		};
 	}
 
 	public static async getUser(accessToken: string): Promise<VatsimUserData> {

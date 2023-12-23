@@ -1,22 +1,31 @@
+import { prisma } from "./prisma";
 import { Database } from "./database";
 
 export class IgnoredCidsDatabase extends Database {
-	private static readonly TABLE_NAME = "ignored_cids";
-
 	public static async getAll(): Promise<number[]> {
-		return (await super.query(`SELECT cid FROM ${this.TABLE_NAME}`)) as number[];
+		const ignoredCids = await prisma.ignored_cids.findMany();
+		return ignoredCids.map((ignoredCid) => ignoredCid.cid);
 	}
 
 	public static async set(cid: number, state: boolean): Promise<void> {
-		if (state) {
-			await super.query(`INSERT IGNORE INTO ${this.TABLE_NAME} (cid) VALUES (?)`, [cid]);
-		} else {
-			await super.query(`DELETE FROM ${this.TABLE_NAME} WHERE cid = ?`, [cid]);
-		}
+		await prisma.ignored_cids.upsert({
+			where: {
+				cid: cid,
+			},
+			update: {},
+			create: {
+				cid: cid,
+			},
+		});
 	}
 
 	public static async isIgnored(cid: number): Promise<boolean> {
-		const result = await super.query(`SELECT cid FROM ${this.TABLE_NAME} WHERE cid = ?`, [cid]);
-		return result.length > 0;
+		const ignoredCid = await prisma.ignored_cids.findUnique({
+			where: {
+				cid: cid,
+			},
+		});
+
+		return ignoredCid !== null;
 	}
 }
