@@ -8,10 +8,10 @@ To use it, go on the deployment website (<https://vatnotif.kristn.co.uk/>) and l
 
 ### MYSQL
 
-This project requires a MySQL database to be running. The database schema can be found in the [schema.sql](src/lib/server/database/schema.sql) file.
-To apply this schema, run the following command on your MySQL server:
+This project requires a MySQL database to be running. The database schema can be found in the [schema.prisma](prisma/schema.prisma) file.
+To apply this schema, run the following command, configure your Prisma databse url and run
 ```bash
-$ mysql -u <username> -p < schema.sql
+$ npx prisma db push
 ```
 
 ### Config

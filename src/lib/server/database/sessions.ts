@@ -1,20 +1,20 @@
+import { prisma } from "./prisma";
 import { Database } from "./database";
 import * as crypto from "crypto";
 
 export class SessionsDatabase extends Database {
-	private static readonly TABLE_NAME = "sessions";
-
 	private static async generateSessionId(): Promise<string> {
-		const query = `SELECT session_id FROM ${this.TABLE_NAME}`;
-		const rows = await super.query(query);
-
-		const sessionIds = rows.map((row: { session_id: string }) => row.session_id);
+		const sessionIds = await prisma.sessions.findMany({
+			select: {
+				session_id: true,
+			},
+		});
 
 		let sessionId = "";
 
 		do {
 			sessionId = crypto.randomBytes(32).toString("hex");
-		} while (sessionIds.includes(sessionId));
+		} while (sessionIds.some((session) => session.session_id === sessionId));
 
 		return sessionId;
 	}
@@ -22,44 +22,55 @@ export class SessionsDatabase extends Database {
 	public static async createSession(accessToken: string, refreshToken: string): Promise<string> {
 		const sessionId = await this.generateSessionId();
 
-		const query = `INSERT INTO ${this.TABLE_NAME} (session_id, access_token, refresh_token) VALUES (?, ?, ?)`;
-		const values = [sessionId, accessToken, refreshToken];
-
-		await super.query(query, values);
+		await prisma.sessions.create({
+			data: {
+				session_id: sessionId,
+				access_token: accessToken,
+				refresh_token: refreshToken,
+			},
+		});
 
 		return sessionId;
 	}
 
 	public static async getSession(sessionId: string): Promise<{ accessToken: string; refreshToken: string } | null> {
-		const query = `SELECT access_token, refresh_token FROM ${this.TABLE_NAME} WHERE session_id = ?`;
-		const values = [sessionId];
+		const session = await prisma.sessions.findUnique({
+			where: {
+				session_id: sessionId,
+			},
+		});
 
-		const rows = await super.query(query, values);
-
-		if (rows.length === 0) return null;
+		if (!session) return null;
 
 		return {
-			accessToken: rows[0].access_token,
-			refreshToken: rows[0].refresh_token,
+			accessToken: session.access_token,
+			refreshToken: session.refresh_token,
 		};
 	}
 
 	public static async deleteSessionById(sessionId: string): Promise<void> {
-		const query = `DELETE FROM ${this.TABLE_NAME} WHERE session_id = ?`;
-		const values = [sessionId];
-
-		await super.query(query, values);
+		await prisma.sessions.delete({
+			where: {
+				session_id: sessionId,
+			},
+		});
 	}
 
 	public static async deleteSessionByAccessToken(accessToken: string): Promise<void> {
-		const query = `DELETE FROM ${this.TABLE_NAME} WHERE access_token = ?`;
-		const values = [accessToken];
-
-		await super.query(query, values);
+		await prisma.sessions.deleteMany({
+			where: {
+				access_token: accessToken,
+			},
+		});
 	}
 
 	public static async deleteExpiredSessions(): Promise<void> {
-		const query = `DELETE FROM ${this.TABLE_NAME} WHERE created_at < NOW() - INTERVAL 24 HOUR;`;
-		await super.query(query);
+		await prisma.sessions.deleteMany({
+			where: {
+				created_at: {
+					lte: new Date(Date.now() - 24 * 60 * 60 * 1000),
+				},
+			},
+		});
 	}
 }
