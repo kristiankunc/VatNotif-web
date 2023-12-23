@@ -7,7 +7,6 @@ export const GET = (async ({ url }) => {
 	const callbackCode = url.searchParams.get("code");
 
 	if (!callbackCode) throw error(400, "No callback code provided");
-
 	const { accessToken, refreshToken } = await VatsimAuth.getUserTokens(callbackCode);
 
 	const sessionId = await SessionsDatabase.createSession(accessToken, refreshToken);

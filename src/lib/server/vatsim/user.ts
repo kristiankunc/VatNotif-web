@@ -10,9 +10,8 @@ export class VatsimUser {
 				Accept: "application/json",
 			},
 		});
-
 		if (!res.ok) {
-			return Promise.reject(res.status);
+			return Promise.reject(await res.text());
 		}
 
 		const data = (await res.json()).data;

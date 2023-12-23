@@ -17,12 +17,13 @@ export class VatsimAuth {
 				code: callbackCode,
 			}),
 		});
+		const json = await res.json();
 
 		if (!res.ok) {
 			return Promise.reject(res.status);
 		}
 
-		const { access_token, refresh_token } = await res.json();
+		const { access_token, refresh_token } = json;
 		if (!access_token || !refresh_token) {
 			Promise.reject(500);
 		}
