@@ -15,7 +15,7 @@ export const load = (async ({ cookies }) => {
 
 	const { accessToken } = session;
 	const user = await VatsimUser.fetchUserDetails(accessToken);
-	console.log(user);
+
 	const watchedCallsigns = await WatchedCallsignsDatabase.getWatchedCallsignsForCid(user.cid);
 	const discordNotifications = await DiscordNotificationsDatabase.getNotificationsForCid(user.cid);
 	const isIgnored = await IgnoredCidsDatabase.isIgnored(user.cid);
