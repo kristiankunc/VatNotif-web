@@ -292,7 +292,7 @@
 					<div class="watched-callsign">
 						<p>{callsign.string}</p>
 						<div style="width: 45%" />
-						<p>top-down</p>
+						<p>Top Down</p>
 						<label class="switch">
 							<input type="checkbox" bind:checked={callsign.topdown} on:click={() => topdownToggle(callsign)} />
 							<span class="slider" />
@@ -304,7 +304,7 @@
 			<div class="watched-callsign">
 				<input placeholder="Enter callsign" bind:value={enteredCallsign} />
 				<div style="width: 20%" />
-				<p>top-down</p>
+				<p>Top Down</p>
 				<label class="switch">
 					<input type="checkbox" bind:checked={enteredTopdown} />
 					<span class="slider" />

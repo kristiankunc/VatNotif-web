@@ -58,25 +58,44 @@
 			</p>
 		</div>
 		<div class="faq__question">
-			<h3 class="faq__question-title">Is the service paid?</h3>
-			<p class="faq__question-answer">
-				No, VatNotif is completely free to use. If you'd like to support the project, you can donate to the developer using <a
-					href="https://paypal.me/kristn1">PayPal</a
-				>.
-			</p>
+			<h3 class="faq__question-title">What notifications are available?</h3>
+			<p class="faq__question-answer">Currently, VatNotif supports Discord webhooks and push notifications</p>
 		</div>
 		<div class="faq__question">
-			<h3 class="faq__question-title">Is this project open-source?</h3>
-			<p class="faq__question-answer">Yes, the project is open-source and can be found on GitHub:</p>
-			<ul class="faq__question-list">
-				<li><a href="https://github.com/kristiankunc/VatNotif-web">VatNotif-web</a></li>
-				<li><a href="https://github.com/kristiankunc/VatNotif-api">VatNotif-api</a></li>
-			</ul>
+			<h3 class="faq__question-title">What is Top Down?</h3>
+			<p class="faq__question-answer">
+				Top Down is a feature that allows you to receive notifications when a controller logs on to a position that is above the selected
+				position and assumes responsibility for the position you.
+			</p>
+			<div class="faq__question">
+				<h3 class="faq__question-title">Is the service paid?</h3>
+				<p class="faq__question-answer">
+					No, VatNotif is completely free to use. If you'd like to support the project, you can donate to the developer using <a
+						href="https://paypal.me/kristn1">PayPal</a
+					>.
+				</p>
+			</div>
+			<div class="faq__question">
+				<h3 class="faq__question-title">Is this project open-source?</h3>
+				<p class="faq__question-answer">Yes, the project is open-source and can be found on GitHub:</p>
+				<ul class="faq__question-list">
+					<li><a href="https://github.com/kristiankunc/VatNotif-web">VatNotif-web</a></li>
+					<li><a href="https://github.com/kristiankunc/VatNotif-api">VatNotif-api</a></li>
+				</ul>
+			</div>
 		</div>
 	</section>
 
 	<section class="news">
 		<h2 class="section-title">What's new?</h2>
+		<div class="news__article">
+			<h3>Top Down</h3>
+			<time datetime="2024-10-01">10. 1. 2024</time>
+			<p>
+				Top Down is a feature that allows you to receive notifications when a controller logs on to a position that is above the selected
+				position and assumes responsibility for the position you.
+			</p>
+		</div>
 		<div class="news__article">
 			<h3>Push Notifications</h3>
 			<time datetime="2021-07-24">24. 7. 2021</time>
