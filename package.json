@@ -26,6 +26,6 @@
 	"type": "module",
 	"dependencies": {
 		"@prisma/client": "^5.7.1",
-		"mysql2": "^3.6.5"
+		"mysql2": "^3.9.2"
 	}
 }
