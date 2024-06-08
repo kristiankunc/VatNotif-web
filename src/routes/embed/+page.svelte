@@ -1,5 +1,6 @@
 <script lang="ts">
-	import { onDestroy, onMount } from "svelte";
+	import { mdToHtml } from "$lib/md-convertor";
+	import { onDestroy } from "svelte";
 
 	let author: string = "VatNotif";
 	let title: string = "Hello, world!";
@@ -65,9 +66,11 @@
 				>
 					<div class="flex flex-col">
 						<p class="p-2 text-lg font-semibold">{title}</p>
-						<p class="white-space-pre-line mb-2 rounded bg-[#2b2d31] p-2 leading-relaxed">
-							{text}
-						</p>
+						{#await mdToHtml(text)}
+							<p>Loading...</p>
+						{:then html}
+							{@html html}
+						{/await}
 					</div>
 				</div>
 			</div>
