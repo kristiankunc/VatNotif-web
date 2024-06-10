@@ -4,6 +4,14 @@ declare global {
 	namespace App {
 		// interface Error {}
 		interface Locals {
+				cid: string;
+				name_first: string;
+				name_last: string;
+				name: string;
+				id: string;
+			};
+		}
+		interface PageData {
 			session?: {
 				user: {
 					cid: string;
@@ -15,7 +23,6 @@ declare global {
 				expires: string;
 			};
 		}
-		// interface PageData {}
 		// interface PageState {}
 		// interface Platform {}
 	}
