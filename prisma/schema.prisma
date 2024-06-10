@@ -20,7 +20,7 @@ model ignored_callsigns {
 
 model discord_notifications {
   id           Int    @id @default(autoincrement())
-  cid          String @db.VarChar(10)
+  cid          String @unique @db.VarChar(10)
   webhook_url  String @db.VarChar(255)
   up_content   Json
   down_content Json

@@ -3,14 +3,7 @@
 declare global {
 	namespace App {
 		// interface Error {}
-		interface Locals {
-				cid: string;
-				name_first: string;
-				name_last: string;
-				name: string;
-				id: string;
-			};
-		}
+		// interface Locals {}
 		interface PageData {
 			session?: {
 				user: {
@@ -25,6 +18,19 @@ declare global {
 		}
 		// interface PageState {}
 		// interface Platform {}
+	}
+}
+
+declare module "@auth/sveltekit" {
+	interface Session {
+		user: {
+			cid: string;
+			name_first: string;
+			name_last: string;
+			name: string;
+			id: string;
+		};
+		expires: string;
 	}
 }
 

@@ -1,13 +1,25 @@
 <script lang="ts">
-	import { page } from "$app/stores";
-	import { mdToHtml } from "$lib/discord-embeds";
+	import { JSONtoEmbed, mdToHtml, type DiscordEmbed } from "$lib/discord-embeds";
 	import { onDestroy } from "svelte";
 
-	let author: string = "VatNotif";
-	let title: string = "Hello, world!";
-	let text: string = "This is a message from Discohook!";
-	let color: string = "#5865f2";
-	let avatar: string = "https://placehold.co/64x64";
+	export let data;
+
+	let isDownNotification: boolean = false;
+	let currentNotificationData = isDownNotification ? data.currentWebhooks?.down_content : data.currentWebhooks?.up_content;
+
+	let parsedData: DiscordEmbed = {
+		author: "VatNotif",
+		title: "Hello, world!",
+		text: "This is a message from Discohook!",
+		color: "#5865f2",
+		avatar: "https://placehold.co/64x64"
+	};
+
+	$: {
+		if (currentNotificationData) {
+			parsedData = JSONtoEmbed(JSON.stringify(currentNotificationData));
+		}
+	}
 
 	let currentTimeStr: string = getTimeStr();
 
@@ -26,27 +38,45 @@
 
 	$: {
 		if (typeof window !== "undefined") {
-			document.documentElement.style.setProperty("--dynamic-color", color);
+			document.documentElement.style.setProperty("--dynamic-color", parsedData.color);
 		}
 	}
 </script>
 
 <div class="flex w-full flex-row justify-between">
 	<div class="justify-cente flex w-1/2 flex-col items-center">
-		<form class="flex w-1/2 flex-col pt-10" method="post" action="?/updateembed">
-			<p class="text-2xl font-semibold">Customize Discord Embed</p>
-			<p class="m-2 w-full text-left text-sm text-gray-500">Author</p>
-			<input type="text" bind:value={author} maxlength="80" class="m-2 rounded border border-gray-300 p-2" required />
-			<p class="m-2 text-sm text-gray-500">Title</p>
-			<input type="text" bind:value={title} maxlength="256" class="m-2 rounded border border-gray-300 p-2" required />
-			<p class="m-2 text-sm text-gray-500">Text</p>
-			<textarea bind:value={text} maxlength="4096" class="m-2 rounded border border-gray-300 p-2" rows="10" required />
-			<p class="m-2 text-sm text-gray-500">Color</p>
-			<input type="color" bind:value={color} class="m-2 rounded border border-gray-300 p-2" required />
-			<p class="m-2 text-sm text-gray-500">Avatar URL</p>
-			<input type="url" bind:value={avatar} class="m-2 rounded border border-gray-300 p-2" required />
+		<form class="flex w-4/6 flex-col pt-10" method="post" action="?/updateembed">
+			<p class="mb-2 text-2xl font-semibold">Customize Discord Embed</p>
+			<div class="flex w-full flex-row items-center justify-center">
+				<p class="m-2 w-full text-left text-sm text-gray-500">Notification type</p>
+				<div class="w-full" />
+				<label class="me-5 inline-flex cursor-pointer content-center items-center justify-center">
+					<input type="checkbox" value="" bind:checked={isDownNotification} class="peer sr-only" />
+					<div
+						class="peer-focus:ring-4rtl:peer-checked:after:-translate-x-full peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-green-500"
+					></div>
+				</label>
+				<p class="w-full text-left text-sm text-gray-500">{isDownNotification ? "Down" : "Up"} Notification</p>
+			</div>
 
-			<input type="submit" value="Update" class="m-2 cursor-pointer rounded bg-[#5865f2] p-2 text-white" />
+			<p class="m-2 w-full text-left text-sm text-gray-500">Webhook URL</p>
+			<input type="url" bind:value={parsedData name="url" class="m-2 rounded border border-gray-300 p-2" required />
+			<p class="m-2 w-full text-left text-sm text-gray-500">Author</p>
+			<input type="text" bind:value={parsedData.author} maxlength="80" name="author" class="m-2 rounded border border-gray-300 p-2" required />
+			<p class="m-2 text-sm text-gray-500">Title</p>
+			<input type="text" bind:value={parsedData.title} maxlength="256" name="title" class="m-2 rounded border border-gray-300 p-2" required />
+			<p class="m-2 text-sm text-gray-500">Text</p>
+			<textarea bind:value={parsedData.text} maxlength="4096" name="text" class="m-2 rounded border border-gray-300 p-2" rows="10" required />
+			<p class="m-2 text-sm text-gray-500">Color</p>
+			<input type="color" bind:value={parsedData.color} name="color" class="m-2 rounded border border-gray-300 p-2" required />
+			<p class="m-2 text-sm text-gray-500">Avatar URL</p>
+			<input type="url" bind:value={parsedData.avatar} name="avatar" class="m-2 rounded border border-gray-300 p-2" required />
+
+			{#if !isDownNotification}
+				<input type="submit" value="Update up notification" class="m-2 cursor-pointer rounded bg-green-500 p-2 text-white" />
+			{:else}
+				<input type="submit" value="Update down notification" class="m-2 cursor-pointer rounded bg-red-600 p-2 text-white" />
+			{/if}
 		</form>
 	</div>
 	<div class="flex min-h-screen w-1/2 flex-col items-center justify-center bg-[#36393f] font-opensans text-white">

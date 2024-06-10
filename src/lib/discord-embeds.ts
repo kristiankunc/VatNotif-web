@@ -22,7 +22,7 @@ export async function mdToHtml(md: string): Promise<string> {
 	return DOMPurify.sanitize(await marked(md), { USE_PROFILES: { html: true } });
 }
 
-export async function embedToJSON(embed: DiscordEmbed): Promise<string> {
+export function embedToJSON(embed: DiscordEmbed): string {
 	return JSON.stringify({
 		content: null,
 		embeds: [
@@ -36,4 +36,20 @@ export async function embedToJSON(embed: DiscordEmbed): Promise<string> {
 		avatar_url: embed.avatar,
 		attachments: []
 	});
+}
+
+export function JSONtoEmbed(json: string): DiscordEmbed {
+	const embed = JSON.parse(json);
+	return {
+		author: embed.username,
+		title: embed.embeds[0].title,
+		text: embed.embeds[0].description,
+		color: "#" + embed.embeds[0].color.toString(16).padStart(6, "0"),
+		avatar: embed.avatar_url
+	};
+}
+
+export function isWebhookUrl(url: string): boolean {
+	const webhookRegex = /^https:\/\/discord(app)?\.com\/api\/webhooks\/\d+\/[\w-]+$/;
+	return webhookRegex.test(url);
 }
