@@ -1,3 +1,4 @@
+import type { JsonValue } from "@prisma/client/runtime/library";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
 
@@ -38,8 +39,8 @@ export function embedToJSON(embed: DiscordEmbed): string {
 	});
 }
 
-export function JSONtoEmbed(json: string): DiscordEmbed {
-	const embed = JSON.parse(json);
+export function JSONtoEmbed(json: string | JsonValue): DiscordEmbed {
+	const embed = JSON.parse(json as string);
 	return {
 		author: embed.username,
 		title: embed.embeds[0].title,

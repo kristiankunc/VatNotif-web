@@ -4,17 +4,22 @@ import type { Actions } from "./$types";
 import { prisma } from "$lib/prisma";
 import { embedToJSON } from "$lib/discord-embeds";
 
-export const load: Load = async ({ request, locals }) => {
+export const load: Load = async ({ locals }) => {
 	const sesh = await locals.auth();
 	if (!sesh) return fail(401, { message: "Unauthorized" });
 
-	const currentWebhooks = await prisma.discord_notifications.findFirst({
+	const currentWebhook = await prisma.discordNotification.findFirst({
 		where: { cid: sesh.user.cid },
-		select: { webhook_url: true, up_content: true, down_content: true }
+		include: {
+			upEmbed: true,
+			downEmbed: true
+		}
 	});
 
+	if (!currentWebhook) return { notification: null };
+
 	return {
-		currentWebhooks: currentWebhooks
+		notification: currentWebhook
 	};
 };
 
@@ -70,19 +75,10 @@ export const actions = {
 			method: "DELETE"
 		});
 
-		await prisma.discord_notifications.upsert({
+		await prisma.DiscordNotification.upsert({
 			where: { cid },
-			update: {
-				webhook_url: url,
-				up_content: json,
-				down_content: json
-			},
-			create: {
-				cid,
-				webhook_url: url,
-				up_content: json,
-				down_content: json
-			}
+			update: { up_content: json, webhook_url: url },
+			create: { cid, up_content: json, webhook_url: url }
 		});
 	}
 } satisfies Actions;

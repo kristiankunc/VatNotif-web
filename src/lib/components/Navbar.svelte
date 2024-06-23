@@ -8,7 +8,6 @@
 		const response = await fetch("https://api.vatnotif.kristn.co.uk/");
 		statusElemet.innerText = response.ok ? "API status: ✅" : "API status: ❌";
 	});
-	fetch("https://api.vatnotif.kristn.co.uk/");
 </script>
 
 <nav class="align-center flex justify-between bg-primary-600 p-4 text-white">
