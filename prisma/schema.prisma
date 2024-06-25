@@ -32,7 +32,7 @@ model DiscordEmbed {
 model DiscordNotification {
   id          Int           @id @default(autoincrement())
   name        String        @db.VarChar(50)
-  cid         String        @db.VarChar(10)
+  cid         Int
   webhookUrl  String        @db.VarChar(255)
   upEmbed     DiscordEmbed? @relation(name: "UpEmbed", fields: [upEmbedId], references: [id])
   upEmbedId   Int?          @unique

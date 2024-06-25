@@ -1,12 +1,14 @@
 import { validateFormData } from "$lib/form";
-import { fail, type Load } from "@sveltejs/kit";
+import { error, fail, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import { prisma } from "$lib/prisma";
 import { embedToJSON } from "$lib/discord-embeds";
+import { goto } from "$app/navigation";
 
 export const load: Load = async ({ locals }) => {
 	const sesh = await locals.auth();
-	if (!sesh) return fail(401, { message: "Unauthorized" });
+
+	if (!sesh) error(401, { message: "Unauthorized" });
 
 	const currentWebhook = await prisma.discordNotification.findFirst({
 		where: { cid: sesh.user.cid },
@@ -32,6 +34,7 @@ export const actions = {
 		const form = await request.formData();
 
 		const isValid = validateFormData(form, [
+			{ key: "isDownNotification", type: "boolean", maxLength: 0 },
 			{ key: "url", type: "string", maxLength: 256 },
 			{ key: "author", type: "string", maxLength: 80 },
 			{ key: "title", type: "string", maxLength: 256 },
@@ -41,14 +44,6 @@ export const actions = {
 		]);
 
 		if (!isValid) return fail(400, { message: "Invalid form data" });
-
-		const json = await embedToJSON({
-			author: form.get("author") as string,
-			title: form.get("title") as string,
-			text: form.get("text") as string,
-			color: form.get("color") as string,
-			avatar: form.get("avatar") as string
-		});
 
 		const url = form.get("url") as string;
 
@@ -75,10 +70,31 @@ export const actions = {
 			method: "DELETE"
 		});
 
-		await prisma.DiscordNotification.upsert({
+		const embedType = form.get("isDownNotification") === "true" ? "DownEmbed" : "UpEmbed";
+		await prisma.discordNotification.upsert({
 			where: { cid },
-			update: { up_content: json, webhook_url: url },
-			create: { cid, up_content: json, webhook_url: url }
+			update: {
+				[embedType]: {
+					create: {
+						name: form.get("url") as string,
+						cid: sesh.user.cid,
+						author: form.get("author") as string,
+						title: form.get("title") as string,
+						text: form.get("text") as string,
+						color: form.get("color") as string,
+						avatar: form.get("avatar") as string
+					},
+					update: {
+						name: form.get("url") as string,
+						cid: sesh.user.cid,
+						author: form.get("author") as string,
+						title: form.get("title") as string,
+						text: form.get("text") as string,
+						color: form.get("color") as string,
+						avatar: form.get("avatar") as string
+					}
+				}
+			}
 		});
 	}
 } satisfies Actions;

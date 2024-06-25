@@ -1,6 +1,7 @@
 import type { JsonValue } from "@prisma/client/runtime/library";
 import DOMPurify from "dompurify";
 import { marked } from "marked";
+import { prisma } from "./prisma";
 
 export interface DiscordEmbed {
 	author: string;
@@ -53,4 +54,42 @@ export function JSONtoEmbed(json: string | JsonValue): DiscordEmbed {
 export function isWebhookUrl(url: string): boolean {
 	const webhookRegex = /^https:\/\/discord(app)?\.com\/api\/webhooks\/\d+\/[\w-]+$/;
 	return webhookRegex.test(url);
+}
+
+export class DiscordHelper {
+	public static getDefaultEmbed(): { up: DiscordEmbed; down: DiscordEmbed } {
+		let baseEmbed = {
+			author: "VatNotif",
+			title: "New notification",
+			color: "#7289DA",
+			avatar: "https://cdn.discordapp.com/embed/avatars/0.png"
+		};
+
+		return {
+			up: {
+				...baseEmbed,
+				text: "{name} ({cid}) has just logged onto {callsign} ({frequency})."
+			},
+			down: {
+				...baseEmbed,
+				text: "{name} ({cid}) has just logged off {callsign} ({frequency})."
+			}
+		};
+	}
+	public static async createDefaultDiscordNotification(cid: number) {
+		const defaultEmbed = DiscordHelper.getDefaultEmbed();
+
+		await prisma.discordNotification.create({
+			data: {
+				cid: cid,
+				url: "",
+				DownEmbed: {
+					create: defaultEmbed.down
+				},
+				UpEmbed: {
+					create: defaultEmbed.up
+				}
+			}
+		});
+	}
 }

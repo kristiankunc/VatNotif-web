@@ -1,17 +1,22 @@
 <script lang="ts">
-	import { mdToHtml, type DiscordEmbed } from "$lib/discord-embeds";
+	import { page } from "$app/stores";
+	import { getDefaultEmbed, mdToHtml, type DiscordEmbed } from "$lib/discord-embeds";
 	import { onDestroy } from "svelte";
 
 	export let data;
+	export let form;
+
 	let isDownNotification: boolean = false;
+
+	const defaultEmbed = getDefaultEmbed();
 
 	let currentData: DiscordEmbed & { url: string } = {
 		url: data?.notification?.webhookUrl || "",
-		author: data?.notification?.upEmbed?.author || "",
-		title: data?.notification?.upEmbed?.title || "",
-		text: data?.notification?.upEmbed?.text || "",
-		color: data?.notification?.upEmbed?.color || "",
-		avatar: data?.notification?.upEmbed?.avatar || ""
+		author: data?.notification?.upEmbed?.author || defaultEmbed.author,
+		title: data?.notification?.upEmbed?.title || defaultEmbed.title,
+		text: data?.notification?.upEmbed?.text || defaultEmbed.text,
+		color: data?.notification?.upEmbed?.color || defaultEmbed.color,
+		avatar: data?.notification?.upEmbed?.avatar || defaultEmbed.avatar
 	};
 
 	let currentTimeStr: string = getTimeStr();
@@ -30,29 +35,31 @@
 	});
 
 	$: {
-		if (isDownNotification) {
-			currentData = {
-				url: data?.notification?.webhookUrl || "",
-				author: data?.notification?.downEmbed?.author || "",
-				title: data?.notification?.downEmbed?.title || "",
-				text: data?.notification?.downEmbed?.text || "",
-				color: data?.notification?.downEmbed?.color || "",
-				avatar: data?.notification?.downEmbed?.avatar || ""
-			};
-		} else {
-			currentData = {
-				url: data?.notification?.webhookUrl || "",
-				
-				
+		if (typeof window !== "undefined") {
+			document.documentElement.style.setProperty("--dynamic-color", currentData.color);
 		}
 	}
 
+	function fetchEmbedData() {
+		if (!data.notification?.downEmbed || !data.notification.upEmbed) return;
 
+		currentData.url = data.notification.webhookUrl;
 
-
-	$: {
-		if (typeof window !== "undefined") {
-			document.documentElement.style.setProperty("--dynamic-color", currentData.color);
+		switch (isDownNotification) {
+			case true:
+				currentData.author = data.notification.downEmbed.author;
+				currentData.title = data.notification.downEmbed.title;
+				currentData.text = data.notification.downEmbed.text;
+				currentData.color = data.notification.downEmbed.color;
+				currentData.avatar = data.notification.downEmbed.avatar;
+				break;
+			case false:
+				currentData.author = data.notification.upEmbed.author;
+				currentData.title = data.notification.upEmbed.title;
+				currentData.text = data.notification.upEmbed.text;
+				currentData.color = data.notification.upEmbed.color;
+				currentData.avatar = data.notification.upEmbed.avatar;
+				break;
 		}
 	}
 </script>
@@ -60,19 +67,25 @@
 <div class="flex w-full flex-row justify-between">
 	<div class="justify-cente flex w-1/2 flex-col items-center">
 		<form class="flex w-4/6 flex-col pt-10" method="post" action="?/updateembed">
+			{#if form?.message}<p class="error">{form.message}</p>{/if}
 			<p class="mb-2 text-2xl font-semibold">Customize Discord Embed</p>
-			<div class="flex w-full flex-row items-center justify-center">
+			<div class="items-between flex w-full flex-row justify-center">
 				<p class="m-2 w-full text-left text-sm text-gray-500">Notification type</p>
-				<div class="w-full" />
-				<label class="me-5 inline-flex cursor-pointer content-center items-center justify-center">
-					<input type="checkbox" value="" bind:checked={isDownNotification} class="peer sr-only" />
-					<div
-						class="peer-focus:ring-4rtl:peer-checked:after:-translate-x-full peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-green-500"
-					></div>
-				</label>
-				<p class="w-full text-left text-sm text-gray-500">{isDownNotification ? "Down" : "Up"} Notification</p>
+				<div class="flex items-center">
+					<label class="me-5 inline-flex cursor-pointer content-center items-center justify-center">
+						<input type="checkbox" value="" bind:checked={isDownNotification} class="peer sr-only" />
+						<div
+							class="peer-focus:ring-4rtl:peer-checked:after:-translate-x-full peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-green-500"
+						></div>
+					</label>
+					<p class="w-full text-left text-sm text-gray-500">{isDownNotification ? "Down" : "Up"} Notification</p>
+				</div>
+			</div>
+			<div class="items-between flex w-full flex-row justify-center">
+				<button type="button" class="m-2 cursor-pointer rounded bg-blue-500 p-2 text-white" on:click={fetchEmbedData}>Fetch from server</button>
 			</div>
 
+			<input type="hidden" name="isDownNotification" value={isDownNotification} />
 			<p class="m-2 w-full text-left text-sm text-gray-500">Webhook URL</p>
 			<input type="url" bind:value={currentData.url} name="url" class="m-2 rounded border border-gray-300 p-2" required />
 			<p class="m-2 w-full text-left text-sm text-gray-500">Author</p>
