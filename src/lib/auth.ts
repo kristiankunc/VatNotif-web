@@ -1,4 +1,4 @@
-import { SvelteKitAuth } from "@auth/sveltekit";
+import { SvelteKitAuth, type Session } from "@auth/sveltekit";
 import { VATSIM_CLIENT_ID, VATSIM_CLIENT_SECRET, VATSIM_AUTH_URL, AUTH_SECRET } from "$env/static/private";
 
 export const auth = SvelteKitAuth({
@@ -22,7 +22,7 @@ export const auth = SvelteKitAuth({
 			userinfo: `${VATSIM_AUTH_URL}/api/user`,
 			async profile(profile) {
 				return {
-					cid: profile.data.cid,
+					cid: Number.parseInt(profile.data.cid),
 					name_first: profile.data.personal.name_first,
 					name_last: profile.data.personal.name_last,
 					name: profile.data.personal.name_full

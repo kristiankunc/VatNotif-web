@@ -7,7 +7,7 @@ declare global {
 		interface PageData {
 			session?: {
 				user: {
-					cid: string;
+					cid: number;
 					name_first: string;
 					name_last: string;
 					name: string;
@@ -24,7 +24,7 @@ declare global {
 declare module "@auth/sveltekit" {
 	interface Session {
 		user: {
-			cid: string;
+			cid: number;
 			name_first: string;
 			name_last: string;
 			name: string;
