@@ -87,13 +87,14 @@
 	}
 </script>
 
-<div class="flex w-full flex-row justify-between">
-	<div class="justify-cente flex w-1/2 flex-col items-center">
+<div class="flex w-full flex-col justify-between md:flex-row">
+	<div class="flex w-full flex-col items-center justify-center md:w-1/2">
 		<form class="flex w-4/6 flex-col pt-10" method="post" action="?/updateembed">
 			{#if form?.message}<p class="error">{form.message}</p>{/if}
 			<p class="mb-2 text-2xl font-semibold">Customize Discord Embed</p>
 			<div class="items-between flex w-full flex-row justify-center">
 				<p class="m-2 w-full text-left text-sm text-gray-500">Notification type</p>
+
 				<div class="flex items-center">
 					<label class="me-5 inline-flex cursor-pointer content-center items-center justify-center">
 						<input type="checkbox" value="" bind:checked={isDownNotification} class="peer sr-only" />
@@ -104,9 +105,6 @@
 					<p class="w-full text-left text-sm text-gray-500">{isDownNotification ? "Down" : "Up"} Notification</p>
 				</div>
 			</div>
-			<div class="items-between flex w-full flex-row justify-center">
-				<button type="button" class="m-2 cursor-pointer rounded bg-blue-500 p-2 text-white" on:click={resetToServer}>Reset</button>
-			</div>
 
 			<input type="hidden" name="isDownNotification" value={isDownNotification} />
 			<p class="m-2 w-full text-left text-sm text-gray-500">Webhook URL</p>
@@ -116,21 +114,23 @@
 			<p class="m-2 text-sm text-gray-500">Title</p>
 			<input type="text" bind:value={currentData.title} maxlength="256" name="title" class="m-2 rounded border border-gray-300 p-2" required />
 			<p class="m-2 text-sm text-gray-500">Text</p>
-			<textarea bind:value={currentData.text} maxlength="4096" name="text" class="m-2 rounded border border-gray-300 p-2" rows="10" required />
+			<textarea bind:value={currentData.text} maxlength="4096" name="text" class="m-2 rounded border border-gray-300 p-2" rows="2" required />
 			<p class="m-2 text-sm text-gray-500">Color</p>
 			<input type="color" bind:value={currentData.color} name="color" class="m-2 rounded border border-gray-300 p-2" required />
 			<p class="m-2 text-sm text-gray-500">Avatar URL</p>
 			<input type="url" bind:value={currentData.avatar} name="avatar" class="m-2 rounded border border-gray-300 p-2" required />
 
-			{#if !isDownNotification}
-				<input type="submit" value="Update up notification" class="m-2 cursor-pointer rounded bg-green-500 p-2 text-white" />
-			{:else}
-				<input type="submit" value="Update down notification" class="m-2 cursor-pointer rounded bg-red-600 p-2 text-white" />
-			{/if}
+			<button type="button" class="m-2 cursor-pointer rounded bg-red-600 p-2 text-white" on:click={resetToServer}>Reset</button>
+			<input
+				type="submit"
+				value="Update {isDownNotification ? 'down' : 'up'} notification"
+				class="m-2 cursor-pointer rounded bg-green-500 p-2 text-white"
+			/>
+			<input type="submit" value="Update down notification" class="m-2 cursor-pointer rounded bg-red-600 p-2 text-white" />
 		</form>
 	</div>
-	<div class="flex min-h-screen w-1/2 flex-col items-center justify-center bg-[#36393f] font-opensans text-white">
-		<div class="flex flex-row">
+	<div class="flex w-full flex-col items-center justify-center bg-[#36393f] font-opensans text-white md:w-1/2">
+		<div class="m-4 flex flex-row p-4">
 			<img src={currentData.avatar} alt="Profile" class="mr-3 mt-2 h-12 w-12 rounded-full" />
 
 			<div class="flex flex-col items-center justify-center">
