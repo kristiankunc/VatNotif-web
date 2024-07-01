@@ -36,5 +36,24 @@ export const actions = {
 		return {
 			status: 200
 		};
+	},
+	removeCallsign: async ({ request, locals }) => {
+		const session = await locals.auth();
+		if (!session?.user) fail(401, { message: "Unauthorized" });
+
+		const form = await request.formData();
+
+		if (!form.get("callsign")) fail(400, { message: "No callsign provided" });
+
+		await prisma.watchedCallsign.deleteMany({
+			where: {
+				cid: session!.user.cid,
+				callsign: form.get("callsign") as string
+			}
+		});
+
+		return {
+			status: 200
+		};
 	}
 };

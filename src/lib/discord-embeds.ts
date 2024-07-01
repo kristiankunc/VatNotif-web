@@ -21,7 +21,13 @@ export async function mdToHtml(md: string): Promise<string> {
 	};
 	marked.setOptions({ renderer, breaks: true });
 
-	return DOMPurify.sanitize(await marked(md), { USE_PROFILES: { html: true } });
+	let textWithVars = (await marked(md))
+		.replace("{name}", "John Doe")
+		.replace("{cid}", "123456")
+		.replace("{callsign}", "EGKK_GND")
+		.replace("{frequency}", "121.805");
+
+	return DOMPurify.sanitize(textWithVars, { USE_PROFILES: { html: true } });
 }
 
 export function embedToJSON(embed: DiscordEmbed): string {
@@ -68,11 +74,11 @@ export class DiscordHelper {
 		return {
 			up: {
 				...baseEmbed,
-				text: "{name} ({cid}) has just logged onto {callsign} ({frequency})."
+				text: "**{name}** (`{cid}`) has just logged onto **{callsign}** (`{frequency}`)."
 			},
 			down: {
 				...baseEmbed,
-				text: "{name} ({cid}) has just logged off {callsign} ({frequency})."
+				text: "**{name}** (`{cid}`) has just logged off from **{callsign}** (`{frequency}`)."
 			}
 		};
 	}

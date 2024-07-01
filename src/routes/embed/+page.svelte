@@ -1,6 +1,5 @@
 <script lang="ts">
-	import { page } from "$app/stores";
-	import { getDefaultEmbed, mdToHtml, type DiscordEmbed } from "$lib/discord-embeds";
+	import { DiscordHelper, mdToHtml, type DiscordEmbed } from "$lib/discord-embeds";
 	import { onDestroy } from "svelte";
 
 	export let data;
@@ -8,15 +7,15 @@
 
 	let isDownNotification: boolean = false;
 
-	const defaultEmbed = getDefaultEmbed();
+	const defaultEmbed = DiscordHelper.getDefaultEmbed();
 
 	let currentData: DiscordEmbed & { url: string } = {
 		url: data?.notification?.webhookUrl || "",
-		author: data?.notification?.upEmbed?.author || defaultEmbed.author,
-		title: data?.notification?.upEmbed?.title || defaultEmbed.title,
-		text: data?.notification?.upEmbed?.text || defaultEmbed.text,
-		color: data?.notification?.upEmbed?.color || defaultEmbed.color,
-		avatar: data?.notification?.upEmbed?.avatar || defaultEmbed.avatar
+		author: data?.notification?.upEmbed?.author || defaultEmbed.up.author,
+		title: data?.notification?.upEmbed?.title || defaultEmbed.up.title,
+		text: data?.notification?.upEmbed?.text || defaultEmbed.up.text,
+		color: data?.notification?.upEmbed?.color || defaultEmbed.up.color,
+		avatar: data?.notification?.upEmbed?.avatar || defaultEmbed.up.avatar
 	};
 
 	let currentTimeStr: string = getTimeStr();
@@ -40,8 +39,12 @@
 		}
 	}
 
-	function fetchEmbedData() {
-		if (!data.notification?.downEmbed || !data.notification.upEmbed) return;
+	function resetToServer() {
+		if (!data.notification?.downEmbed || !data.notification.upEmbed) {
+			console.log("default");
+			setDefault();
+			return;
+		}
 
 		currentData.url = data.notification.webhookUrl;
 
@@ -59,6 +62,26 @@
 				currentData.text = data.notification.upEmbed.text;
 				currentData.color = data.notification.upEmbed.color;
 				currentData.avatar = data.notification.upEmbed.avatar;
+				break;
+		}
+	}
+
+	function setDefault() {
+		currentData.url = "";
+		switch (isDownNotification) {
+			case true:
+				currentData.author = defaultEmbed.down.author;
+				currentData.title = defaultEmbed.down.title;
+				currentData.text = defaultEmbed.down.text;
+				currentData.color = defaultEmbed.down.color;
+				currentData.avatar = defaultEmbed.down.avatar;
+				break;
+			case false:
+				currentData.author = defaultEmbed.up.author;
+				currentData.title = defaultEmbed.up.title;
+				currentData.text = defaultEmbed.up.text;
+				currentData.color = defaultEmbed.up.color;
+				currentData.avatar = defaultEmbed.up.avatar;
 				break;
 		}
 	}
@@ -82,7 +105,7 @@
 				</div>
 			</div>
 			<div class="items-between flex w-full flex-row justify-center">
-				<button type="button" class="m-2 cursor-pointer rounded bg-blue-500 p-2 text-white" on:click={fetchEmbedData}>Fetch from server</button>
+				<button type="button" class="m-2 cursor-pointer rounded bg-blue-500 p-2 text-white" on:click={resetToServer}>Reset</button>
 			</div>
 
 			<input type="hidden" name="isDownNotification" value={isDownNotification} />
