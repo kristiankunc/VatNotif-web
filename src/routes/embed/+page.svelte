@@ -9,14 +9,7 @@
 
 	const defaultEmbed = DiscordHelper.getDefaultEmbed();
 
-	let currentData: DiscordEmbed & { url: string } = {
-		url: data?.notification?.webhookUrl || "",
-		author: data?.notification?.upEmbed?.author || defaultEmbed.up.author,
-		title: data?.notification?.upEmbed?.title || defaultEmbed.up.title,
-		text: data?.notification?.upEmbed?.text || defaultEmbed.up.text,
-		color: data?.notification?.upEmbed?.color || defaultEmbed.up.color,
-		avatar: data?.notification?.upEmbed?.avatar || defaultEmbed.up.avatar
-	};
+	let currentData: DiscordEmbed = data.embeds?.up || defaultEmbed.up;
 
 	let currentTimeStr: string = getTimeStr();
 
@@ -39,50 +32,12 @@
 		}
 	}
 
-	function resetToServer() {
-		if (!data.notification?.downEmbed || !data.notification.upEmbed) {
-			console.log("default");
-			setDefault();
-			return;
-		}
-
-		currentData.url = data.notification.webhookUrl;
-
+	function getServerData(): DiscordEmbed {
 		switch (isDownNotification) {
 			case true:
-				currentData.author = data.notification.downEmbed.author;
-				currentData.title = data.notification.downEmbed.title;
-				currentData.text = data.notification.downEmbed.text;
-				currentData.color = data.notification.downEmbed.color;
-				currentData.avatar = data.notification.downEmbed.avatar;
-				break;
+				return data.embeds?.down || defaultEmbed.down;
 			case false:
-				currentData.author = data.notification.upEmbed.author;
-				currentData.title = data.notification.upEmbed.title;
-				currentData.text = data.notification.upEmbed.text;
-				currentData.color = data.notification.upEmbed.color;
-				currentData.avatar = data.notification.upEmbed.avatar;
-				break;
-		}
-	}
-
-	function setDefault() {
-		currentData.url = "";
-		switch (isDownNotification) {
-			case true:
-				currentData.author = defaultEmbed.down.author;
-				currentData.title = defaultEmbed.down.title;
-				currentData.text = defaultEmbed.down.text;
-				currentData.color = defaultEmbed.down.color;
-				currentData.avatar = defaultEmbed.down.avatar;
-				break;
-			case false:
-				currentData.author = defaultEmbed.up.author;
-				currentData.title = defaultEmbed.up.title;
-				currentData.text = defaultEmbed.up.text;
-				currentData.color = defaultEmbed.up.color;
-				currentData.avatar = defaultEmbed.up.avatar;
-				break;
+				return data.embeds?.up || defaultEmbed.up;
 		}
 	}
 </script>
@@ -97,7 +52,15 @@
 
 				<div class="flex items-center">
 					<label class="me-5 inline-flex cursor-pointer content-center items-center justify-center">
-						<input type="checkbox" value="" bind:checked={isDownNotification} class="peer sr-only" />
+						<input
+							type="checkbox"
+							value=""
+							bind:checked={isDownNotification}
+							class="peer sr-only"
+							on:change={() => {
+								currentData = getServerData();
+							}}
+						/>
 						<div
 							class="peer-focus:ring-4rtl:peer-checked:after:-translate-x-full peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-green-500"
 						></div>
@@ -120,13 +83,14 @@
 			<p class="m-2 text-sm text-gray-500">Avatar URL</p>
 			<input type="url" bind:value={currentData.avatar} name="avatar" class="m-2 rounded border border-gray-300 p-2" required />
 
-			<button type="button" class="m-2 cursor-pointer rounded bg-red-600 p-2 text-white" on:click={resetToServer}>Reset</button>
+			<button type="button" class="m-2 cursor-pointer rounded bg-red-600 p-2 text-white" on:click={() => (currentData = getServerData())}
+				>Reset</button
+			>
 			<input
 				type="submit"
 				value="Update {isDownNotification ? 'down' : 'up'} notification"
 				class="m-2 cursor-pointer rounded bg-green-500 p-2 text-white"
 			/>
-			<input type="submit" value="Update down notification" class="m-2 cursor-pointer rounded bg-red-600 p-2 text-white" />
 		</form>
 	</div>
 	<div class="flex w-full flex-col items-center justify-center bg-[#36393f] font-opensans text-white md:w-1/2">

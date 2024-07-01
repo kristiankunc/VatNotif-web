@@ -2,26 +2,23 @@ import { validateFormData } from "$lib/form";
 import { error, fail, type Load } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import { prisma } from "$lib/prisma";
-import { embedToJSON } from "$lib/discord-embeds";
-import { goto } from "$app/navigation";
 
 export const load: Load = async ({ locals }) => {
 	const sesh = await locals.auth();
 
 	if (!sesh) error(401, { message: "Unauthorized" });
 
-	const currentWebhook = await prisma.discordNotification.findFirst({
-		where: { cid: sesh.user.cid },
-		include: {
-			upEmbed: true,
-			downEmbed: true
-		}
+	const embeds = await prisma.discordEmbed.findMany({
+		where: { cid: sesh.user.cid }
 	});
 
-	if (!currentWebhook) return { notification: null };
+	if (!embeds) return { notification: null };
 
 	return {
-		notification: currentWebhook
+		embeds: {
+			up: embeds.find((embed) => embed.event === "up"),
+			down: embeds.find((embed) => embed.event === "down")
+		}
 	};
 };
 
@@ -70,30 +67,32 @@ export const actions = {
 			method: "DELETE"
 		});
 
-		const embedType = form.get("isDownNotification") === "true" ? "DownEmbed" : "UpEmbed";
-		await prisma.discordNotification.upsert({
-			where: { cid },
-			update: {
-				[embedType]: {
-					create: {
-						name: form.get("url") as string,
-						cid: sesh.user.cid,
-						author: form.get("author") as string,
-						title: form.get("title") as string,
-						text: form.get("text") as string,
-						color: form.get("color") as string,
-						avatar: form.get("avatar") as string
-					},
-					update: {
-						name: form.get("url") as string,
-						cid: sesh.user.cid,
-						author: form.get("author") as string,
-						title: form.get("title") as string,
-						text: form.get("text") as string,
-						color: form.get("color") as string,
-						avatar: form.get("avatar") as string
-					}
+		const embedType = form.get("isDownNotification") === "true" ? "down" : "up";
+
+		await prisma.discordEmbed.upsert({
+			where: {
+				cid_event: {
+					cid: cid,
+					event: embedType
 				}
+			},
+			update: {
+				url: form.get("url") as string,
+				author: form.get("author") as string,
+				title: form.get("title") as string,
+				text: form.get("text") as string,
+				color: form.get("color") as string,
+				avatar: form.get("avatar") as string
+			},
+			create: {
+				cid: cid,
+				event: embedType,
+				url: form.get("url") as string,
+				author: form.get("author") as string,
+				title: form.get("title") as string,
+				text: form.get("text") as string,
+				color: form.get("color") as string,
+				avatar: form.get("avatar") as string
 			}
 		});
 	}

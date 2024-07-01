@@ -19,23 +19,15 @@ model IgnoredCallsign {
 }
 
 model DiscordEmbed {
-  id        Int                  @id @default(autoincrement())
-  author    String               @db.VarChar(80)
-  title     String               @db.VarChar(256)
-  text      String               @db.VarChar(4096)
-  color     String               @db.VarChar(7)
-  avatar    String               @db.VarChar(256)
-  upEmbed   DiscordNotification? @relation(name: "UpEmbed")
-  downEmbed DiscordNotification? @relation(name: "DownEmbed")
-}
+  id     Int    @id @default(autoincrement())
+  cid    Int
+  event  String @db.VarChar(4) // up | down
+  url    String @db.VarChar(256)
+  author String @db.VarChar(80)
+  title  String @db.VarChar(256)
+  text   String @db.VarChar(4096)
+  color  String @db.VarChar(7)
+  avatar String @db.VarChar(256)
 
-model DiscordNotification {
-  id          Int           @id @default(autoincrement())
-  name        String        @db.VarChar(50)
-  cid         Int
-  webhookUrl  String        @db.VarChar(255)
-  upEmbed     DiscordEmbed? @relation(name: "UpEmbed", fields: [upEmbedId], references: [id])
-  upEmbedId   Int?          @unique
-  downEmbed   DiscordEmbed? @relation(name: "DownEmbed", fields: [downEmbedId], references: [id])
-  downEmbedId Int?          @unique
+  @@unique([cid, event])
 }
