@@ -12,8 +12,22 @@ export const load: Load = async ({ locals }) => {
 		}
 	});
 
+	const embeds = await prisma.discordEmbed.findMany({
+		where: {
+			cid: session.user.cid
+		}
+	});
+
 	return {
-		watchedCallsigns
+		watchedCallsigns,
+		embedConfig: {
+			up: embeds.find((embed) => embed.event === "up") !== undefined,
+			down: embeds.find((embed) => embed.event === "down") !== undefined
+		},
+		embedStatus: {
+			up: embeds.find((embed) => embed.enabled === true) !== undefined,
+			down: embeds.find((embed) => embed.enabled === true) !== undefined
+		}
 	};
 };
 
@@ -24,12 +38,14 @@ export const actions = {
 
 		const form = await request.formData();
 
-		if (!form.get("callsign")) fail(400, { message: "No callsign provided" });
+		const callsign = form.get("callsign") as string;
+		if (callsign) fail(400, { message: "No callsign provided" });
+		if (!isCallsign(callsign)) fail(400, { message: "Invalid callsign" });
 
 		await prisma.watchedCallsign.create({
 			data: {
 				cid: session!.user.cid,
-				callsign: form.get("callsign") as string
+				callsign: callsign
 			}
 		});
 

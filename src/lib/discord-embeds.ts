@@ -57,4 +57,8 @@ export class DiscordHelper {
 			}
 		};
 	}
+
+	public static isWebhookUrl(url: string): boolean {
+		return /^https:\/\/discord\.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_-]+$/.test(url);
+	}
 }

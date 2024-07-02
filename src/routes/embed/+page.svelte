@@ -65,7 +65,7 @@
 							class="peer-focus:ring-4rtl:peer-checked:after:-translate-x-full peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-green-500"
 						></div>
 					</label>
-					<p class="w-full text-left text-sm text-gray-500">{isDownNotification ? "Down" : "Up"} Notification</p>
+					<p class="w-full text-left text-sm text-gray-500">{isDownNotification ? "Logoff" : "Logon"} Notification</p>
 				</div>
 			</div>
 
@@ -88,7 +88,7 @@
 			>
 			<input
 				type="submit"
-				value="Update {isDownNotification ? 'down' : 'up'} notification"
+				value="Update {isDownNotification ? 'logoff' : 'logon'} notification"
 				class="m-2 cursor-pointer rounded bg-green-500 p-2 text-white"
 			/>
 		</form>
