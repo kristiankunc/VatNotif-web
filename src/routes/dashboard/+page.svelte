@@ -7,7 +7,8 @@
 </script>
 
 <div class="flex flex-col items-center justify-center">
-	<p class="m-2 text-2xl font-semibold">Tracked callsigns</p>
+	<h1 class="m-2 text-4xl font-semibold">Dashboard</h1>
+	<h2 class="m-2 text-2xl font-semibold">Tracked callsigns</h2>
 
 	<form method="POST" action="?/addCallsign" class="flex justify-center">
 		<input
@@ -40,6 +41,10 @@
 		</div>
 	{/each}
 
+	<h2 class="m-2 text-2xl font-semibold">Discord notifications</h2>
+
 	<p><b>Logon embed</b>: {data.embedConfig.up ? "configured" : "not configured"} & {data.embedStatus.up ? "enabled" : "disabled"}</p>
 	<p><b>Logoff embed</b>: {data.embedConfig.down ? "configured" : "not configured"} & {data.embedStatus.down ? "enabled" : "disabled"}</p>
+
+	<h2 class="m-2 text-2xl font-semibold">Privacy settings</h2>
 </div>
