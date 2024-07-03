@@ -44,59 +44,73 @@
 
 <div class="flex w-full flex-col justify-between md:flex-row">
 	<div class="flex w-full flex-col items-center justify-center md:w-1/2">
-		<form class="flex w-4/6 flex-col pt-10" method="post" action="?/updateembed">
-			{#if form?.message}<p class="error">{form.message}</p>{/if}
-			<p class="mb-2 text-2xl font-semibold">Customize Discord Embed</p>
-			<div class="items-between flex w-full flex-row justify-center">
-				<p class="m-2 w-full text-left text-sm text-gray-500">Notification type</p>
+		<div class="flex w-4/6 flex-col pt-10">
+			<form class="flex flex-col pt-10" method="POST" action="?/updateembed">
+				{#if form?.message}<p class="error">{form.message}</p>{/if}
+				<p class="mb-2 text-2xl font-semibold">Customize Discord Embed</p>
+				<div class="items-between flex w-full flex-row justify-between">
+					<p class="m-2 text-left text-sm text-gray-500">Notification type</p>
 
-				<div class="flex items-center">
-					<label class="me-5 inline-flex cursor-pointer content-center items-center justify-center">
-						<input
-							type="checkbox"
-							value=""
-							bind:checked={isDownNotification}
-							class="peer sr-only"
-							on:change={() => {
-								currentData = getServerData();
-							}}
-						/>
-						<div
-							class="peer-focus:ring-4rtl:peer-checked:after:-translate-x-full peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-green-500"
-						></div>
-					</label>
-					<p class="w-full text-left text-sm text-gray-500">{isDownNotification ? "Logoff" : "Logon"} Notification</p>
+					<div class="flex items-center">
+						<label class="me-5 inline-flex cursor-pointer content-center items-center justify-center">
+							<input
+								type="checkbox"
+								value=""
+								bind:checked={isDownNotification}
+								class="peer sr-only"
+								on:change={() => {
+									currentData = getServerData();
+								}}
+							/>
+							<div
+								class="peer-focus:ring-4rtl:peer-checked:after:-translate-x-full peer relative h-6 w-11 rounded-full bg-gray-200 after:absolute after:start-[2px] after:top-0.5 after:h-5 after:w-5 after:rounded-full after:border after:border-gray-300 after:bg-white after:transition-all after:content-[''] peer-checked:bg-red-600 peer-checked:after:translate-x-full peer-checked:after:border-white dark:border-gray-600 dark:bg-green-500"
+							></div>
+						</label>
+						<p class="w-full text-center text-sm text-gray-500">{isDownNotification ? "Logoff" : "Logon"} Notification</p>
+					</div>
 				</div>
-			</div>
 
-			<input type="hidden" name="isDownNotification" value={isDownNotification} />
-			<p class="m-2 w-full text-left text-sm text-gray-500">Webhook URL</p>
-			<input type="url" bind:value={currentData.url} name="url" class="m-2 rounded border border-gray-300 p-2" required />
-			<p class="m-2 w-full text-left text-sm text-gray-500">Author</p>
-			<input type="text" bind:value={currentData.author} maxlength="80" name="author" class="m-2 rounded border border-gray-300 p-2" required />
-			<p class="m-2 text-sm text-gray-500">Title</p>
-			<input type="text" bind:value={currentData.title} maxlength="256" name="title" class="m-2 rounded border border-gray-300 p-2" required />
-			<p class="m-2 text-sm text-gray-500">Text</p>
-			<textarea bind:value={currentData.text} maxlength="4096" name="text" class="m-2 rounded border border-gray-300 p-2" rows="2" required />
-			<p class="m-2 text-sm text-gray-500">Color</p>
-			<input type="color" bind:value={currentData.color} name="color" class="m-2 rounded border border-gray-300 p-2" required />
-			<p class="m-2 text-sm text-gray-500">Avatar URL</p>
-			<input type="url" bind:value={currentData.avatar} name="avatar" class="m-2 rounded border border-gray-300 p-2" required />
+				<input type="hidden" name="isDownNotification" value={isDownNotification} />
 
-			<div class="flex content-center items-center justify-center">
+				<p class="m-2 w-full text-left text-sm text-gray-500">Webhook URL</p>
+				<input type="url" bind:value={currentData.url} name="url" class="m-2 rounded border border-gray-300 p-2" required />
+
+				<p class="m-2 text-sm text-gray-500">Avatar URL</p>
+				<input type="url" bind:value={currentData.avatar} name="avatar" class="m-2 rounded border border-gray-300 p-2" required />
+
+				<div class="flex">
+					<div class="flex w-1/2 flex-col">
+						<p class="m-2 text-sm text-gray-500">Title</p>
+						<input type="text" bind:value={currentData.title} maxlength="256" name="title" class="m-2 rounded border border-gray-300 p-2" required />
+					</div>
+
+					<div class="flex w-1/2 flex-col">
+						<p class="m-2 text-left text-sm text-gray-500">Author</p>
+						<input type="text" bind:value={currentData.author} maxlength="80" name="author" class="m-2 rounded border border-gray-300 p-2" required />
+					</div>
+				</div>
+
+				<p class="m-2 text-sm text-gray-500">Text</p>
+				<textarea bind:value={currentData.text} maxlength="4096" name="text" class="m-2 rounded border border-gray-300 p-2" rows="2" required />
+
+				<p class="m-2 text-sm text-gray-500">Color</p>
+				<input type="color" bind:value={currentData.color} name="color" class="m-2 rounded border border-gray-300 p-2" required />
+
+				<input
+					type="submit"
+					value="Update {isDownNotification ? 'logoff' : 'logon'} notification"
+					class="m-2 cursor-pointer rounded bg-primary-500 p-2 text-white hover:bg-primary-600"
+				/>
+			</form>
+			<div class="flex w-full content-center items-center justify-center">
 				<button
-					class="m-2 w-1/2 cursor-pointer rounded bg-accent-500 p-2 text-white hover:bg-accent-600"
+					class="m-2 w-1/2 cursor-pointer rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800"
 					on:click={() => (currentData = getServerData())}>Reset</button
 				>
 
-				<button class="m-2 w-1/2 cursor-pointer rounded bg-secondary-600 p-2 text-white hover:bg-secondary-700">Test</button>
+				<button class="m-2 w-1/2 cursor-pointer rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800">Test</button>
 			</div>
-			<input
-				type="submit"
-				value="Update {isDownNotification ? 'logoff' : 'logon'} notification"
-				class="m-2 cursor-pointer rounded bg-primary-500 p-2 text-white hover:bg-primary-600"
-			/>
-		</form>
+		</div>
 	</div>
 	<div class="flex w-full flex-col items-center justify-center bg-[#36393f] font-opensans text-white md:w-1/2">
 		<div class="m-4 flex flex-row p-4">
