@@ -96,21 +96,24 @@
 				<p class="m-2 text-sm text-gray-500">Color</p>
 				<input type="color" bind:value={currentData.color} name="color" class="m-2 rounded border border-gray-300 p-2" required />
 
-				<input
-					type="submit"
-					value="Update {isDownNotification ? 'logoff' : 'logon'} notification"
-					class="m-2 cursor-pointer rounded bg-primary-500 p-2 text-white hover:bg-primary-600"
-				/>
+				<div class="m-2 flex cursor-pointer justify-center rounded bg-primary-500 p-2 text-white hover:bg-primary-600">
+					<span class="material-symbols-outlined mr-2"> cloud_upload </span>
+					<input type="submit" value="Update {isDownNotification ? 'logoff' : 'logon'} notification" class=" cursor-pointer rounded text-white" />
+				</div>
 			</form>
 			<div class="flex w-full content-center items-center justify-center">
 				<button
-					class="m-2 w-1/2 cursor-pointer rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800"
+					class="m-2 flex w-1/2 cursor-pointer justify-center rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800"
 					on:click={() => (currentData = { ...getServerData() })}
 				>
-					Reset
+					<span class="material-symbols-outlined mr-2"> restart_alt </span>
+					<p>Reset</p>
 				</button>
 
-				<button class="m-2 w-1/2 cursor-pointer rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800">Test</button>
+				<button class="m-2 flex w-1/2 cursor-pointer justify-center rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800">
+					<span class="material-symbols-outlined mr-2"> verified_user </span>
+					<p>Test</p>
+				</button>
 			</div>
 		</div>
 	</div>

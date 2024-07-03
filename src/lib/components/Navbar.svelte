@@ -11,15 +11,18 @@
 	</div>
 	<div class="flex items-center">
 		{#if $page.data.session?.user}
-			<p class="pr-2">{$page.data.session.user.name}</p>
+			<p class="pr-4 text-2xl font-semibold">{$page.data.session.user.name}</p>
 			<a href="/dashboard" class="pr-2">
 				<button
-					class="rounded bg-secondary-600 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-secondary-700
-				">Dashboard</button
+					class="flex rounded bg-secondary-600 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-secondary-700
+				"
+				>
+					<span class="material-symbols-outlined mr-2">settings</span>
+					<p>Dashboard</p></button
 				>
 			</a>
 			<button
-				class="material-icons rounded bg-primary-300 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-400"
+				class="material-symbols-outlined rounded bg-primary-300 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-400"
 				on:click={() => signOut()}>logout</button
 			>
 		{:else}

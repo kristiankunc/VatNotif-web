@@ -20,11 +20,14 @@
 
 		<div class="flex flex-row items-center justify-center">
 			<a href="/embed">
-				<button class="m-2 rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"> Configure embeds </button>
+				<button class="m-2 flex rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600">
+					<span class="material-symbols-outlined mr-2">rule_settings</span>
+					<p>Configure embeds</p></button
+				>
 			</a>
 			<button
 				type="submit"
-				class="m-2 rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"
+				class="m-2 flex rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"
 				on:click={async () => {
 					document.body.style.cursor = "wait";
 					const res = await fetch("/api/notify", {
@@ -37,8 +40,11 @@
 
 					$hasEnabledEmbeds = !$hasEnabledEmbeds;
 					document.body.style.cursor = "default";
-				}}>{$hasEnabledEmbeds ? "Enable" : "Disable"}</button
+				}}
 			>
+				<span class="material-symbols-outlined mr-2"> {$hasEnabledEmbeds ? "notifications_active" : "notifications_off"} </span>
+				<p>{$hasEnabledEmbeds ? "Enable" : "Disable"}</p>
+			</button>
 		</div>
 	</div>
 	<div class="m-4 flex flex-col items-center justify-center">
@@ -54,8 +60,9 @@
 				maxlength="15"
 				required
 			/>
-			<button type="submit" class="m-2 rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600">
-				Add callsign
+			<button type="submit" class="m-2 flex rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600">
+				<span class="material-symbols-outlined mr-2">add</span>
+				<p>Add callsign</p>
 			</button>
 		</form>
 
@@ -65,9 +72,10 @@
 				<input class="m-2" type="checkbox" name="callsign" value={callsign.topdown} disabled />
 				<form method="POST" action="?/removeCallsign" class="flex justify-center">
 					<input type="hidden" name="callsign" value={callsign.callsign} />
-					<button type="submit" class="m-2 rounded bg-secondary-700 p-4 text-white transition duration-150 ease-in-out hover:bg-secondary-800"
-						>Remove</button
-					>
+					<button type="submit" class="m-2 flex rounded bg-secondary-700 p-4 text-white transition duration-150 ease-in-out hover:bg-secondary-800">
+						<span class="material-symbols-outlined mr-2">cancel</span>
+						<p>Remove</p>
+					</button>
 				</form>
 			</div>
 		{/each}
