@@ -5,7 +5,8 @@
 
 	let callsignsStore = writable(data.watchedCallsigns);
 
-	let isIgnored = writable(data.isIgnored);
+	const isIgnored = writable(data.isIgnored);
+	const hasEnabledEmbeds = writable(data.embedStatus.up && data.embedStatus.down);
 </script>
 
 <h1 class="m-2 text-center text-4xl font-semibold">Dashboard</h1>
@@ -21,11 +22,23 @@
 			<a href="/embed">
 				<button class="m-2 rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"> Configure embeds </button>
 			</a>
-			<form method="POST" action="?/toggleEmbeds">
-				<button type="submit" class="m-2 rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"
-					>{data.embedStatus.up && data.embedStatus.down ? "Disable" : "Enable"}</button
-				>
-			</form>
+			<button
+				type="submit"
+				class="m-2 rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"
+				on:click={async () => {
+					document.body.style.cursor = "wait";
+					const res = await fetch("/api/notify", {
+						method: $hasEnabledEmbeds ? "DELETE" : "POST"
+					});
+
+					if (!res.ok) {
+						alert("Failed to update notification settings");
+					}
+
+					$hasEnabledEmbeds = !$hasEnabledEmbeds;
+					document.body.style.cursor = "default";
+				}}>{$hasEnabledEmbeds ? "Enable" : "Disable"}</button
+			>
 		</div>
 	</div>
 	<div class="m-4 flex flex-col items-center justify-center">
