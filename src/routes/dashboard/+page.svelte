@@ -65,7 +65,7 @@
 				<input class="m-2" type="checkbox" name="callsign" value={callsign.topdown} disabled />
 				<form method="POST" action="?/removeCallsign" class="flex justify-center">
 					<input type="hidden" name="callsign" value={callsign.callsign} />
-					<button type="submit" class="m-2 rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"
+					<button type="submit" class="m-2 rounded bg-secondary-700 p-4 text-white transition duration-150 ease-in-out hover:bg-secondary-800"
 						>Remove</button
 					>
 				</form>
