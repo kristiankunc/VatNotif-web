@@ -9,7 +9,7 @@
 
 	const defaultEmbed = DiscordHelper.getDefaultEmbed();
 
-	let currentData: DiscordEmbed = data.embeds?.up || defaultEmbed.up;
+	let currentData: DiscordEmbed = { ...(data.embeds?.up || defaultEmbed.up) };
 
 	let currentTimeStr: string = getTimeStr();
 
@@ -59,7 +59,7 @@
 								bind:checked={isDownNotification}
 								class="peer sr-only"
 								on:change={() => {
-									currentData = getServerData();
+									currentData = { ...getServerData() };
 								}}
 							/>
 							<div
@@ -105,8 +105,10 @@
 			<div class="flex w-full content-center items-center justify-center">
 				<button
 					class="m-2 w-1/2 cursor-pointer rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800"
-					on:click={() => (currentData = getServerData())}>Reset</button
+					on:click={() => (currentData = { ...getServerData() })}
 				>
+					Reset
+				</button>
 
 				<button class="m-2 w-1/2 cursor-pointer rounded bg-secondary-700 p-2 text-white hover:bg-secondary-800">Test</button>
 			</div>
