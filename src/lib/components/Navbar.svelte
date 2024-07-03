@@ -22,14 +22,20 @@
 				>
 			</a>
 			<button
-				class="material-symbols-outlined rounded bg-primary-300 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-400"
-				on:click={() => signOut()}>logout</button
+				class="flex rounded bg-primary-300 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-400"
+				on:click={() => signOut()}
 			>
+				<span class="material-symbols-outlined mr-2">logout</span>
+				<p>Sign out</p>
+			</button>
 		{:else}
 			<button
-				class="rounded bg-accent-500 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-accent-700"
-				on:click={() => signIn("vatsim")}>Sign in with VATSIM</button
+				class="flex rounded bg-accent-500 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-accent-700"
+				on:click={() => signIn("vatsim")}
 			>
+				<span class="material-symbols-outlined mr-2"> login </span>
+				<p>Sign in with VATSIM</p>
+			</button>
 		{/if}
 	</div>
 </nav>
