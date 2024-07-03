@@ -83,11 +83,14 @@
 			<p class="m-2 text-sm text-gray-500">Avatar URL</p>
 			<input type="url" bind:value={currentData.avatar} name="avatar" class="m-2 rounded border border-gray-300 p-2" required />
 
-			<button
-				type="button"
-				class="m-2 cursor-pointer rounded bg-secondary-600 p-2 text-white hover:bg-secondary-700"
-				on:click={() => (currentData = getServerData())}>Reset</button
-			>
+			<div class="flex content-center items-center justify-center">
+				<button
+					class="m-2 w-1/2 cursor-pointer rounded bg-accent-500 p-2 text-white hover:bg-accent-600"
+					on:click={() => (currentData = getServerData())}>Reset</button
+				>
+
+				<button class="m-2 w-1/2 cursor-pointer rounded bg-secondary-600 p-2 text-white hover:bg-secondary-700">Test</button>
+			</div>
 			<input
 				type="submit"
 				value="Update {isDownNotification ? 'logoff' : 'logon'} notification"
