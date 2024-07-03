@@ -1,5 +1,6 @@
 import { prisma } from "$lib/prisma";
 import { error, fail, type Load } from "@sveltejs/kit";
+import type { Actions } from "./$types";
 
 export const load: Load = async ({ locals }) => {
 	const session = await locals.auth();
@@ -42,13 +43,13 @@ export const load: Load = async ({ locals }) => {
 export const actions = {
 	addCallsign: async ({ request, locals }) => {
 		const session = await locals.auth();
-		if (!session?.user) fail(401, { message: "Unauthorized" });
+		if (!session?.user) return fail(401, { message: "Unauthorized" });
 
 		const form = await request.formData();
 
 		const callsign = form.get("callsign") as string;
-		if (callsign) fail(400, { message: "No callsign provided" });
-		if (!isCallsign(callsign)) fail(400, { message: "Invalid callsign" });
+		if (callsign) return fail(400, { message: "No callsign provided" });
+		if (!isCallsign(callsign)) return fail(400, { message: "Invalid callsign" });
 
 		await prisma.watchedCallsign.create({
 			data: {
@@ -56,10 +57,6 @@ export const actions = {
 				callsign: callsign
 			}
 		});
-
-		return {
-			status: 200
-		};
 	},
 	removeCallsign: async ({ request, locals }) => {
 		const session = await locals.auth();
@@ -75,9 +72,5 @@ export const actions = {
 				callsign: form.get("callsign") as string
 			}
 		});
-
-		return {
-			status: 200
-		};
 	}
-};
+} satisfies Actions;

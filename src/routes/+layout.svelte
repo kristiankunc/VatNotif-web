@@ -1,6 +1,13 @@
 <script>
 	import "$lib/app.css";
 	import Navbar from "$lib/components/Navbar.svelte";
+	import { page } from "$app/stores";
+	import { onMount } from "svelte";
+
+	// TODO: Error component
+	onMount(() => {
+		if ($page.form?.message) alert($page.form?.message);
+	});
 </script>
 
 <svelte:head>
