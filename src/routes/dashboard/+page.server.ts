@@ -18,6 +18,13 @@ export const load: Load = async ({ locals }) => {
 		}
 	});
 
+	const isIgnored =
+		(await prisma.ignoredCid.findFirst({
+			where: {
+				cid: session.user.cid
+			}
+		})) !== null;
+
 	return {
 		watchedCallsigns,
 		embedConfig: {
@@ -27,7 +34,8 @@ export const load: Load = async ({ locals }) => {
 		embedStatus: {
 			up: embeds.find((embed) => embed.enabled === true) !== undefined,
 			down: embeds.find((embed) => embed.enabled === true) !== undefined
-		}
+		},
+		isIgnored: isIgnored
 	};
 };
 
