@@ -4,7 +4,7 @@
 </script>
 
 <nav class="flex justify-between bg-primary-600 p-4 text-white">
-	<div class="flex items-center text-2xl font-semibold">
+	<div class="flex items-center text-3xl font-semibold">
 		<a class="flex items-center" href="/">
 			<img src="/logo.webp" alt="VatNotif logo" class="mr-2 h-10 w-10" />
 			<h2>VatNotif</h2>
@@ -12,7 +12,7 @@
 	</div>
 	<div class="flex items-center">
 		{#if $page.data.session?.user}
-			<p class="pr-4 text-2xl font-semibold">{$page.data.session.user.name}</p>
+			<p class="pr-3 text-2xl font-semibold">{$page.data.session.user.name}</p>
 			<a href="/dashboard" class="pr-2">
 				<button
 					class="flex rounded bg-secondary-600 px-4 py-2 text-white transition duration-150 ease-in-out hover:bg-secondary-700

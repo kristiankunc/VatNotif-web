@@ -1,4 +1,6 @@
 <script lang="ts">
+	import { enhance } from "$app/forms";
+	import { isCallsign } from "$lib/callsign";
 	import { writable } from "svelte/store";
 
 	export let data;
@@ -54,7 +56,35 @@
 	<div class="m-4 flex flex-col items-center justify-center">
 		<h2 class="mb-2 text-2xl font-semibold">Tracked callsigns</h2>
 
-		<form method="POST" action="?/addCallsign" class="flex justify-center">
+		<form
+			method="POST"
+			action="?/addCallsign"
+			class="flex justify-center"
+			use:enhance={({ formElement, formData, action, cancel, submitter }) => {
+				// TODO: fix this sketchy enhancer
+				// TS fuckery
+				const callsign = String(formData.get("callsign"));
+
+				if (!isCallsign(callsign)) {
+					cancel();
+					// TODO: Error component
+					alert("Invalid callsign");
+					return;
+				}
+
+				if ($callsignsStore.find((c) => c.callsign === callsign)) {
+					cancel();
+					// TODO: Error component
+					alert("Callsign already added");
+					return;
+				}
+
+				return async ({ result, update }) => {
+					update();
+					window.location.reload();
+				};
+			}}
+		>
 			<input
 				type="text"
 				name="callsign"

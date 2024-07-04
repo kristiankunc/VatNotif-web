@@ -13,6 +13,10 @@ export const load: ServerLoad = async ({ locals }) => {
 	const watchedCallsigns = await prisma.watchedCallsign.findMany({
 		where: {
 			cid: session.user.cid
+		},
+		select: {
+			callsign: true,
+			topdown: true
 		}
 	});
 
