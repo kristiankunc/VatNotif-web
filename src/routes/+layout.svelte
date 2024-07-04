@@ -1,12 +1,17 @@
-<script>
+<script lang="ts">
 	import "$lib/app.css";
 	import Navbar from "$lib/components/Navbar.svelte";
 	import { page } from "$app/stores";
 	import { onMount } from "svelte";
+	import Error, { showError } from "$lib/components/Error.svelte";
 
-	// TODO: Error component
 	onMount(() => {
-		if ($page.form?.message) alert($page.form?.message);
+		showError("Error", $page.error?.message || "unknown error");
+
+		if ($page.form?.message) {
+			alert($page.form?.message);
+			showError("Error", $page.error?.message || "unknown error");
+		}
 	});
 </script>
 
@@ -24,6 +29,7 @@
 </svelte:head>
 
 <Navbar />
+<Error />
 <main>
 	<slot />
 </main>

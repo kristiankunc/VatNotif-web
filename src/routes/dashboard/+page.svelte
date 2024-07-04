@@ -1,6 +1,7 @@
 <script lang="ts">
 	import { enhance } from "$app/forms";
 	import { isCallsign } from "$lib/callsign";
+	import { showError } from "$lib/components/Error.svelte";
 	import { writable } from "svelte/store";
 
 	export let data;
@@ -67,15 +68,13 @@
 
 				if (!isCallsign(callsign)) {
 					cancel();
-					// TODO: Error component
-					alert("Invalid callsign");
+					showError("Error when adding a callsign", "callsign is invalid");
 					return;
 				}
 
 				if ($callsignsStore.find((c) => c.callsign === callsign)) {
 					cancel();
-					// TODO: Error component
-					alert("Callsign already added");
+					showError("Error when adding a callsign", "you already track this callsign");
 					return;
 				}
 
@@ -129,8 +128,7 @@
 
 					if (!res.ok) {
 						$isIgnored = !$isIgnored;
-						// TODO: Error component
-						alert("Failed to update privacy settings");
+						showError("Error when updating privacy settings", "failed to update privacy settings");
 					}
 
 					document.body.style.cursor = "default";
