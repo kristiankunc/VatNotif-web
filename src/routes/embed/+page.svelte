@@ -42,6 +42,9 @@
 	}
 </script>
 
+<svelte:head>
+	<title>VatNotif | Embed configuration</title>
+</svelte:head>
 <div class="flex w-full flex-col justify-between md:flex-row">
 	<div class="flex w-full flex-col items-center justify-center md:w-1/2">
 		<div class="flex w-4/6 flex-col pt-10">

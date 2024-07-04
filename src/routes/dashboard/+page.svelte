@@ -9,6 +9,10 @@
 	const hasEnabledEmbeds = writable(data.embedStatus.up && data.embedStatus.down);
 </script>
 
+<svelte:head>
+	<title>VatNotif | Dashboard</title>
+</svelte:head>
+
 <h1 class="m-2 text-center text-4xl font-semibold">Dashboard</h1>
 
 <div class="flex flex-row flex-wrap items-start justify-evenly">

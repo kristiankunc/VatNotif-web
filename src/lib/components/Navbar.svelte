@@ -5,7 +5,8 @@
 
 <nav class="flex justify-between bg-primary-600 p-4 text-white">
 	<div class="flex items-center text-2xl font-semibold">
-		<a href="/">
+		<a class="flex items-center" href="/">
+			<img src="/logo.webp" alt="VatNotif logo" class="mr-2 h-10 w-10" />
 			<h2>VatNotif</h2>
 		</a>
 	</div>
