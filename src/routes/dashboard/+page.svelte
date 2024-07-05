@@ -22,8 +22,8 @@
 	<div class="m-4 flex flex-col items-center justify-center">
 		<h2 class="mb-2 text-2xl font-semibold">Discord notifications</h2>
 
-		<p><b>Logon embed</b>: {data.embedConfig.up ? "configured" : "not configured"} & {data.embedStatus.up ? "enabled" : "disabled"}</p>
-		<p><b>Logoff embed</b>: {data.embedConfig.down ? "configured" : "not configured"} & {data.embedStatus.down ? "enabled" : "disabled"}</p>
+		<p><b>Logon embed</b>: {data.embedConfig.up ? "configured" : "not configured"} & {$hasEnabledEmbeds ? "enabled" : "disabled"}</p>
+		<p><b>Logoff embed</b>: {data.embedConfig.down ? "configured" : "not configured"} & {$hasEnabledEmbeds ? "enabled" : "disabled"}</p>
 
 		<div class="flex flex-row items-center justify-center">
 			<a href="/embed">
@@ -49,8 +49,8 @@
 					document.body.style.cursor = "default";
 				}}
 			>
-				<span class="material-symbols-outlined mr-2"> {$hasEnabledEmbeds ? "notifications_active" : "notifications_off"} </span>
-				<p>{$hasEnabledEmbeds ? "Enable" : "Disable"}</p>
+				<span class="material-symbols-outlined mr-2"> {$hasEnabledEmbeds ? "notifications_off" : "notifications_active"} </span>
+				<p>{$hasEnabledEmbeds ? "Disable" : "Enable"}</p>
 			</button>
 		</div>
 	</div>
@@ -63,7 +63,6 @@
 			class="flex justify-center"
 			use:enhance={({ formElement, formData, action, cancel, submitter }) => {
 				// TODO: fix this sketchy enhancer
-				// TS fuckery
 				const callsign = String(formData.get("callsign"));
 
 				if (!isCallsign(callsign)) {
