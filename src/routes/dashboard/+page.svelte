@@ -100,9 +100,8 @@
 		</form>
 
 		{#each $callsignsStore as callsign}
-			<div class="flex items-center justify-center">
-				<p class="m-2">{callsign.callsign}</p>
-				<input class="m-2" type="checkbox" name="callsign" value={callsign.topdown} disabled />
+			<div class="flex w-full items-center justify-evenly">
+				<p class="m-2 w-20">{callsign.callsign}</p>
 				<form method="POST" action="?/removeCallsign" class="flex justify-center">
 					<input type="hidden" name="callsign" value={callsign.callsign} />
 					<button type="submit" class="m-2 flex rounded bg-secondary-700 p-4 text-white transition duration-150 ease-in-out hover:bg-secondary-800">
