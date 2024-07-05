@@ -6,8 +6,6 @@
 	import Error, { showError } from "$lib/components/Error.svelte";
 
 	onMount(() => {
-		showError("Error", $page.error?.message || "unknown error");
-
 		if ($page.form?.message) {
 			alert($page.form?.message);
 			showError("Error", $page.error?.message || "unknown error");
