@@ -125,7 +125,7 @@
 				<p class="m-2 text-sm text-gray-500">Text</p>
 				<textarea bind:value={$currentData.text} maxlength="4096" name="text" class="m-2 rounded border border-gray-300 p-2" rows="2" required />
 
-				<div class="mb-3 ml-2 mt-3 flex flex-col">
+				<div class="mb-3 ml-2 mt-3 flex justify-center">
 					<ColorPicker
 						hex={$currentData.color}
 						name="color"
