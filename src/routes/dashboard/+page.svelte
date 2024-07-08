@@ -84,8 +84,8 @@
 	<div class="m-4 flex flex-col items-center justify-center">
 		<h2 class="mb-2 w-full text-left text-2xl font-semibold">Privacy settings</h2>
 		<div class="flex w-full flex-row items-center justify-between rounded border border-gray-300 p-2">
-			<p>Your CID currently <b>{$isIgnored ? "can't" : "can"}</b> be watched by other using VatNotif</p>
-			<label class="me-5 inline-flex w-1/4 cursor-pointer justify-end">
+			<p class="w-3/4">Your CID currently <b>{$isIgnored ? "can't" : "can"}</b> be watched by other using VatNotif</p>
+			<label class="me-5 inline-flex cursor-pointer justify-end">
 				<input
 					type="checkbox"
 					class="peer sr-only"
