@@ -2,6 +2,7 @@
 	import { DiscordHelper, mdToHtml } from "$lib/discord-embeds";
 	import { onDestroy } from "svelte";
 	import { writable } from "svelte/store";
+	import ColorPicker from "svelte-awesome-color-picker";
 
 	export let data;
 
@@ -124,8 +125,15 @@
 				<p class="m-2 text-sm text-gray-500">Text</p>
 				<textarea bind:value={$currentData.text} maxlength="4096" name="text" class="m-2 rounded border border-gray-300 p-2" rows="2" required />
 
-				<p class="m-2 text-sm text-gray-500">Color</p>
-				<input type="color" bind:value={$currentData.color} name="color" class="m-2 rounded border border-gray-300 p-2" required />
+				<div class="mb-3 ml-2 mt-3 flex flex-col">
+					<ColorPicker
+						hex={$currentData.color}
+						name="color"
+						on:input={(event) => {
+							$currentData.color = event.detail.hex || "#5865f2";
+						}}
+					/>
+				</div>
 
 				<div class="m-2 flex cursor-pointer justify-center rounded bg-primary-500 p-2 text-white transition duration-150 hover:bg-primary-600">
 					<span class="material-symbols-outlined mr-2"> cloud_upload </span>
