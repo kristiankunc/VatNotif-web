@@ -56,7 +56,10 @@
 				maxlength="15"
 				required
 			/>
-			<button type="submit" class="m-2 flex rounded bg-primary-500 px-3 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-600">
+			<button
+				type="submit"
+				class="m-2 flex items-center rounded bg-primary-500 px-3 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-600"
+			>
 				<span class="material-symbols-outlined mr-2">add</span>
 				<p>Add callsign</p>
 			</button>
@@ -114,7 +117,7 @@
 
 			<div class="flex flex-row items-center justify-center">
 				<a href="/embed">
-					<button class="m-2 flex rounded bg-primary-500 px-3 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-600">
+					<button class="m-2 flex items-center rounded bg-primary-500 px-3 py-2 text-white transition duration-150 ease-in-out hover:bg-primary-600">
 						<span class="material-symbols-outlined mr-2">rule_settings</span>
 						<p>Configure embeds</p></button
 					>
