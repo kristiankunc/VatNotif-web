@@ -24,7 +24,7 @@
 		<form
 			method="POST"
 			action="?/addCallsign"
-			class="flex justify-center"
+			class="flex flex-wrap justify-center"
 			use:enhance={({ formElement, formData, action, cancel, submitter }) => {
 				// TODO: fix this sketchy enhancer
 				const callsign = String(formData.get("callsign"));
@@ -66,7 +66,7 @@
 		</form>
 
 		{#each $callsignsStore as callsign}
-			<div class="flex w-3/4 items-center justify-between">
+			<div class="flex w-full items-center justify-between sm:w-3/4">
 				<p class="m-2 w-20">{callsign.callsign}</p>
 				<form method="POST" action="?/removeCallsign" class="flex justify-center">
 					<input type="hidden" name="callsign" value={callsign.callsign} />
