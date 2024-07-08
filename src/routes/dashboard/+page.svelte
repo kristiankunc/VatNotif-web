@@ -66,7 +66,7 @@
 		</form>
 
 		{#each $callsignsStore as callsign}
-			<div class="flex w-full items-center justify-between sm:w-3/4">
+			<div class="flex w-full items-center justify-between">
 				<p class="m-2 w-20">{callsign.callsign}</p>
 				<form method="POST" action="?/removeCallsign" class="flex justify-center">
 					<input type="hidden" name="callsign" value={callsign.callsign} />
@@ -109,7 +109,7 @@
 				></div>
 			</label>
 		</div>
-		<h2 class="mb-2 mt-4 w-full text-left text-2xl font-semibold">Discord notifications</h2>
+		<h2 class="mb-2 mt-6 w-full text-left text-2xl font-semibold">Discord notifications</h2>
 		<div class="flex w-full flex-row items-center justify-between rounded border border-gray-300 p-2">
 			<p class="w-1/2">
 				{data.hasEmbedUrls ? "All of your embeds have a working webhook URL" : "Some of your embeds are missing a webhook URL"}
