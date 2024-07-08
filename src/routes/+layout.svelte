@@ -7,8 +7,7 @@
 
 	onMount(() => {
 		if ($page.form?.message) {
-			alert($page.form?.message);
-			showError("Error", $page.error?.message || "unknown error");
+			showError("Error", $page.form.message);
 		}
 	});
 </script>

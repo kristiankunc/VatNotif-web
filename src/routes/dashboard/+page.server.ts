@@ -35,14 +35,7 @@ export const load: ServerLoad = async ({ locals }) => {
 
 	return {
 		watchedCallsigns,
-		embedConfig: {
-			up: embeds.find((embed) => embed.event === "up") !== undefined,
-			down: embeds.find((embed) => embed.event === "down") !== undefined
-		},
-		embedStatus: {
-			up: embeds.find((embed) => embed.enabled === true) !== undefined,
-			down: embeds.find((embed) => embed.enabled === true) !== undefined
-		},
+		hasEmbedUrls: embeds.every((embed) => embed.url !== ""),
 		isIgnored: isIgnored
 	};
 };

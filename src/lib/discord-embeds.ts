@@ -1,6 +1,7 @@
 import DOMPurify from "dompurify";
 import { marked } from "marked";
 import { prisma } from "./prisma";
+import { type DiscordEmbed as PrismaDiscordEmbed } from "@prisma/client";
 
 export interface DiscordEmbed {
 	url: string;
@@ -60,5 +61,58 @@ export class DiscordHelper {
 
 	public static isWebhookUrl(url: string): boolean {
 		return /^https:\/\/discord\.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_-]+$/.test(url);
+	}
+
+	public static async createDefaultEmbeds(cid: number): Promise<PrismaDiscordEmbed[]> {
+		const defaultEmbeds = DiscordHelper.getDefaultEmbed();
+		await prisma.discordEmbed.createMany({
+			data: [
+				{
+					cid: cid,
+					event: "down",
+					enabled: true,
+					name: "Default logoff notification",
+					...defaultEmbeds.down
+				},
+				{
+					cid: cid,
+					event: "up",
+					enabled: true,
+					name: "Default logon notification",
+					...defaultEmbeds.up
+				}
+			]
+		});
+
+		return await prisma.discordEmbed.findMany({
+			where: { cid: cid }
+		});
+	}
+
+	public static async isWebhookUrlValid(url: string): Promise<boolean> {
+		const postRes = await fetch(`${url}?wait=true`, {
+			method: "POST",
+			headers: {
+				"Content-Type": "application/json"
+			},
+			body: JSON.stringify({
+				embeds: null,
+				content: "VatNotif test notification",
+				attachments: []
+			})
+		});
+
+		const message = await postRes.json();
+
+		if (!message.id) return false;
+
+		const webhookId = url.split("/")[5];
+		const webhookToken = url.split("/")[6];
+
+		await fetch(`https://discord.com/api/webhooks/${webhookId}/${webhookToken}/messages/${message.id}`, {
+			method: "DELETE"
+		});
+
+		return true;
 	}
 }

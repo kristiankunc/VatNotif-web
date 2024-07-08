@@ -9,7 +9,6 @@
 	let callsignsStore = writable(data.watchedCallsigns);
 
 	const isIgnored = writable(data.isIgnored);
-	const hasEnabledEmbeds = writable(data.embedStatus.up && data.embedStatus.down);
 </script>
 
 <svelte:head>
@@ -22,8 +21,9 @@
 	<div class="m-4 flex flex-col items-center justify-center">
 		<h2 class="mb-2 text-2xl font-semibold">Discord notifications</h2>
 
-		<p><b>Logon embed</b>: {data.embedConfig.up ? "configured" : "not configured"} & {$hasEnabledEmbeds ? "enabled" : "disabled"}</p>
-		<p><b>Logoff embed</b>: {data.embedConfig.down ? "configured" : "not configured"} & {$hasEnabledEmbeds ? "enabled" : "disabled"}</p>
+		<p>
+			{data.hasEmbedUrls ? "All of your embeds have a working webhook URL" : "Some of your embeds are missing a webhook URL"}
+		</p>
 
 		<div class="flex flex-row items-center justify-center">
 			<a href="/embed">
@@ -32,26 +32,6 @@
 					<p>Configure embeds</p></button
 				>
 			</a>
-			<button
-				type="submit"
-				class="m-2 flex rounded bg-primary-500 p-4 text-white transition duration-150 ease-in-out hover:bg-primary-600"
-				on:click={async () => {
-					document.body.style.cursor = "wait";
-					const res = await fetch("/api/notify", {
-						method: $hasEnabledEmbeds ? "DELETE" : "POST"
-					});
-
-					if (!res.ok) {
-						alert("Failed to update notification settings");
-					}
-
-					$hasEnabledEmbeds = !$hasEnabledEmbeds;
-					document.body.style.cursor = "default";
-				}}
-			>
-				<span class="material-symbols-outlined mr-2"> {$hasEnabledEmbeds ? "notifications_off" : "notifications_active"} </span>
-				<p>{$hasEnabledEmbeds ? "Disable" : "Enable"}</p>
-			</button>
 		</div>
 	</div>
 	<div class="m-4 flex flex-col items-center justify-center">

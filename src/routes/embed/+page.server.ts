@@ -1,24 +1,36 @@
 import { validateFormData } from "$lib/form";
-import { error, fail, type Load } from "@sveltejs/kit";
+import { error, fail, type ServerLoad } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import { prisma } from "$lib/prisma";
+import { DiscordHelper } from "$lib/discord-embeds";
 
-export const load: Load = async ({ locals }) => {
+export const load: ServerLoad = async ({ locals }) => {
 	const sesh = await locals.auth();
 
 	if (!sesh) error(401, { message: "Unauthorized" });
 
-	const embeds = await prisma.discordEmbed.findMany({
-		where: { cid: sesh.user.cid }
+	let embeds = await prisma.discordEmbed.findMany({
+		where: { cid: sesh.user.cid },
+		select: {
+			id: true,
+			url: true,
+			avatar: true,
+			name: true,
+			title: true,
+			color: true,
+			text: true,
+			author: true,
+			event: true
+		}
 	});
 
-	if (!embeds) return { notification: null };
+	// TODO this does not work as expected, test again
+	if (embeds.length === 0) {
+		embeds = await DiscordHelper.createDefaultEmbeds(sesh.user.cid);
+	}
 
 	return {
-		embeds: {
-			up: embeds.find((embed) => embed.event === "up"),
-			down: embeds.find((embed) => embed.event === "down")
-		}
+		embeds: embeds
 	};
 };
 
@@ -31,7 +43,8 @@ export const actions = {
 		const form = await request.formData();
 
 		const isValid = validateFormData(form, [
-			{ key: "isDownNotification", type: "boolean", maxLength: 0 },
+			{ key: "id", type: "number", maxLength: -1 },
+			{ key: "notificationType", type: "string", maxLength: 4 }, // up | down
 			{ key: "url", type: "string", maxLength: 256 },
 			{ key: "author", type: "string", maxLength: 80 },
 			{ key: "title", type: "string", maxLength: 256 },
@@ -42,41 +55,34 @@ export const actions = {
 
 		if (!isValid) return fail(400, { message: "Invalid form data" });
 
-		const url = form.get("url") as string;
-
-		const postRes = await fetch(`${url}?wait=true`, {
-			method: "POST",
-			headers: {
-				"Content-Type": "application/json"
+		const currentWebhookUrl = await prisma.discordEmbed.findFirst({
+			where: {
+				id: parseInt(form.get("id") as string)
 			},
-			body: JSON.stringify({
-				embeds: null,
-				content: "VatNotif test notification",
-				attachments: []
-			})
+			select: {
+				url: true
+			}
 		});
 
-		const message = await postRes.json();
+		const newWebhookUrl = form.get("url") as string;
 
-		if (!message.id) return fail(400, { message: "Invalid webhook URL" });
+		if (!DiscordHelper.isWebhookUrl(newWebhookUrl)) return fail(400, { message: "Invalid webhook URL" });
+		if (currentWebhookUrl?.url !== newWebhookUrl) {
+			if (!DiscordHelper.isWebhookUrlValid(newWebhookUrl)) return fail(400, { message: "Invalid webhook URL" });
+		}
 
-		const webhookId = url.split("/")[5];
-		const webhookToken = url.split("/")[6];
-
-		await fetch(`https://discord.com/api/webhooks/${webhookId}/${webhookToken}/messages/${message.id}`, {
-			method: "DELETE"
-		});
-
-		const embedType = form.get("isDownNotification") === "true" ? "down" : "up";
+		if (form.get("notificationType") !== "up" && form.get("notificationType") !== "down") {
+			return fail(400, { message: "Invalid event, must be [up|down]" });
+		}
 
 		await prisma.discordEmbed.upsert({
 			where: {
-				cid_event: {
-					cid: cid,
-					event: embedType
-				}
+				id: parseInt(form.get("id") as string),
+				cid: cid
 			},
 			update: {
+				event: form.get("notificationType") as string,
+				name: form.get("name") as string,
 				url: form.get("url") as string,
 				author: form.get("author") as string,
 				title: form.get("title") as string,
@@ -86,13 +92,31 @@ export const actions = {
 			},
 			create: {
 				cid: cid,
-				event: embedType,
+				event: form.get("notificationType") as string,
+				name: form.get("name") as string,
 				url: form.get("url") as string,
 				author: form.get("author") as string,
 				title: form.get("title") as string,
 				text: form.get("text") as string,
 				color: form.get("color") as string,
 				avatar: form.get("avatar") as string
+			}
+		});
+	},
+	deleteembed: async ({ request, locals }) => {
+		const sesh = await locals.auth();
+		if (!sesh) return fail(401, { message: "Unauthorized" });
+		const cid = sesh.user.cid;
+
+		const form = await request.formData();
+		const isValid = validateFormData(form, [{ key: "id", type: "number", maxLength: -1 }]);
+
+		if (!isValid) return fail(400, { message: "Invalid form data" });
+
+		await prisma.discordEmbed.deleteMany({
+			where: {
+				id: parseInt(form.get("id") as string),
+				cid: cid
 			}
 		});
 	}
