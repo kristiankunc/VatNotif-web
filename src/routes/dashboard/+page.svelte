@@ -15,7 +15,7 @@
 	<title>VatNotif | Dashboard</title>
 </svelte:head>
 
-<div class="flex min-h-[80vh] flex-col justify-center">
+<div class="flex min-h-[90vh] flex-col justify-center">
 	<h1 class="m-2 text-center text-4xl font-semibold">Dashboard</h1>
 
 	<div class="flex flex-row flex-wrap items-start justify-evenly">
