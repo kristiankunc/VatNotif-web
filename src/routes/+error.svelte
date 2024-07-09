@@ -1,6 +1,8 @@
 <script lang="ts">
 	import { page } from "$app/stores";
 	import { signIn } from "@auth/sveltekit/client";
+
+	console.error($page.error);
 </script>
 
 <div class="flex h-[90vh] flex-col items-center justify-center">
