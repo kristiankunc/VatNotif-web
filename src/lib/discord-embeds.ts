@@ -42,7 +42,7 @@ export class DiscordHelper {
 			url: "",
 			author: "VatNotif",
 			title: "New notification",
-			avatar: "https://cdn.discordapp.com/embed/avatars/0.png"
+			avatar: "https://vatnotif.kristn.co.uk/logo.webp"
 		};
 
 		return {
