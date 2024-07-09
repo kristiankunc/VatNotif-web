@@ -7,7 +7,7 @@ export async function mdToHtml(md: string): Promise<string> {
 		return `<a href="${href}" class="text-blue-500 hover:underline">${text}</a>`;
 	};
 	renderer.paragraph = function (text) {
-		return `<p class="white-space-pre-line word-break break-all mb-2 rounded bg-[#2b2d31] p-2 leading-relaxed">${text}</p>`;
+		return `<p class="white-space-pre-line word-break break-all rounded bg-[#2b2d31] pt-2 px-2 pb-1 leading-relaxed">${text}</p>`;
 	};
 	marked.setOptions({ renderer, breaks: true });
 

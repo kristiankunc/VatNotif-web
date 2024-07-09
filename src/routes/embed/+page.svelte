@@ -35,15 +35,18 @@
 		isDownNotification = value.event === "down";
 	});
 
-	let currentTimeStr: string = getTimeStr();
-
 	function getTimeStr(): string {
 		const date = new Date();
-		return date.toLocaleTimeString().split(":").slice(0, 2).join(":");
+		return date.toLocaleTimeString("en-US", {
+			hour: "numeric",
+			minute: "numeric",
+			hour12: false
+		});
 	}
+	let currentTimeStr = writable(getTimeStr());
 
 	const interval = setInterval(() => {
-		currentTimeStr = getTimeStr();
+		$currentTimeStr = getTimeStr();
 	}, 60000);
 
 	onDestroy(() => {
@@ -178,19 +181,20 @@
 						<div class="ml-2">
 							<span class="rounded bg-[#5865f2] px-1.5 py-0.5 text-sm font-bold text-white">BOT</span>
 						</div>
-						<span class="ml-2 text-xs text-gray-400">Today at {currentTimeStr}</span>
+						<span class="ml-2 text-xs text-gray-400">Today at {$currentTimeStr}</span>
 					</div>
 				</div>
 				<div
 					class="dynamic-color relative w-full max-w-lg rounded-lg bg-[#2b2d31] p-4 shadow-lg before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-l-lg"
 				>
 					<div class="flex flex-col">
-						<p class="p-2 text-lg font-semibold">{$currentData.title}</p>
+						<p class="pl-2 text-lg font-semibold">{$currentData.title}</p>
 						{#await mdToHtml($currentData.text)}
 							<p>Loading...</p>
 						{:then html}
 							{@html html}
 						{/await}
+						<p class="pl-2 text-xs">Today at {$currentTimeStr}</p>
 					</div>
 				</div>
 			</div>
