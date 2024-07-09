@@ -4,14 +4,14 @@
 
 <div class="flex min-h-[90vh] w-full flex-row flex-wrap justify-evenly">
 	<div class="flex flex-col items-center justify-center">
-		<h1 class="text-6xl font-semibold">VatNotif</h1>
+		<h1 class="m-5 text-6xl font-semibold">VatNotif</h1>
 		<div>
 			<img src="/logo.webp" alt="VatNotif logo" class="h-20 w-20" />
 		</div>
 	</div>
 
 	<div class="flex flex-col justify-center">
-		<div class="my-8 flex items-center justify-center">
+		<div class="mx-4 my-8 flex items-center justify-center">
 			<div
 				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
 			>
@@ -19,7 +19,7 @@
 				<p class="mt-4 text-gray-600">Find airports and positions you are interested in!</p>
 			</div>
 		</div>
-		<div class="my-8 flex items-center justify-center">
+		<div class="mx-4 my-8 flex items-center justify-center">
 			<div
 				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
 			>
@@ -27,7 +27,7 @@
 				<p class="mt-4 text-gray-600">Get their callsign and add them to your tracking list!</p>
 			</div>
 		</div>
-		<div class="my-8 flex items-center justify-center">
+		<div class="mx-4 my-8 flex items-center justify-center">
 			<div
 				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
 			>

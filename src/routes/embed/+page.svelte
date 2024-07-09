@@ -3,6 +3,7 @@
 	import { onDestroy } from "svelte";
 	import { writable } from "svelte/store";
 	import ColorPicker from "svelte-awesome-color-picker";
+	import { showError } from "$lib/components/Error.svelte";
 
 	export let data;
 
@@ -151,6 +152,7 @@
 
 				<button
 					class="m-2 flex w-1/2 cursor-pointer justify-center rounded bg-secondary-700 p-2 text-white transition duration-150 hover:bg-secondary-800"
+					on:click={() => showError("Not implemented", "This feature is not implemented yet")}
 				>
 					<span class="material-symbols-outlined mr-2"> verified_user </span>
 					<p>Test</p>

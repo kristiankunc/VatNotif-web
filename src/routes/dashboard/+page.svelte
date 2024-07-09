@@ -53,7 +53,7 @@
 					name="callsign"
 					id="callsign"
 					placeholder="EGKK_GND"
-					class="m-2 rounded border border-gray-300 p-2"
+					class="m-2 grow rounded border border-gray-300 p-2"
 					maxlength="15"
 					required
 				/>
