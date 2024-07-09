@@ -69,17 +69,17 @@ export class DiscordHelper {
 			data: [
 				{
 					cid: cid,
-					event: "down",
-					enabled: true,
-					name: "Default logoff notification",
-					...defaultEmbeds.down
-				},
-				{
-					cid: cid,
 					event: "up",
 					enabled: true,
 					name: "Default logon notification",
 					...defaultEmbeds.up
+				},
+				{
+					cid: cid,
+					event: "down",
+					enabled: true,
+					name: "Default logoff notification",
+					...defaultEmbeds.down
 				}
 			]
 		});

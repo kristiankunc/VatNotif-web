@@ -24,7 +24,6 @@ export const load: ServerLoad = async ({ locals }) => {
 		}
 	});
 
-	// TODO this does not work as expected, test again
 	if (embeds.length === 0) {
 		embeds = await DiscordHelper.createDefaultEmbeds(sesh.user.cid);
 	}

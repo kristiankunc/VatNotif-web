@@ -3,8 +3,6 @@ import { error, fail, type Load, type ServerLoad } from "@sveltejs/kit";
 import type { Actions } from "./$types";
 import { isCallsign } from "$lib/callsign";
 
-// TODO: Add default embed for new users
-
 export const load: ServerLoad = async ({ locals }) => {
 	const session = await locals.auth();
 
@@ -35,7 +33,7 @@ export const load: ServerLoad = async ({ locals }) => {
 
 	return {
 		watchedCallsigns,
-		hasEmbedUrls: embeds.every((embed) => embed.url !== ""),
+		hasEmbedUrls: embeds.length !== 0 && embeds.every((embed) => embed.url !== ""),
 		isIgnored: isIgnored
 	};
 };
