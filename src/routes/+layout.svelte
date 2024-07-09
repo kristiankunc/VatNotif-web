@@ -4,6 +4,7 @@
 	import { page } from "$app/stores";
 	import { onMount } from "svelte";
 	import Error, { showError } from "$lib/components/Error.svelte";
+	import Footer from "$lib/components/Footer.svelte";
 
 	onMount(() => {
 		if ($page.form?.message) {
@@ -30,3 +31,4 @@
 <main>
 	<slot />
 </main>
+<Footer />
