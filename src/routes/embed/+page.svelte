@@ -1,9 +1,9 @@
 <script lang="ts">
-	import { DiscordHelper, mdToHtml } from "$lib/discord-embeds";
 	import { onDestroy } from "svelte";
 	import { writable } from "svelte/store";
 	import ColorPicker from "svelte-awesome-color-picker";
 	import { showError } from "$lib/components/Error.svelte";
+	import { mdToHtml } from "$lib/string-format.js";
 
 	export let data;
 

@@ -1,6 +1,5 @@
 import { validateFormData } from "$lib/form";
-import { error, fail, type ServerLoad } from "@sveltejs/kit";
-import type { Actions } from "./$types";
+import { error, fail, type Actions, type ServerLoad } from "@sveltejs/kit";
 import { prisma } from "$lib/prisma";
 import { DiscordHelper } from "$lib/discord-embeds";
 
