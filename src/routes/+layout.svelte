@@ -26,6 +26,22 @@
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
 
 	<script defer data-domain="vatnotif.kristn.co.uk" src="https://plausible.kristn.co.uk/js/script.js"></script>
+
+	<meta name="description" content="Free VATSIM controller tracker" />
+	<meta name="keywords" content="VATSIM, controller, tracker, aviation" />
+	<meta name="author" content="Kristián Kunc" />
+	<meta name="robots" content="index, follow" />
+	<meta name="googlebot" content="index, follow" />
+	<meta name="theme-color" content="#ffffff" />
+	<meta property="og:title" content="VatNotif" />
+	<meta property="og:description" content="Free VATSIM controller tracker" />
+	<meta property="og:image" content="https://vatnotif.kristn.co.uk/brand/logo.webp" />
+	<meta property="og:url" content="https://vatnotif.kristn.co.uk/" />
+	<meta property="og:type" content="website" />
+	<meta name="twitter:card" content="summary_large_image" />
+	<meta name="twitter:title" content="VatNotif" />
+	<meta name="twitter:description" content="Free VATSIM controller tracker" />
+	<meta name="twitter:image" content="https://vatnotif.kristn.co.uk/brand/logo.webp" />
 </svelte:head>
 
 <Navbar />
