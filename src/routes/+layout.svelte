@@ -27,7 +27,7 @@
 
 	<script defer data-domain="vatnotif.kristn.co.uk" src="https://plausible.kristn.co.uk/js/script.js"></script>
 
-	<meta name="description" content="Free VATSIM controller tracker" />
+	<meta name="description" content="VATSIM callsign tracker" />
 	<meta name="keywords" content="VATSIM, controller, tracker, aviation" />
 	<meta name="author" content="Kristián Kunc" />
 	<meta name="robots" content="index, follow" />
