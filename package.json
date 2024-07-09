@@ -9,7 +9,10 @@
 		"check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
 		"check:watch": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json --watch",
 		"lint": "prettier --check .",
-		"format": "prettier --write ."
+		"format": "prettier --write .",
+		"prisma": {
+			"migrate-old": "ts-node prisma/migrate-old.ts"
+		}
 	},
 	"devDependencies": {
 		"@auth/core": "^0.32.0",
