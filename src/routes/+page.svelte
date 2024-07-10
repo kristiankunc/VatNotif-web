@@ -57,7 +57,14 @@
 		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to use wildcards</summary>
 		<p class="p-4">
 			A wild card in the form of percent sign (%) can be used to match any number of characters. For example, if you want to track all positions at
-			London Heathrow, you can use the wildcard EGGL_% and all positions from Ground (EGLL_1_GND) up to Radar (EGLL_N_APP) will be tracked.
+			London Heathrow, you can use the wildcard EGLL_% and all positions from Ground (EGLL_1_GND) up to Radar (EGLL_N_APP) will be tracked.
+		</p>
+	</details>
+	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
+		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to use variables</summary>
+		<p class="p-4">
+			A total of four variables are allowed: name, cid, callsign & frequency and they must be inside curly braces. For example, &#123callsign&#125 is
+			going to be rendered as EGKK_GND. They can be used in the embed text and title.
 		</p>
 	</details>
 	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">

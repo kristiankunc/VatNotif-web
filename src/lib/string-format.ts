@@ -1,6 +1,10 @@
 import DOMPurify from "dompurify";
 import { marked } from "marked";
 
+function addVariables(text: string): string {
+	return text.replace("{name}", "John Doe").replace("{cid}", "123456").replace("{callsign}", "EGKK_GND").replace("{frequency}", "121.805");
+}
+
 export async function mdToText(md: string): Promise<string> {
 	const renderer = new marked.Renderer();
 	renderer.link = function (href, title, text) {
@@ -11,13 +15,7 @@ export async function mdToText(md: string): Promise<string> {
 	};
 	marked.setOptions({ renderer, breaks: true });
 
-	let textWithVars = (await marked(md))
-		.replace("{name}", "John Doe")
-		.replace("{cid}", "123456")
-		.replace("{callsign}", "EGKK_GND")
-		.replace("{frequency}", "121.805");
-
-	return DOMPurify.sanitize(textWithVars, { USE_PROFILES: { html: true } });
+	return DOMPurify.sanitize(addVariables(await marked(md)), { USE_PROFILES: { html: true } });
 }
 
 export async function mdToTitle(md: string): Promise<string> {
@@ -32,11 +30,5 @@ export async function mdToTitle(md: string): Promise<string> {
 
 	marked.setOptions({ renderer, breaks: true });
 
-	let textWithVars = (await marked(md))
-		.replace("{name}", "John Doe")
-		.replace("{cid}", "123456")
-		.replace("{callsign}", "EGKK_GND")
-		.replace("{frequency}", "121.805");
-
-	return DOMPurify.sanitize(textWithVars, { USE_PROFILES: { html: true } });
+	return DOMPurify.sanitize(addVariables(await marked(md)), { USE_PROFILES: { html: true } });
 }
