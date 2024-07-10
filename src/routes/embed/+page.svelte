@@ -3,7 +3,7 @@
 	import { writable } from "svelte/store";
 	import ColorPicker from "svelte-awesome-color-picker";
 	import { showError } from "$lib/components/Error.svelte";
-	import { mdToHtml } from "$lib/string-format.js";
+	import { mdToText, mdToTitle } from "$lib/string-format.js";
 
 	export let data;
 
@@ -188,8 +188,13 @@
 					class="dynamic-color relative w-full max-w-lg rounded-lg bg-[#2b2d31] p-4 shadow-lg before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:rounded-l-lg"
 				>
 					<div class="flex flex-col">
-						<p class="pl-2 text-lg font-semibold">{$currentData.title}</p>
-						{#await mdToHtml($currentData.text)}
+						{#await mdToTitle($currentData.title)}
+							<p class="pl-2 text-lg font-semibold">Loading...</p>
+						{:then html}
+							{@html html}
+						{/await}
+
+						{#await mdToText($currentData.text)}
 							<p>Loading...</p>
 						{:then html}
 							{@html html}
