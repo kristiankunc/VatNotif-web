@@ -71,7 +71,7 @@
 
 <div class="flex w-full flex-col justify-between md:flex-row">
 	<div class="flex w-full flex-col items-center justify-center md:w-1/2">
-		<div class="flex w-4/6 flex-col pt-10">
+		<div class="flex w-11/12 flex-col pt-10 md:w-4/6">
 			<p class="mb-2 text-2xl font-semibold">Customize Discord Embed</p>
 			<select bind:value={$currentEmbedId} class="m-2 rounded border border-gray-300 p-2">
 				{#each data.embeds as embed}
