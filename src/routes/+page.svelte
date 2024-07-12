@@ -73,7 +73,7 @@
 	<p class="flex flex-col items-center">
 		I build software in my free time and everything I make is publicly availible and free to use for everyone. The infrastructure is all paid out of
 		my own pocket and that's why I'd appriciate any kind of financial support. 100% of donations go towards covering the server costs. Please consider
-		supporting using ko-fi
+		supporting using Ko-fi.
 		<a href="https://ko-fi.com/kristiankunc" target="_blank">
 			<button class="mt-4 flex justify-center rounded bg-primary-600 px-4 py-2 font-semibold text-white hover:bg-primary-700">
 				<span class="material-symbols-outlined mr-2"> attach_money </span>Support me</button
