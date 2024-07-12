@@ -36,20 +36,20 @@
 	<script defer data-domain="vatnotif.kristn.co.uk" src="https://plausible.kristn.co.uk/js/script.js"></script>
 	<script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
 
-	<meta name="description" content="VATSIM callsign tracker" />
+	<meta name="description" content="VATSIM controller callsign tracker" />
 	<meta name="keywords" content="VATSIM, controller, tracker, aviation" />
 	<meta name="author" content="Kristián Kunc" />
 	<meta name="robots" content="index, follow" />
 	<meta name="googlebot" content="index, follow" />
 	<meta name="theme-color" content="#ffffff" />
 	<meta property="og:title" content="VatNotif" />
-	<meta property="og:description" content="Free VATSIM controller tracker" />
+	<meta property="og:description" content="VATSIM controller callsign tracker" />
 	<meta property="og:image" content="https://vatnotif.kristn.co.uk/brand/logo.webp" />
 	<meta property="og:url" content="https://vatnotif.kristn.co.uk/" />
 	<meta property="og:type" content="website" />
 	<meta name="twitter:card" content="summary_large_image" />
 	<meta name="twitter:title" content="VatNotif" />
-	<meta name="twitter:description" content="Free VATSIM controller tracker" />
+	<meta name="twitter:description" content="VATSIM controller callsign tracker" />
 	<meta name="twitter:image" content="https://vatnotif.kristn.co.uk/brand/logo.webp" />
 </svelte:head>
 
