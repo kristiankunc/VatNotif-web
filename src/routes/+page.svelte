@@ -15,7 +15,10 @@
 			<div
 				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
 			>
-				<h1 class="text-2xl font-bold">Find positions</h1>
+				<h1 class="flex items-center justify-start text-2xl font-bold">
+					<span class="material-symbols-outlined mr-2"> travel_explore </span>
+					Find positions
+				</h1>
 				<p class="mt-4 text-gray-600">Find airports and positions you are interested in!</p>
 			</div>
 		</div>
@@ -23,7 +26,10 @@
 			<div
 				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
 			>
-				<h1 class="text-2xl font-bold">Get callsign</h1>
+				<h1 class="flex items-center justify-start text-2xl font-bold">
+					<span class="material-symbols-outlined mr-2"> sell </span>
+					Get callsign
+				</h1>
 				<p class="mt-4 text-gray-600">Get their callsign and add them to your tracking list!</p>
 			</div>
 		</div>
@@ -31,7 +37,10 @@
 			<div
 				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
 			>
-				<h1 class="text-2xl font-bold">Receive notifications</h1>
+				<h1 class="flex items-center justify-start text-2xl font-bold">
+					<span class="material-symbols-outlined mr-2"> notifications_active </span>
+					Receive notifications
+				</h1>
 				<p class="mt-4 text-gray-600">Receive a notification via Discord whenever they come online!</p>
 			</div>
 		</div>
