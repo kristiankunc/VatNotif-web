@@ -1,38 +1,34 @@
-# create-svelte
+# VatNotif
 
-Everything you need to build a Svelte project, powered by [`create-svelte`](https://github.com/sveltejs/kit/tree/main/packages/create-svelte).
+A website for tracking VATSIM controller callsigns written in SvelteKit
 
-## Creating a project
+## Development setup
+1) After cloning, edit the [.env.example](https://github.com/kristiankunc/VatNotif-web/blob/main/.env.example) with your config. Information on VATSIM OAuth can be found @ https://vatsim.dev/api/connect-api/vatsim-connect-api as the site uses VATSIM for login and does not implement any username/password auth.
 
-If you're seeing this, you've probably already done this step. Congrats!
-
-```bash
-# create a new project in the current directory
-npm create svelte@latest
-
-# create a new project in my-app
-npm create svelte@latest my-app
+2) Install dependcies with npm
+```
+$ npm i
 ```
 
-## Developing
-
-Once you've created a project and installed dependencies with `npm install` (or `pnpm install` or `yarn`), start a development server:
-
-```bash
-npm run dev
-
-# or start the server and open the app in a new browser tab
-npm run dev -- --open
+3) Generate Prisma client API
+```
+$ npx prisma generate
 ```
 
-## Building
-
-To create a production version of your app:
-
-```bash
-npm run build
+4) Run the project
+```
+$ npm run dev
+```
+You can also build the project and run it with Node, this is ideal for any production setup
+```
+$ npm run build && node build/
 ```
 
-You can preview the production build with `npm run preview`.
+## License
+This project is released under the MIT License - see the [LICENSE](https://github.com/kristiankunc/VatNotif-api/blob/main/LICENSE). file for details.
 
-> To deploy your app, you may need to install an [adapter](https://kit.svelte.dev/docs/adapters) for your target environment.
+## Contributing
+Contributions are welcome, feel free to fork the project and submit a PR.
+This project follows the [Contributor Covenant Code of Conduct](https://www.contributor-covenant.org/version/2/0/code_of_conduct/), by participating you are expected to follow it.
+
+Thank you for your contributions!
