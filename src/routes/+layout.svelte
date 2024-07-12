@@ -7,6 +7,14 @@
 	import Footer from "$lib/components/Footer.svelte";
 
 	onMount(() => {
+		// @ts-ignore
+		kofiWidgetOverlay.draw("kristiankunc", {
+			type: "floating-chat",
+			"floating-chat.donateButton.text": "Support me",
+			"floating-chat.donateButton.background-color": "#3EA8F4",
+			"floating-chat.donateButton.text-color": "#fff"
+		});
+
 		if ($page.form?.message) {
 			showError("Error", $page.form.message);
 		}
@@ -26,6 +34,7 @@
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
 
 	<script defer data-domain="vatnotif.kristn.co.uk" src="https://plausible.kristn.co.uk/js/script.js"></script>
+	<script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
 
 	<meta name="description" content="VATSIM callsign tracker" />
 	<meta name="keywords" content="VATSIM, controller, tracker, aviation" />

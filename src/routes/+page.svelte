@@ -47,7 +47,42 @@
 	</div>
 </div>
 
-<div class="w-ull m-auto flex flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
+<div class="m-auto mb-5 flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
+	<h2 class="w-full text-center text-3xl font-bold">How to use VatNotif</h2>
+	<h3 class="mt-4 text-2xl font-semibold">Callsign selection</h3>
+	<p>
+		The callsign selection is essential for good user expirience. <br />You should never include double underscores in your callsign, only watch the
+		standard version and you'll receive notifications for both. <br />
+		Also utilise the wildcard (%), more info about it's usage is written below in the FAQ.
+	</p>
+	<h3 class="mt-4 text-2xl font-semibold">Embed setup</h3>
+	<p>
+		After setting up your callsigns, head over to the embed configuration page, a default logon & logoff embeds have been generated for you by
+		default. The only thing you need to do is add a Webhook URL, how to create one can be found <a
+			class="text-blue-500 underline hover:text-blue-700"
+			href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks"
+			target="_blank">here</a
+		>.
+		<br />
+		You are able to create as many logon/logoff embeds as you wish and configure them to your liking utilising the variables.
+	</p>
+</div>
+
+<div class="m-auto mb-5 flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
+	<h2 class="w-full text-center text-3xl font-bold">Donations</h2>
+	<p class="flex flex-col items-center">
+		I build software in my free time and everything I make is publicly availible and free to use for everyone. The infrastructure is all paid out of
+		my own pocket and that's why I'd appriciate any kind of financial support. 100% of donations go towards covering the server costs. Please consider
+		supporting using ko-fi
+		<a href="https://ko-fi.com/kristiankunc" target="_blank">
+			<button class="mt-4 flex justify-center rounded bg-primary-600 px-4 py-2 font-semibold text-white hover:bg-primary-700">
+				<span class="material-symbols-outlined mr-2"> attach_money </span>Support me</button
+			>
+		</a>
+	</p>
+</div>
+
+<div class="m-auto mb-5 flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
 	<h2 class="w-full text-center text-3xl font-bold">Frequently asked questions</h2>
 	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
 		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">What is VatNotif?</summary>
@@ -89,8 +124,22 @@
 			>.
 		</p>
 	</details>
+	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
+		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">Is this project open-source?</summary
+		>
+		<p class="p-4">
+			Yes, you can find both <a
+				class="text-blue-500 underline hover:text-blue-700"
+				href="https://github.com/kristiankunc/VatNotif-web"
+				target="_blank">this website</a
+			>
+			and the <a class="text-blue-500 underline hover:text-blue-700" href="https://github.com/kristiankunc/VatNotif-api" target="_blank">API</a>
+			on GitHub.
+		</p>
+	</details>
 </div>
-<div class="w-ull m-auto flex flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
+
+<div class="m-auto flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
 	<h2 class="w-full text-center text-3xl font-bold">Privacy policy</h2>
 	<h3 class="mt-4 text-2xl font-semibold">Your data</h3>
 	<p>The only personal data stored by default is your unique VATSIM CID. Other data may be stored based on user preference & settings.</p>
