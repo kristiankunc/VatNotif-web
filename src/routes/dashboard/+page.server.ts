@@ -45,9 +45,11 @@ export const actions = {
 
 		const form = await request.formData();
 
-		const callsign = form.get("callsign") as string;
+		let callsign = form.get("callsign") as string;
 		if (!callsign) return fail(400, { message: "No callsign provided" });
-		if (!isCallsign(callsign)) return fail(400, { message: "Invalid callsign" });
+
+		callsign = callsign.toUpperCase().replace(/_+/g, "_");
+		if (!isCallsign(callsign)) return fail(400, { message: "Callsign is invalid" });
 
 		await prisma.watchedCallsign.create({
 			data: {

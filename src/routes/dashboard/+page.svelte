@@ -22,32 +22,7 @@
 		<div class="m-4 flex flex-col items-center justify-center">
 			<h2 class="mb-2 text-2xl font-semibold">Tracked callsigns</h2>
 
-			<form
-				method="POST"
-				action="?/addCallsign"
-				class="flex flex-wrap justify-center"
-				use:enhance={({ formElement, formData, action, cancel, submitter }) => {
-					// TODO: fix this sketchy enhancer
-					const callsign = String(formData.get("callsign"));
-
-					if (!isCallsign(callsign)) {
-						cancel();
-						showError("Error when adding a callsign", "callsign is invalid");
-						return;
-					}
-
-					if ($callsignsStore.find((c) => c.callsign === callsign)) {
-						cancel();
-						showError("Error when adding a callsign", "you already track this callsign");
-						return;
-					}
-
-					return async ({ result, update }) => {
-						update();
-						window.location.reload();
-					};
-				}}
-			>
+			<form method="POST" action="?/addCallsign" class="flex flex-wrap justify-center">
 				<input
 					type="text"
 					name="callsign"
