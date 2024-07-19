@@ -8,12 +8,15 @@
 
 	onMount(() => {
 		// @ts-ignore
-		kofiWidgetOverlay.draw("kristiankunc", {
-			type: "floating-chat",
-			"floating-chat.donateButton.text": "Support me",
-			"floating-chat.donateButton.background-color": "#3EA8F4",
-			"floating-chat.donateButton.text-color": "#fff"
-		});
+		if (window.innerWidth > 1024) {
+			// @ts-ignore
+			kofiWidgetOverlay.draw("kristiankunc", {
+				type: "floating-chat",
+				"floating-chat.donateButton.text": "Support me",
+				"floating-chat.donateButton.background-color": "#3EA8F4",
+				"floating-chat.donateButton.text-color": "#fff"
+			});
+		}
 
 		if ($page.form?.message) {
 			showError("Error", $page.form.message);

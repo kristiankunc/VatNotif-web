@@ -76,7 +76,7 @@
 		supporting using Ko-fi.
 		<a href="https://ko-fi.com/kristiankunc" target="_blank">
 			<button class="mt-4 flex justify-center rounded bg-primary-600 px-4 py-2 font-semibold text-white hover:bg-primary-700">
-				<span class="material-symbols-outlined mr-2"> attach_money </span>Support me</button
+				<span class="material-symbols-outlined mr-2"> local_cafe </span>Support me</button
 			>
 		</a>
 	</p>
