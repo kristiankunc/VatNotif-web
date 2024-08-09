@@ -1,6 +1,5 @@
 import { SvelteKitAuth, type Session } from "@auth/sveltekit";
 import { VATSIM_CLIENT_ID, VATSIM_CLIENT_SECRET, VATSIM_AUTH_URL, AUTH_SECRET } from "$env/static/private";
-import { fail } from "@sveltejs/kit";
 
 export const auth = SvelteKitAuth({
 	trustHost: true,
