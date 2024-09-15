@@ -139,14 +139,14 @@
 					/>
 				</div>
 
-				<div class="m-2 flex cursor-pointer justify-center rounded bg-primary-500 p-2 text-white transition duration-150 hover:bg-primary-600">
+				<div class="bg-primary-500 hover:bg-primary-600 m-2 flex cursor-pointer justify-center rounded p-2 text-white transition duration-150">
 					<span class="material-symbols-outlined mr-2"> cloud_upload </span>
 					<input type="submit" value="Update {isDownNotification ? 'logoff' : 'logon'} notification" class=" cursor-pointer rounded text-white" />
 				</div>
 			</form>
 			<div class="flex w-full content-center items-center justify-center">
 				<button
-					class="m-2 flex w-1/2 cursor-pointer justify-center rounded bg-secondary-700 p-2 text-white transition duration-150 hover:bg-secondary-800"
+					class="bg-secondary-700 hover:bg-secondary-800 m-2 flex w-1/2 cursor-pointer justify-center rounded p-2 text-white transition duration-150"
 					on:click={() => ($currentData = { ...getServerData() })}
 				>
 					<span class="material-symbols-outlined mr-2"> restart_alt </span>
@@ -154,7 +154,7 @@
 				</button>
 
 				<button
-					class="m-2 flex w-1/2 cursor-pointer justify-center rounded bg-secondary-700 p-2 text-white transition duration-150 hover:bg-secondary-800"
+					class="bg-secondary-700 hover:bg-secondary-800 m-2 flex w-1/2 cursor-pointer justify-center rounded p-2 text-white transition duration-150"
 					on:click={() => showError("Not implemented", "This feature is not implemented yet")}
 				>
 					<span class="material-symbols-outlined mr-2"> verified_user </span>
@@ -170,7 +170,7 @@
 			</form>
 		</div>
 	</div>
-	<div class="flex w-full flex-col items-center justify-center bg-[#36393f] font-opensans text-white md:w-1/2">
+	<div class="font-opensans flex w-full flex-col items-center justify-center bg-[#36393f] text-white md:w-1/2">
 		<div class="m-4 flex flex-row p-4">
 			<img src={$currentData.avatar} alt="Profile" class="mr-3 mt-2 h-12 w-12 rounded-full" />
 
