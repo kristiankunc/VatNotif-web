@@ -1,5 +1,7 @@
-import { SvelteKitAuth, type Session } from "@auth/sveltekit";
-import { VATSIM_CLIENT_ID, VATSIM_CLIENT_SECRET, VATSIM_AUTH_URL, AUTH_SECRET } from "$env/dynamic/private";
+import { SvelteKitAuth } from "@auth/sveltekit";
+import dotenv from "dotenv";
+
+dotenv.config();
 
 export const auth = SvelteKitAuth({
 	trustHost: true,
@@ -9,17 +11,17 @@ export const auth = SvelteKitAuth({
 			name: "VATSIM Connect",
 			type: "oauth",
 			authorization: {
-				url: `${VATSIM_AUTH_URL}/oauth/authorize?response_type=code`,
+				url: `${process.env.VATSIM_AUTH_URL}/oauth/authorize?response_type=code`,
 				params: {
 					scope: "full_name"
 				}
 			},
-			clientId: VATSIM_CLIENT_ID,
-			clientSecret: VATSIM_CLIENT_SECRET,
+			clientId: process.env.VATSIM_CLIENT_ID,
+			clientSecret: process.env.VATSIM_CLIENT_SECRET,
 			token: {
-				url: `${VATSIM_AUTH_URL}/oauth/token`
+				url: `${process.env.VATSIM_AUTH_URL}/oauth/token`
 			},
-			userinfo: `${VATSIM_AUTH_URL}/api/user`,
+			userinfo: `${process.env.VATSIM_AUTH_URL}/api/user`,
 			async profile(profile) {
 				return {
 					cid: Number.parseInt(profile.data.cid),

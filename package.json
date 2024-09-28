@@ -17,6 +17,7 @@
 		"@sveltejs/kit": "^2.5.25",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
 		"@types/dompurify": "^3.0.5",
+		"@types/node": "^22.7.4",
 		"autoprefixer": "^10.4.19",
 		"postcss": "^8.4.42",
 		"prettier": "^3.3.3",
@@ -36,6 +37,7 @@
 		"@auth/sveltekit": "^1.4.1",
 		"@prisma/client": "^5.18.0",
 		"dompurify": "^3.1.6",
+		"dotenv": "^16.4.5",
 		"marked": "^14.1.0"
 	}
 }
