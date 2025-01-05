@@ -12,7 +12,7 @@
 		"format": "prettier --write ."
 	},
 	"devDependencies": {
-		"@auth/core": "^0.34.2",
+		"@auth/core": "^0.37.4",
 		"@sveltejs/adapter-node": "^5.2.0",
 		"@sveltejs/kit": "^2.5.25",
 		"@sveltejs/vite-plugin-svelte": "^3.1.2",
@@ -34,7 +34,7 @@
 	},
 	"type": "module",
 	"dependencies": {
-		"@auth/sveltekit": "^1.4.1",
+		"@auth/sveltekit": "^1.7.4",
 		"@prisma/client": "^5.21.1",
 		"dompurify": "^3.2.3",
 		"dotenv": "^16.4.5",
