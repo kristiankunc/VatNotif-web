@@ -2,7 +2,7 @@ FROM node:18-alpine AS builder
 WORKDIR /app
 COPY package*.json .
 COPY prisma ./prisma/
-RUN apk add --no-cache openssl
+RUN apk add --no-cache openssl openssl-dev
 RUN npm ci
 RUN npx prisma generate
 COPY . .
@@ -11,6 +11,7 @@ RUN npm prune --production
 
 FROM node:18-alpine
 WORKDIR /app
+RUN apk add --no-cache openssl openssl-dev
 COPY --from=builder /app/build build/
 COPY --from=builder /app/node_modules node_modules/
 COPY package.json .
