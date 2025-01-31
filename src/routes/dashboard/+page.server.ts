@@ -24,17 +24,9 @@ export const load: ServerLoad = async ({ locals }) => {
 		}
 	});
 
-	const isIgnored =
-		(await prisma.ignoredCid.findFirst({
-			where: {
-				cid: session.user.cid
-			}
-		})) !== null;
-
 	return {
 		watchedCallsigns,
-		hasEmbedUrls: embeds.length !== 0 && embeds.every((embed) => embed.url !== ""),
-		isIgnored: isIgnored
+		hasEmbedUrls: embeds.length !== 0 && embeds.every((embed) => embed.url !== "")
 	};
 };
 
