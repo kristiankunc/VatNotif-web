@@ -152,11 +152,6 @@
 		>
 		are used on the site to ensure smooth operations
 	</p>
-	<h3 class="mt-4 text-2xl font-semibold">Privacy settings</h3>
-	<p>
-		If you wish for your CID to be ignored when you log on, such as that no notification about your presence will be sent, you can allow your CID to
-		be ignored in the dashboard.
-	</p>
 	<h3 class="mt-4 text-2xl font-semibold">Data deletion</h3>
 	<p>
 		I will promptly delete your data upon request. To do so, contact
