@@ -43,9 +43,20 @@ export const actions = {
 		callsign = callsign.toUpperCase().replace(/_+/g, "_");
 		if (!isCallsign(callsign)) return fail(400, { message: "Callsign is invalid" });
 
+		const existingCallsign = await prisma.watchedCallsign.findFirst({
+			where: {
+				cid: session.user.cid,
+				callsign: callsign
+			}
+		});
+
+		if (existingCallsign) {
+			return fail(400, { message: "Callsign already being watched" });
+		}
+
 		await prisma.watchedCallsign.create({
 			data: {
-				cid: session!.user.cid,
+				cid: session.user.cid,
 				callsign: callsign
 			}
 		});
