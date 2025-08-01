@@ -37,7 +37,7 @@
 		"@auth/sveltekit": "^1.7.4",
 		"@prisma/client": "^5.21.1",
 		"dompurify": "^3.2.4",
-		"dotenv": "^16.4.5",
+		"dotenv": "^17.2.1",
 		"marked": "^15.0.11"
 	}
 }
