@@ -35,13 +35,15 @@ export const auth = SvelteKitAuth({
 	callbacks: {
 		async session({ session, token, newSession, trigger }) {
 			if (session && token && token.user) {
-				// Create a clean copy of user object without tokens
-				// eslint-disable-next-line @typescript-eslint/no-unused-vars
-				const { tokens, ...userWithoutTokens } = token.user as Record<string, unknown>;
-				session.user = userWithoutTokens;
-				//session.token_expires = token.account.expires_at;
-				//session.accessToken = token.accessToken;
-				//session.refreshToken = token.refreshToken;
+				// Extract user data from token and set it on session
+				const user = token.user as any;
+				session.user = {
+					cid: user.cid,
+					name: user.name,
+					name_first: user.name_first,
+					name_last: user.name_last,
+					id: user.id
+				};
 			}
 
 			return session;
