@@ -7,8 +7,6 @@
 	export let data;
 
 	let callsignsStore = writable(data.watchedCallsigns);
-
-	const isIgnored = writable(data.isIgnored);
 </script>
 
 <svelte:head>
