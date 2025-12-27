@@ -42,7 +42,7 @@ export class DiscordHelper {
 		return /^https:\/\/discord\.com\/api\/webhooks\/\d+\/[a-zA-Z0-9_-]+$/.test(url);
 	}
 
-	public static async createDefaultEmbeds(cid: number): Promise<PrismaDiscordEmbed[]> {
+	public static async createDefaultEmbeds(cid: number) {
 		const defaultEmbeds = DiscordHelper.getDefaultEmbed();
 		await prisma.discordEmbed.createMany({
 			data: [
@@ -64,7 +64,18 @@ export class DiscordHelper {
 		});
 
 		return await prisma.discordEmbed.findMany({
-			where: { cid: cid }
+			where: { cid: cid },
+			select: {
+				id: true,
+				url: true,
+				avatar: true,
+				name: true,
+				title: true,
+				color: true,
+				text: true,
+				author: true,
+				event: true
+			}
 		});
 	}
 
