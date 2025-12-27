@@ -34,11 +34,10 @@ export const auth = SvelteKitAuth({
 	],
 	callbacks: {
 		async session({ session, token, newSession, trigger }) {
-			if (session && token) {
-				let u = token.user;
-				delete u["tokens"];
-
-				session.user = u;
+			if (session && token && token.user) {
+				// Create a clean copy of user object without tokens
+				const { tokens, ...userWithoutTokens } = token.user as any;
+				session.user = userWithoutTokens;
 				//session.token_expires = token.account.expires_at;
 				//session.accessToken = token.accessToken;
 				//session.refreshToken = token.refreshToken;
