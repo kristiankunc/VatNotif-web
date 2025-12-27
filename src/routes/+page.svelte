@@ -53,7 +53,8 @@
 	<p>
 		The callsign selection is essential for good user expirience. <br />You should never include double underscores in your callsign, only watch the
 		standard version and you'll receive notifications for both. <br />
-		Also utilise the wildcard (%), more info about it's usage is written below in the FAQ.
+		Also utilise the wildcard (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">%</code>), more info about it's usage is written below in the
+		FAQ.
 	</p>
 	<h3 class="mt-4 text-2xl font-semibold">Embed setup</h3>
 	<p>
@@ -85,14 +86,10 @@
 <div class="m-auto mb-5 flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
 	<h2 class="w-full text-center text-3xl font-bold">Frequently asked questions</h2>
 	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
-		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">What is VatNotif?</summary>
-		<p class="p-4">VatNotif is a service that allows you to receive notifications when a specific VATSIM callsign comes online.</p>
-	</details>
-	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
 		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to find a callsign</summary>
 		<p class="p-4">
 			Controllers on VATSIM log on under a callsign, you can use mapping tools such as
-			<a class="text-blue-500 underline hover:text-blue-700" href="https://simaware.ca/" target="_blank">SimAware</a>
+			<a class="text-blue-500 underline hover:text-blue-700" href="https://vatsim-radar.com/" target="_blank">Vatsm Radar</a>
 			or <a class="text-blue-500 underline hover:text-blue-700" href="https://vatspy.rosscarlson.dev/" target="_blank">VAT-Spy</a>
 			to find the callsign of the controller you are interested in.
 		</p>
@@ -100,15 +97,22 @@
 	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
 		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to use wildcards</summary>
 		<p class="p-4">
-			A wild card in the form of percent sign (%) can be used to match any number of characters. For example, if you want to track all positions at
-			London Heathrow, you can use the wildcard EGLL_% and all positions from Ground (EGLL_1_GND) up to Radar (EGLL_N_APP) will be tracked.
+			A wild card in the form of percent sign (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">%</code>) can be used to match any number of
+			characters. For example, if you want to track all positions at London Heathrow, you can use the wildcard
+			<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGLL_%</code>
+			and all positions from Ground (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGLL_1_GND</code>) up to Radar (<code
+				class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGLL_N_APP</code
+			>) will be tracked.
 		</p>
 	</details>
 	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
 		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to use variables</summary>
 		<p class="p-4">
-			A total of four variables are allowed: name, cid, callsign & frequency and they must be inside curly braces. For example, &#123callsign&#125 is
-			going to be rendered as EGKK_GND. They can be used in the embed text and title.
+			A total of four variables are allowed: <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">name</code>,
+			<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">cid</code>, <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">callsign</code> &
+			<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">frequency</code>
+			and they must be inside curly braces. For example, <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">&#123;callsign&#125;</code> is going
+			to be rendered as <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGKK_GND</code>. They can be used in the embed text and title.
 		</p>
 	</details>
 	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
@@ -142,7 +146,10 @@
 <div class="m-auto flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
 	<h2 class="w-full text-center text-3xl font-bold">Privacy policy</h2>
 	<h3 class="mt-4 text-2xl font-semibold">Your data</h3>
-	<p>The only personal data stored by default is your unique VATSIM CID. Other data may be stored based on user preference & settings.</p>
+	<p>
+		The only personal data stored by default is your unique VATSIM CID. Other data may be stored based on user preference & settings (such as webhook
+		URLs).
+	</p>
 	<h3 class="mt-4 text-2xl font-semibold">Cookies</h3>
 	<p>
 		Third party cokies, including, but not limited to <a
@@ -154,8 +161,8 @@
 	</p>
 	<h3 class="mt-4 text-2xl font-semibold">Data deletion</h3>
 	<p>
-		I will promptly delete your data upon request. To do so, contact
-		<a class="text-blue-500 underline hover:text-blue-700" href="mailto:kristian@kristn.co.uk">kristian &ltat&gt kristn.co.uk</a>
+		I will promptly delete your data upon request. To do so, contact me via
+		<a class="text-blue-500 underline hover:text-blue-700" href="https://github.com/kristiankunc" target="_blank">github.com/kristiankunc</a>
 		for further assistance.
 	</p>
 </div>
