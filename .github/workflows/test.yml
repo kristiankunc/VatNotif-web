@@ -1,0 +1,58 @@
+name: Tests
+on:
+    push:
+        branches: [main]
+    pull_request:
+        branches: [main]
+
+jobs:
+    test:
+        runs-on: ubuntu-latest
+
+        services:
+            mysql:
+                image: mysql:8
+                env:
+                    MYSQL_ROOT_PASSWORD: root
+                    MYSQL_DATABASE: vatnotif_test
+                    MYSQL_USER: vatnotif
+                    MYSQL_PASSWORD: vatnotif
+                ports:
+                    - 3306:3306
+                options: >-
+                    --health-cmd "mysqladmin ping -h localhost"
+                    --health-interval 10s
+                    --health-timeout 5s
+                    --health-retries 10
+
+        steps:
+            - uses: actions/checkout@v4
+
+            - uses: actions/setup-node@v4
+              with:
+                  node-version: 22
+                  cache: npm
+
+            - run: npm ci
+
+            - run: npx prisma generate
+              env:
+                  DATABASE_URL: mysql://vatnotif:vatnotif@localhost:3306/vatnotif_test
+
+            - name: Run Prisma migrations
+              run: npx prisma db push --accept-data-loss
+              env:
+                  DATABASE_URL: mysql://vatnotif:vatnotif@localhost:3306/vatnotif_test
+
+            - name: Run tests
+              run: npx vitest run
+              env:
+                  DATABASE_URL: mysql://vatnotif:vatnotif@localhost:3306/vatnotif_test
+                  AUTH_SECRET: ${{ secrets.AUTH_SECRET_TEST || 'ci-secret-at-least-32-characters-long!!!' }}
+
+            - name: Upload coverage (if generated)
+              if: failure()
+              uses: actions/upload-artifact@v4
+              with:
+                  name: vitest-output
+                  path: test-results/

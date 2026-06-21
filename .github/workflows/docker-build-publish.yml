@@ -32,4 +32,4 @@ jobs:
 
       - name: Alert Watchtower
         run: |
-          curl -H "Authorization: Bearer ${{ secrets.WATCHTOWER_HTTP_API_TOKEN }}" https://watchtower.kristn.co.uk/v1/update
+          curl -X POST -H "Authorization: Bearer ${{ secrets.WATCHTOWER_HTTP_API_TOKEN }}" https://watchtower.kristn.co.uk/v1/update
