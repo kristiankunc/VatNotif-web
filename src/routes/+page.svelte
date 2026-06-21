@@ -1,168 +1,191 @@
+<script lang="ts">
+	import { page } from "$app/state";
+	import { signIn } from "@auth/sveltekit/client";
+</script>
+
 <svelte:head>
-	<title>VatNotif</title>
+	<title>VatNotif — VATSIM Controller Callsign Tracker</title>
 </svelte:head>
 
-<div class="flex min-h-[90vh] w-full flex-row flex-wrap justify-evenly">
-	<div class="flex flex-col items-center justify-center">
-		<h1 class="m-5 text-6xl font-semibold">VatNotif</h1>
-		<div>
-			<img src="/logo.webp" alt="VatNotif logo" class="h-20 w-20" />
+
+<section class="bg-gradient-to-br from-primary-900 to-primary-800 px-4 py-20 text-center text-white">
+	<div class="mx-auto max-w-3xl">
+		<img src="/logo.webp" alt="VatNotif logo" class="mx-auto h-24 w-24" />
+		<h1 class="mt-4 text-5xl font-bold md:text-6xl">VatNotif</h1>
+		<p class="mt-2 text-lg text-primary-200">Track VATSIM controller callsigns and get notified when they log on or off.</p>
+
+		<div class="mt-6 flex flex-wrap justify-center gap-3">
+			{#if page.data.session?.user}
+				<a href="/dashboard" class="inline-block rounded bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-700">Go to Dashboard</a>
+			{:else}
+				<button
+					onclick={() => signIn("vatsim")}
+					class="cursor-pointer rounded bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-700">Sign in with VATSIM</button>
+			{/if}
+			<a href="#how-it-works" class="inline-block rounded bg-white px-5 py-2.5 text-sm font-semibold text-gray-800 shadow-sm transition hover:bg-gray-100">How does it work</a>
 		</div>
 	</div>
+</section>
 
-	<div class="flex flex-col justify-center">
-		<div class="mx-4 my-8 flex items-center justify-center">
-			<div
-				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
-			>
-				<h1 class="flex items-center justify-start text-2xl font-bold">
-					<span class="material-symbols-outlined mr-2"> travel_explore </span>
-					Find positions
-				</h1>
-				<p class="mt-4 text-gray-600">Find airports and positions you are interested in!</p>
+
+<section id="how-it-works" class="bg-white py-24 ">
+	<div class="mx-auto max-w-6xl px-4">
+		<h2 class="text-center text-3xl font-bold text-gray-900 md:text-4xl">How does it work</h2>
+		<p class="mt-2 text-center text-gray-500 ">Three simple steps to start tracking</p>
+
+		<div class="mt-12 grid gap-6 md:grid-cols-3">
+			
+			<div class="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center ">
+				<div class="mx-auto flex h-12 w-12 items-center justify-center text-primary-600">
+					<span class="material-symbols-outlined text-2xl">travel_explore</span>
+				</div>
+				<h3 class="mt-3 text-lg font-semibold text-gray-900 ">Find positions</h3>
+				<p class="mt-1 text-sm text-gray-500 ">Find airports and positions you're interested in using VATSIM mapping tools.</p>
+			</div>
+
+			
+			<div class="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center ">
+				<div class="mx-auto flex h-12 w-12 items-center justify-center text-primary-600">
+					<span class="material-symbols-outlined text-2xl">sell</span>
+				</div>
+				<h3 class="mt-3 text-lg font-semibold text-gray-900 ">Track callsigns</h3>
+				<p class="mt-1 text-sm text-gray-500 ">Add their callsign to your tracking list — supports wildcards.</p>
+			</div>
+
+			
+			<div class="rounded-lg border border-gray-200 bg-gray-50 p-6 text-center ">
+				<div class="mx-auto flex h-12 w-12 items-center justify-center text-primary-600">
+					<span class="material-symbols-outlined text-2xl">notifications_active</span>
+				</div>
+				<h3 class="mt-3 text-lg font-semibold text-gray-900 ">Get notified</h3>
+				<p class="mt-1 text-sm text-gray-500 ">Receive Discord notifications whenever they come online or go offline.</p>
 			</div>
 		</div>
-		<div class="mx-4 my-8 flex items-center justify-center">
-			<div
-				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
-			>
-				<h1 class="flex items-center justify-start text-2xl font-bold">
-					<span class="material-symbols-outlined mr-2"> sell </span>
-					Get callsign
-				</h1>
-				<p class="mt-4 text-gray-600">Get their callsign and add them to your tracking list!</p>
-			</div>
-		</div>
-		<div class="mx-4 my-8 flex items-center justify-center">
-			<div
-				class="w-full rounded-lg bg-white p-10 shadow-2xl shadow-blue-500/50 transition-shadow duration-300 hover:shadow-2xl hover:shadow-blue-700/70"
-			>
-				<h1 class="flex items-center justify-start text-2xl font-bold">
-					<span class="material-symbols-outlined mr-2"> notifications_active </span>
-					Receive notifications
-				</h1>
-				<p class="mt-4 text-gray-600">Receive a notification via Discord whenever they come online!</p>
-			</div>
+
+		
+		<div class="mx-auto mt-12 max-w-2xl rounded-lg border border-gray-200 bg-gray-50 p-6 ">
+			<h3 class="flex items-center gap-2 text-lg font-semibold text-gray-900 ">
+				<span class="material-symbols-outlined text-primary-500">rocket_launch</span>
+				Quick start
+			</h3>
+			<p class="mt-2 text-sm text-gray-600 ">
+				After signing in, default logon &amp; logoff notifications are created automatically. Just add a
+				<a href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">Discord webhook URL</a>
+				and you're all set. You can create as many embeds as you like and customise them using variables like <code class="rounded bg-gray-200 px-1 py-0.5 font-mono text-xs ">{`{callsign}`}</code>.
+			</p>
 		</div>
 	</div>
-</div>
+</section>
 
-<div class="m-auto mb-5 flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
-	<h2 class="w-full text-center text-3xl font-bold">How to use VatNotif</h2>
-	<h3 class="mt-4 text-2xl font-semibold">Callsign selection</h3>
-	<p>
-		The callsign selection is essential for good user expirience. <br />You should never include double underscores in your callsign, only watch the
-		standard version and you'll receive notifications for both. <br />
-		Also utilise the wildcard (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">%</code>), more info about it's usage is written below in the
-		FAQ.
-	</p>
-	<h3 class="mt-4 text-2xl font-semibold">Embed setup</h3>
-	<p>
-		After setting up your callsigns, head over to the embed configuration page, a default logon & logoff embeds have been generated for you by
-		default. The only thing you need to do is add a Webhook URL, how to create one can be found <a
-			class="text-blue-500 underline hover:text-blue-700"
-			href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks"
-			target="_blank">here</a
-		>.
-		<br />
-		You are able to create as many logon/logoff embeds as you wish and configure them to your liking utilising the variables.
-	</p>
-</div>
 
-<div class="m-auto mb-5 flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
-	<h2 class="w-full text-center text-3xl font-bold">Donations</h2>
-	<p class="flex flex-col items-center">
-		I build software in my free time and everything I make is publicly availible and free to use for everyone. The infrastructure is all paid out of
-		my own pocket and that's why I'd appriciate any kind of financial support. 100% of donations go towards covering the server costs. Please consider
-		supporting using Ko-fi.
-		<a href="https://ko-fi.com/kristiankunc" target="_blank">
-			<button class="mt-4 flex justify-center rounded bg-primary-600 px-4 py-2 font-semibold text-white hover:bg-primary-700">
-				<span class="material-symbols-outlined mr-2"> local_cafe </span>Support me</button
-			>
-		</a>
-	</p>
-</div>
+<section class="bg-white py-24 ">
+	<div class="mx-auto max-w-3xl px-4">
+		<h2 class="text-center text-3xl font-bold text-gray-900 md:text-4xl">Frequently asked questions</h2>
 
-<div class="m-auto mb-5 flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
-	<h2 class="w-full text-center text-3xl font-bold">Frequently asked questions</h2>
-	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
-		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to find a callsign</summary>
-		<p class="p-4">
-			Controllers on VATSIM log on under a callsign, you can use mapping tools such as
-			<a class="text-blue-500 underline hover:text-blue-700" href="https://vatsim-radar.com/" target="_blank">Vatsm Radar</a>
-			or <a class="text-blue-500 underline hover:text-blue-700" href="https://vatspy.rosscarlson.dev/" target="_blank">VAT-Spy</a>
-			to find the callsign of the controller you are interested in.
-		</p>
-	</details>
-	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
-		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to use wildcards</summary>
-		<p class="p-4">
-			A wild card in the form of percent sign (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">%</code>) can be used to match any number of
-			characters. For example, if you want to track all positions at London Heathrow, you can use the wildcard
-			<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGLL_%</code>
-			and all positions from Ground (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGLL_1_GND</code>) up to Radar (<code
-				class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGLL_N_APP</code
-			>) will be tracked.
-		</p>
-	</details>
-	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
-		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">How to use variables</summary>
-		<p class="p-4">
-			A total of four variables are allowed: <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">name</code>,
-			<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">cid</code>, <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">callsign</code> &
-			<code class="rounded bg-gray-200 px-1 py-0.5 font-mono">frequency</code>
-			and they must be inside curly braces. For example, <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">&#123;callsign&#125;</code> is going
-			to be rendered as <code class="rounded bg-gray-200 px-1 py-0.5 font-mono">EGKK_GND</code>. They can be used in the embed text and title.
-		</p>
-	</details>
-	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
-		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500"
-			>How to create a Discord webhook</summary
-		>
-		<p class="p-4">
-			To receive notifications, you need to create a Discord webhook by following the instructions
-			<a
-				class="text-blue-500 underline hover:text-blue-700"
-				href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks"
-				target="_blank">here</a
-			>.
-		</p>
-	</details>
-	<details class="my-2 w-full rounded-lg bg-slate-100 px-2 py-4 shadow">
-		<summary class="cursor-pointer text-xl font-semibold text-gray-700 transition-colors hover:text-primary-500">Is this project open-source?</summary
-		>
-		<p class="p-4">
-			Yes, you can find both <a
-				class="text-blue-500 underline hover:text-blue-700"
-				href="https://github.com/kristiankunc/VatNotif-web"
-				target="_blank">this website</a
-			>
-			and the <a class="text-blue-500 underline hover:text-blue-700" href="https://github.com/kristiankunc/VatNotif-api" target="_blank">API</a>
-			on GitHub.
-		</p>
-	</details>
-</div>
+		<div class="mt-12 space-y-3">
+			<details class="group cursor-pointer rounded-xl border border-gray-200 bg-gray-50 transition hover:border-gray-300 ">
+				<summary class="flex items-center justify-between px-5 py-4 text-base font-semibold text-gray-900 ">
+					How to find a callsign
+					<span class="material-symbols-outlined text-gray-400 transition group-open:rotate-180">expand_more</span>
+				</summary>
+				<div class="px-5 pb-4 text-sm text-gray-600 ">
+					Controllers on VATSIM log on under a callsign. Use mapping tools such as
+					<a href="https://vatsim-radar.com/" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">VATSIM Radar</a>
+					or <a href="https://vatspy.rosscarlson.dev/" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">VAT-Spy</a>
+					to find the callsign of the controller you're interested in.
+				</div>
+			</details>
 
-<div class="m-auto flex w-full flex-col items-start justify-center p-4 md:w-3/4 xl:w-1/2">
-	<h2 class="w-full text-center text-3xl font-bold">Privacy policy</h2>
-	<h3 class="mt-4 text-2xl font-semibold">Your data</h3>
-	<p>
-		The only personal data stored by default is your unique VATSIM CID. Other data may be stored based on user preference & settings (such as webhook
-		URLs).
-	</p>
-	<h3 class="mt-4 text-2xl font-semibold">Cookies</h3>
-	<p>
-		Third party cokies, including, but not limited to <a
-			class="text-blue-500 underline hover:text-blue-700"
-			href="https://developers.cloudflare.com/fundamentals/reference/policies-compliances/cloudflare-cookies/"
-			target="_blank">Cloudflare cookies,</a
-		>
-		are used on the site to ensure smooth operations
-	</p>
-	<h3 class="mt-4 text-2xl font-semibold">Data deletion</h3>
-	<p>
-		I will promptly delete your data upon request. To do so, contact me via
-		<a class="text-blue-500 underline hover:text-blue-700" href="https://github.com/kristiankunc" target="_blank">github.com/kristiankunc</a>
-		for further assistance.
-	</p>
-</div>
+			<details class="group cursor-pointer rounded-xl border border-gray-200 bg-gray-50 transition hover:border-gray-300 ">
+				<summary class="flex items-center justify-between px-5 py-4 text-base font-semibold text-gray-900 ">
+					How to use wildcards
+					<span class="material-symbols-outlined text-gray-400 transition group-open:rotate-180">expand_more</span>
+				</summary>
+				<div class="px-5 pb-4 text-sm text-gray-600 ">
+					The percent sign (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">%</code>) matches any number of characters. For example,
+					<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">EGLL_%</code> tracks all positions at London Heathrow — from Ground
+					(<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">EGLL_1_GND</code>) to Radar (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">EGLL_N_APP</code>).
+				</div>
+			</details>
+
+			<details class="group cursor-pointer rounded-xl border border-gray-200 bg-gray-50 transition hover:border-gray-300 ">
+				<summary class="flex items-center justify-between px-5 py-4 text-base font-semibold text-gray-900 ">
+					How to use variables
+					<span class="material-symbols-outlined text-gray-400 transition group-open:rotate-180">expand_more</span>
+				</summary>
+				<div class="px-5 pb-4 text-sm text-gray-600 ">
+					Four variables are available: <code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">{`{name}`}</code>,
+					<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">{`{cid}`}</code>,
+					<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">{`{callsign}`}</code> &amp;
+					<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">{`{frequency}`}</code>.
+					They must be inside curly braces and can be used in the embed text and title.
+				</div>
+			</details>
+
+			<details class="group cursor-pointer rounded-xl border border-gray-200 bg-gray-50 transition hover:border-gray-300 ">
+				<summary class="flex items-center justify-between px-5 py-4 text-base font-semibold text-gray-900 ">
+					How to create a Discord webhook
+					<span class="material-symbols-outlined text-gray-400 transition group-open:rotate-180">expand_more</span>
+				</summary>
+				<div class="px-5 pb-4 text-sm text-gray-600 ">
+					Follow the official Discord guide:
+					<a href="https://support.discord.com/hc/en-us/articles/228383668-Intro-to-Webhooks" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">Intro to Webhooks</a>.
+				</div>
+			</details>
+
+			<details class="group cursor-pointer rounded-xl border border-gray-200 bg-gray-50 transition hover:border-gray-300 ">
+				<summary class="flex items-center justify-between px-5 py-4 text-base font-semibold text-gray-900 ">
+					Is this project open-source?
+					<span class="material-symbols-outlined text-gray-400 transition group-open:rotate-180">expand_more</span>
+				</summary>
+				<div class="px-5 pb-4 text-sm text-gray-600 ">
+					Yes! You can find both
+					<a href="https://github.com/kristiankunc/VatNotif-web" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">this website</a>
+					and the <a href="https://github.com/kristiankunc/VatNotif-api" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">API</a>
+					on GitHub.
+				</div>
+			</details>
+		</div>
+	</div>
+</section>
+
+
+<section class="bg-gray-50 py-24 ">
+	<div class="mx-auto max-w-3xl px-4">
+		<div class="rounded-xl border border-gray-200 bg-white p-8 ">
+			<h2 class="flex items-center gap-2 text-2xl font-bold text-gray-900 ">
+				<span class="material-symbols-outlined text-accent-500">favorite</span>
+				Support the project
+			</h2>
+			<p class="mt-2 text-sm text-gray-600 ">
+				Everything is built in free time and the infrastructure comes out of my own pocket.
+				100% of donations go towards covering server costs.
+			</p>
+			<a href="https://ko-fi.com/kristiankunc" target="_blank" class="btn-press focus-ring mt-4 inline-flex items-center gap-2 rounded-lg bg-accent-600 px-5 py-2.5 text-sm font-semibold text-white transition hover:bg-accent-700">
+				<span class="material-symbols-outlined text-lg">local_cafe</span>
+				Support on Ko-fi
+			</a>
+		</div>
+
+		<details class="group mt-8 cursor-pointer">
+			<summary class="flex items-center justify-between text-sm font-medium text-gray-500 hover:text-gray-700 ">
+				Legal &amp; Privacy
+				<span class="material-symbols-outlined text-base transition group-open:rotate-180">expand_more</span>
+			</summary>
+			<div class="mt-4 space-y-4 text-sm text-gray-600 ">
+				<div>
+					<h4 class="font-semibold text-gray-900 ">Your data</h4>
+					<p>The only personal data stored by default is your unique VATSIM CID. Additional data (such as webhook URLs) is stored based on your preferences.</p>
+				</div>
+				<div>
+					<h4 class="font-semibold text-gray-900 ">Cookies</h4>
+					<p>Third-party cookies, including <a href="https://developers.cloudflare.com/fundamentals/reference/policies-compliances/cloudflare-cookies/" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">Cloudflare cookies</a>, are used to ensure smooth operation.</p>
+				</div>
+				<div>
+					<h4 class="font-semibold text-gray-900 ">Data deletion</h4>
+					<p>I will promptly delete your data upon request. Contact me via <a href="https://github.com/kristiankunc" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">GitHub</a>.</p>
+				</div>
+			</div>
+		</details>
+	</div>
+</section>

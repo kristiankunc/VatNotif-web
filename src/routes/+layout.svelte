@@ -1,25 +1,17 @@
 <script lang="ts">
 	import "$lib/app.css";
 	import Navbar from "$lib/components/Navbar.svelte";
-	import { page } from "$app/stores";
-	import { onMount } from "svelte";
-	import Error, { showError } from "$lib/components/Error.svelte";
+	import { page } from "$app/state";
+	import Error from "$lib/components/Error.svelte";
+	import { showError } from "$lib/stores/error.svelte";
 	import Footer from "$lib/components/Footer.svelte";
+	import Toast from "$lib/components/Toast.svelte";
 
-	onMount(() => {
-		// @ts-ignore
-		if (window.innerWidth > 1024) {
-			// @ts-ignore
-			kofiWidgetOverlay.draw("kristiankunc", {
-				type: "floating-chat",
-				"floating-chat.donateButton.text": "Support me",
-				"floating-chat.donateButton.background-color": "#3EA8F4",
-				"floating-chat.donateButton.text-color": "#fff"
-			});
-		}
+	let { children }: { children?: import('svelte').Snippet } = $props();
 
-		if ($page.form?.message) {
-			showError("Error", $page.form.message);
+	$effect(() => {
+		if (page.form?.message) {
+			showError("Error", page.form.message);
 		}
 	});
 </script>
@@ -37,7 +29,6 @@
 	<link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap" rel="stylesheet" />
 
 	<script defer data-domain="vatnotif.kristn.co.uk" src="https://plausible.kristn.co.uk/js/script.js"></script>
-	<script src="https://storage.ko-fi.com/cdn/scripts/overlay-widget.js"></script>
 
 	<meta name="description" content="VATSIM controller callsign tracker" />
 	<meta name="keywords" content="VATSIM, controller, tracker, aviation" />
@@ -59,6 +50,7 @@
 <Navbar />
 <Error />
 <main>
-	<slot />
+	{@render children?.()}
 </main>
+<Toast />
 <Footer />

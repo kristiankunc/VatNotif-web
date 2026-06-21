@@ -35,25 +35,22 @@ export const auth = SvelteKitAuth({
 	callbacks: {
 		async session({ session, token, newSession, trigger }) {
 			if (session && token) {
-				let u = token.user;
+				let u = token.user as Record<string, unknown>;
 				delete u["tokens"];
 
-				session.user = u;
-				//session.token_expires = token.account.expires_at;
-				//session.accessToken = token.accessToken;
-				//session.refreshToken = token.refreshToken;
+				session.user = u as unknown as typeof session.user;
 			}
 
 			return session;
 		},
 		async jwt({ token, user, account, profile, trigger, session }) {
 			if (token && user) {
-				token.user = user;
+				(token as Record<string, unknown>).user = user;
 
 				if (account) {
-					token.account = account;
-					token.accessToken = account.access_token;
-					token.refreshToken = account.refresh_token;
+					(token as Record<string, unknown>).account = account;
+					(token as Record<string, unknown>).accessToken = account.access_token;
+					(token as Record<string, unknown>).refreshToken = account.refresh_token;
 				}
 			}
 

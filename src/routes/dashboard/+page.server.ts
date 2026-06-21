@@ -26,7 +26,7 @@ export const load: ServerLoad = async ({ locals }) => {
 
 	return {
 		watchedCallsigns,
-		hasEmbedUrls: embeds.length !== 0 && embeds.every((embed) => embed.url !== "")
+		hasEmbedUrls: embeds.length !== 0 && embeds.every((embed: { url: string }) => embed.url !== "")
 	};
 };
 
