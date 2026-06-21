@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>VatNotif — VATSIM Controller Callsign Tracker</title>
+	<title>VatNotif | VATSIM Controller Callsign Tracker</title>
 </svelte:head>
 
 
@@ -49,7 +49,7 @@
 					<span class="material-symbols-outlined text-2xl">sell</span>
 				</div>
 				<h3 class="mt-3 text-lg font-semibold text-gray-900 ">Track callsigns</h3>
-				<p class="mt-1 text-sm text-gray-500 ">Add their callsign to your tracking list — supports wildcards.</p>
+				<p class="mt-1 text-sm text-gray-500 ">Add their callsign to your tracking list - supports wildcards.</p>
 			</div>
 
 			
@@ -103,7 +103,7 @@
 				</summary>
 				<div class="px-5 pb-4 text-sm text-gray-600 ">
 					The percent sign (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">%</code>) matches any number of characters. For example,
-					<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">EGLL_%</code> tracks all positions at London Heathrow — from Ground
+					<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">EGLL_%</code> tracks all positions at London Heathrow - from Ground
 					(<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">EGLL_1_GND</code>) to Radar (<code class="rounded bg-gray-200 px-1 py-0.5 font-mono ">EGLL_N_APP</code>).
 				</div>
 			</details>

@@ -108,7 +108,7 @@
 </script>
 
 <svelte:head>
-	<title>Embed Configuration — VatNotif</title>
+	<title>Embed Configuration | VatNotif</title>
 </svelte:head>
 
 <div class="flex min-h-[85vh] w-full flex-col lg:flex-row">
