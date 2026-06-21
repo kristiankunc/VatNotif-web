@@ -1,7 +1,6 @@
 @import "tailwindcss";
 
 @theme {
-	/* ── Color palettes ── */
 	--color-text-50: #030d16;
 	--color-text-100: #061b2d;
 	--color-text-200: #0c365a;
@@ -65,7 +64,6 @@
 	--font-family-sans: "Poppins", "sans-serif";
 	--font-family-opensans: "Open Sans", "sans-serif";
 
-	/* ── Animations ── */
 	--animate-fade-in: fade-in 0.2s ease-out;
 	--animate-slide-up: slide-up 0.2s ease-out;
 	--animate-scale-in: scale-in 0.15s ease-out;

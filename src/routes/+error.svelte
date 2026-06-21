@@ -4,7 +4,7 @@
 </script>
 
 <svelte:head>
-	<title>Error {page.status} — VatNotif</title>
+	<title>Error {page.status} | VatNotif</title>
 </svelte:head>
 
 <div class="relative flex min-h-[85vh] flex-col items-center justify-center overflow-hidden px-4">

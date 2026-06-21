@@ -17,7 +17,7 @@
 </script>
 
 <svelte:head>
-	<title>Dashboard — VatNotif</title>
+	<title>Dashboard | VatNotif</title>
 </svelte:head>
 
 <div class="mx-auto min-h-[85vh] max-w-5xl px-4 py-10">

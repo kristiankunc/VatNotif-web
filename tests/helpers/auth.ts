@@ -1,9 +1,3 @@
-/**
- * Test helpers for mocking Auth.js sessions.
- *
- * Generates a realistic session object matching what locals.auth()
- * returns after a real VATSIM Connect login.
- */
 export interface TestUser {
 	cid: number;
 	name_first: string;

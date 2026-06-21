@@ -83,18 +83,11 @@ describe("embed actions", () => {
 				avatar: "https://example.com/avatar.png"
 			});
 
-			// The updateembed action calls DiscordHelper.isWebhookUrlValid
-			// which makes a real HTTP request.  Since we're testing without
-			// a real Discord webhook, we expect a 400 — that's fine,
-			// it proves the form validation passed and the webhook check ran.
 			const result = await actions.updateembed({
 				request: new Request("http://localhost", { method: "POST", body: form }),
 				locals: mockLocals(defaultUser)
 			} as any);
 
-			// We expect 400 because the webhook URL isn't valid.
-			// If someone configures a real test webhook URL, this would be 200.
-			// The important thing is it returns a Response, not throws.
 			expect(result).toBeDefined();
 			expect(typeof result).toBe("object");
 		});
