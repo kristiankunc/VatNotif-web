@@ -178,6 +178,10 @@
 					<p>The only personal data stored by default is your unique VATSIM CID. Additional data (such as webhook URLs) is stored based on your preferences.</p>
 				</div>
 				<div>
+					<h4 class="font-semibold text-gray-900 ">Analytics</h4>
+					<p>This site uses <a href="https://plausible.io" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">Plausible Analytics</a>, a privacy-friendly analytics service, to count site visits. Plausible does not use cookies and does not collect any personal data - no tracking across sites and no persistent identifiers. All analytics data is stored on infrastructure I operate myself.</p>
+				</div>
+				<div>
 					<h4 class="font-semibold text-gray-900 ">Cookies</h4>
 					<p>Third-party cookies, including <a href="https://developers.cloudflare.com/fundamentals/reference/policies-compliances/cloudflare-cookies/" target="_blank" class="font-medium text-primary-600 underline-offset-2 hover:underline ">Cloudflare cookies</a>, are used to ensure smooth operation.</p>
 				</div>
