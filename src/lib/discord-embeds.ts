@@ -1,5 +1,5 @@
 import { prisma } from "./prisma";
-import { type DiscordEmbed as PrismaDiscordEmbed } from "@prisma/client";
+import { type DiscordEmbed as PrismaDiscordEmbed } from "../generated/prisma/client";
 
 export interface DiscordEmbed {
 	url: string;
