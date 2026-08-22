@@ -36,7 +36,7 @@
 		"@prisma/adapter-mariadb": "^7.9.1",
 		"@prisma/client": "^7.9.1",
 		"dompurify": "^3.4.13",
-		"dotenv": "^16.5.0",
+		"dotenv": "^17.0.0",
 		"marked": "^15.0.11"
 	}
 }
