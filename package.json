@@ -33,7 +33,7 @@
 	"type": "module",
 	"dependencies": {
 		"@auth/sveltekit": "^1.11.3",
-		"@prisma/adapter-mariadb": "^7.9.1",
+		"@prisma/adapter-mariadb": "^7.10.1",
 		"@prisma/client": "^7.9.1",
 		"dompurify": "^3.4.13",
 		"dotenv": "^17.0.0",
