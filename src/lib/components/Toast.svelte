@@ -17,12 +17,9 @@
 </script>
 
 {#if toasts.length > 0}
-	<div class="fixed bottom-4 right-4 z-50 flex flex-col gap-2" aria-live="polite">
+	<div class="fixed right-4 bottom-4 z-50 flex flex-col gap-2" aria-live="polite">
 		{#each toasts as toast (toast.id)}
-			<div
-				class="flex animate-slide-up items-center gap-3 rounded-lg px-4 py-3 text-white shadow-elevation-3 {bgMap[toast.type]}"
-				role="alert"
-			>
+			<div class="animate-slide-up shadow-elevation-3 flex items-center gap-3 rounded-lg px-4 py-3 text-white {bgMap[toast.type]}" role="alert">
 				<span class="material-symbols-outlined text-lg">{iconMap[toast.type]}</span>
 				<p class="text-sm font-medium">{toast.message}</p>
 				<button

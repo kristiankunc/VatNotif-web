@@ -7,7 +7,7 @@
 	import Footer from "$lib/components/Footer.svelte";
 	import Toast from "$lib/components/Toast.svelte";
 
-	let { children }: { children?: import('svelte').Snippet } = $props();
+	let { children }: { children?: import("svelte").Snippet } = $props();
 
 	$effect(() => {
 		if (page.form?.message) {
@@ -31,10 +31,18 @@
 	<!-- Privacy-friendly analytics by Plausible -->
 	<script async src="https://plausible.kristn.co.uk/js/pa-5Flkdt2--_HiS-mjjHvRu.js"></script>
 	<script>
-	window.plausible=window.plausible||function(){(plausible.q=plausible.q||[]).push(arguments)},plausible.init=plausible.init||function(i){plausible.o=i||{}};
-	plausible.init()
+		((window.plausible =
+			window.plausible ||
+			function () {
+				(plausible.q = plausible.q || []).push(arguments);
+			}),
+			(plausible.init =
+				plausible.init ||
+				function (i) {
+					plausible.o = i || {};
+				}));
+		plausible.init();
 	</script>
-
 
 	<meta name="description" content="VATSIM controller callsign tracker" />
 	<meta name="keywords" content="VATSIM, controller, tracker, aviation" />

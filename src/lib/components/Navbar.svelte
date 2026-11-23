@@ -12,23 +12,26 @@
 			<span class="text-lg font-bold text-gray-900">VatNotif</span>
 		</a>
 
-		
 		<div class="hidden items-center gap-2 md:flex">
 			{#if page.data.session?.user}
 				<span class="text-sm text-gray-600">{page.data.session.user.name}</span>
-				<a href="/dashboard"
-					class="rounded bg-primary-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-primary-700">Dashboard</a>
+				<a href="/dashboard" class="bg-primary-600 hover:bg-primary-700 rounded px-3 py-1.5 text-sm font-medium text-white transition">Dashboard</a>
 				<button
-					onclick={() => signOut({ redirectTo: '/' })}
-					class="cursor-pointer rounded px-3 py-1.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100">Sign out</button>
+					onclick={() => signOut({ redirectTo: "/" })}
+					class="cursor-pointer rounded px-3 py-1.5 text-sm font-medium text-gray-600 transition hover:bg-gray-100"
+				>
+					Sign out
+				</button>
 			{:else}
 				<button
 					onclick={() => signIn("vatsim")}
-					class="cursor-pointer rounded bg-accent-600 px-3 py-1.5 text-sm font-medium text-white transition hover:bg-accent-700">Sign in with VATSIM</button>
+					class="bg-accent-600 hover:bg-accent-700 cursor-pointer rounded px-3 py-1.5 text-sm font-medium text-white transition"
+				>
+					Sign in with VATSIM
+				</button>
 			{/if}
 		</div>
 
-		
 		<div class="md:hidden">
 			<button
 				onclick={() => (menuOpen = true)}
@@ -40,7 +43,6 @@
 		</div>
 	</div>
 </nav>
-
 
 {#if menuOpen}
 	<div class="fixed inset-0 z-50 bg-black/40 md:hidden" onclick={() => (menuOpen = false)}></div>
@@ -59,15 +61,22 @@
 		<div class="flex-1 px-3 py-4">
 			{#if page.data.session?.user}
 				<p class="mb-3 px-2 text-sm font-medium text-gray-900">{page.data.session.user.name}</p>
-				<a href="/dashboard" onclick={() => (menuOpen = false)}
-					class="mb-1 block rounded px-2 py-2 text-sm text-gray-700 hover:bg-gray-100">Dashboard</a>
+				<a href="/dashboard" onclick={() => (menuOpen = false)} class="mb-1 block rounded px-2 py-2 text-sm text-gray-700 hover:bg-gray-100">
+					Dashboard
+				</a>
 				<button
-					onclick={() => signOut({ redirectTo: '/' })}
-					class="block w-full cursor-pointer rounded px-2 py-2 text-left text-sm text-gray-700 hover:bg-gray-100">Sign out</button>
+					onclick={() => signOut({ redirectTo: "/" })}
+					class="block w-full cursor-pointer rounded px-2 py-2 text-left text-sm text-gray-700 hover:bg-gray-100"
+				>
+					Sign out
+				</button>
 			{:else}
 				<button
 					onclick={() => signIn("vatsim")}
-					class="w-full cursor-pointer rounded bg-accent-600 px-3 py-2 text-sm font-medium text-white hover:bg-accent-700">Sign in with VATSIM</button>
+					class="bg-accent-600 hover:bg-accent-700 w-full cursor-pointer rounded px-3 py-2 text-sm font-medium text-white"
+				>
+					Sign in with VATSIM
+				</button>
 			{/if}
 		</div>
 	</div>

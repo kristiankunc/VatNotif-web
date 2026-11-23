@@ -5,20 +5,22 @@
 </script>
 
 {#if error.isVisible}
-	
 	<div
-		class="fixed inset-0 z-50 flex animate-fade-in items-center justify-center bg-black/40"
+		class="animate-fade-in fixed inset-0 z-50 flex items-center justify-center bg-black/40"
 		role="presentation"
 		onclick={() => hideError()}
-		onkeydown={(e) => { if (e.key === 'Enter' || e.key === ' ' || e.key === 'Escape') hideError(); }}
+		onkeydown={(e) => {
+			if (e.key === "Enter" || e.key === " " || e.key === "Escape") hideError();
+		}}
 	>
-		
 		<div
 			role="dialog"
 			tabindex="-1"
-			class="m-4 flex w-full max-w-md animate-scale-in flex-col rounded-xl bg-red-500 p-6 text-white shadow-elevation-3"
+			class="animate-scale-in shadow-elevation-3 m-4 flex w-full max-w-md flex-col rounded-xl bg-red-500 p-6 text-white"
 			onclick={(e) => e.stopPropagation()}
-			onkeydown={(e) => { if (e.key === 'Escape') hideError(); }}
+			onkeydown={(e) => {
+				if (e.key === "Escape") hideError();
+			}}
 		>
 			<div class="flex items-center gap-3">
 				<span class="material-symbols-outlined text-3xl">warning</span>

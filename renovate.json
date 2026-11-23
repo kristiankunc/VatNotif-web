@@ -1,17 +1,12 @@
 {
 	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": [
-		"config:recommended",
-		"schedule:weekly"
-	],
+	"extends": ["config:recommended", "schedule:weekly"],
 	"commitMessagePrefix": "chore: ",
 	"packageRules": [
 		{
 			"automerge": true,
 			"groupName": "patch dependencies",
-			"matchUpdateTypes": [
-				"patch"
-			]
+			"matchUpdateTypes": ["patch"]
 		}
 	]
 }
