@@ -1,12 +1,50 @@
 {
-	"$schema": "https://docs.renovatebot.com/renovate-schema.json",
-	"extends": ["config:recommended", "schedule:weekly"],
-	"commitMessagePrefix": "chore: ",
-	"packageRules": [
-		{
-			"automerge": true,
-			"groupName": "patch dependencies",
-			"matchUpdateTypes": ["patch"]
-		}
-	]
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": [
+    "config:recommended",
+    "schedule:weekly"
+  ],
+  "timezone": "Europe/Prague",
+  "rangeStrategy": "bump",
+  "minimumReleaseAge": "3 days",
+  "platformAutomerge": true,
+  "vulnerabilityAlerts": {
+    "minimumReleaseAge": null
+  },
+  "lockFileMaintenance": {
+    "enabled": true,
+    "extends": ["schedule:weekly"],
+    "automerge": true
+  },
+  "packageRules": [
+    {
+      "description": "Pins, replacements and rollbacks should not wait for the release age",
+      "matchUpdateTypes": ["pin", "pinDigest", "replacement", "rollback", "bump", "lockFileMaintenance"],
+      "minimumReleaseAge": null
+    },
+    {
+      "description": "One weekly PR for all minor and patch updates",
+      "matchUpdateTypes": ["minor", "patch"],
+      "groupName": "non-major dependencies",
+      "automerge": true
+    },
+    {
+      "description": "Major updates show up in the Dependency Dashboard and are only opened once approved",
+      "matchUpdateTypes": ["major"],
+      "dependencyDashboardApproval": true
+    },
+    {
+      "description": "GitHub Actions minor and patch updates in one PR",
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["minor", "patch", "digest"],
+      "groupName": "github actions",
+      "automerge": true
+    },
+    {
+      "description": "Docker base images and compose services in one PR that needs review",
+      "matchManagers": ["dockerfile", "docker-compose"],
+      "groupName": "docker images",
+      "automerge": false
+    }
+  ]
 }

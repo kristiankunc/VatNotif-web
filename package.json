@@ -15,7 +15,7 @@
 		"@auth/core": "^0.41.3",
 		"@sveltejs/adapter-node": "^5.5.8",
 		"@sveltejs/kit": "^2.70.4",
-		"@sveltejs/vite-plugin-svelte": "^7.3.1",
+		"@sveltejs/vite-plugin-svelte": "^7.3.2",
 		"@tailwindcss/vite": "^4.3.5",
 		"@types/node": "^26.6.6",
 		"prettier": "^3.10.1",
@@ -36,6 +36,6 @@
 		"prisma": "^7.10.1",
 		"dompurify": "^3.5.0",
 		"dotenv": "^18.0.10",
-		"marked": "^18.2.1"
+		"marked": "^18.3.0"
 	}
 }
