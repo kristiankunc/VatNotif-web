@@ -13,7 +13,7 @@
 	},
 	"devDependencies": {
 		"@auth/core": "^0.41.3",
-		"@sveltejs/adapter-node": "^5.5.8",
+		"@sveltejs/adapter-node": "^6.0.5",
 		"@sveltejs/kit": "^2.70.4",
 		"@sveltejs/vite-plugin-svelte": "^7.3.2",
 		"@tailwindcss/vite": "^4.3.5",
